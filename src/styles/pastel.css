@@ -1,0 +1,273 @@
+:root {
+  /* Modern lavender and purple theme variables */
+  --bg: linear-gradient(180deg, #F3ECFF 0%, #F9F6FF 100%); /* gentle lavender gradient */
+  --text: #36214A; /* deep purple for headings and primary text */
+  --primary: #B497FF; /* pastel purple accents */
+  --card: #FAF7F5; /* soft cream/silver for cards */
+  --muted: #8B7E95; /* muted gray-purple for secondary text */
+  --glass: rgba(255,255,255,0.6);
+}
+
+/* Neon accent variables available in light theme */
+:root {
+  --neon-blue: #00ffff;
+  --neon-pink: #ff00ff;
+  --neon-green: #39ff14;
+}
+
+body { 
+  background: var(--bg); 
+  color: var(--text); 
+}
+
+.choose-btn { 
+  background: linear-gradient(90deg, rgba(180,150,255,0.12), rgba(180,150,255,0.18)); 
+  border: 1px solid rgba(180,150,255,0.25); 
+  color: var(--primary); 
+  box-shadow: 0 4px 18px rgba(180,150,255,0.08); 
+}
+
+.choose-btn:hover { 
+  box-shadow: 0 6px 28px rgba(180,150,255,0.18); 
+  transform: translateY(-2px); 
+}
+
+/* Ensure the light theme header layout, spacing and typography match the dark theme
+   exactly while preserving all colors/backgrounds. These rules only affect layout
+   and font metrics (size, weight, spacing) for header elements. */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* keep the exact same box sizing as the rest of the app */
+  box-sizing: border-box;
+}
+
+/* Avatar sizing inside header (matches the header avatar in dark theme) */
+header .w-12.h-12 {
+  width: 3rem; /* 48px */
+  height: 3rem;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+/* Tabs / nav spacing and typography — match dark theme metrics */
+header .tabs {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* same as gap-6 */
+}
+
+header .tabs button,
+header nav a {
+  font-size: 0.875rem; /* text-sm */
+  line-height: 1.2;
+  font-family: inherit; /* preserve the existing font-family but keep metrics consistent */
+  font-weight: 600; /* match header weight in dark theme */
+  letter-spacing: 0.02em;
+  background: transparent; /* do not touch colors */
+  border: none;
+  padding: 0;
+}
+
+/* Header action icons / buttons spacing (no color changes) */
+header .header-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px; /* same as dark theme */
+  border-radius: 6px;
+}
+
+/* Center the hero (name + tagline) across the full viewport in the light theme
+   without changing colors. This mirrors the dark theme behavior exactly. */
+.hero {
+  min-height: 360px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  text-align: center; 
+  position: relative; 
+  z-index: 5;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.hero-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  max-width: none;
+  z-index: 5;
+}
+
+/* Force light theme hero typography to match dark theme exactly */
+.hero-text h1,
+.hero-text .neon-title,
+.hero .hero-text h1,
+.hero .hero-text .neon-title,
+.hero-text motion.h1,
+.hero motion.h1 {
+  font-size: 48px !important; 
+  letter-spacing: 2px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  margin: 0 !important;
+  line-height: 1.05 !important;
+}
+
+.hero-text p,
+.hero .hero-text p,
+.hero-text motion.p,
+.hero motion.p {
+  max-width: 900px !important;
+  margin: 18px auto !important;
+  line-height: 1.9 !important;
+  font-size: 18px !important;
+}
+
+.photo-bar {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+  /* On small screens let the hero stack vertically as before */
+  .hero { display: block; padding-left: 1rem; padding-right: 1rem; }
+  .hero-text { position: static; transform: none; text-align: left; width: auto; max-width: none; }
+  .photo-bar { position: static; transform: none; margin-top: 1.25rem; }
+}
+
+.pastel-shimmer { 
+  position: absolute; 
+  inset: 0; 
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.45), transparent 10%); 
+}
+
+.control-btn { 
+  background: transparent; 
+  border: none; 
+  color: var(--text); 
+}
+
+.card-pastel { 
+  background: linear-gradient(180deg, var(--card), #F6F4F3); 
+  border-radius: 12px; 
+  padding: 12px; 
+  box-shadow: 0 8px 18px rgba(54,33,74,0.04); 
+}
+
+.control-dot { 
+  background: rgba(54,33,74,0.06); 
+  box-shadow: 0 0 0 6px rgba(250,245,243,0.6), 0 8px 24px rgba(180,150,255,0.06); 
+  position: absolute; 
+  left: 50%; 
+  top: 50%; 
+  transform: translate(-50%, -50%); 
+}
+
+.nav-link { 
+  color: var(--text); 
+  opacity: 0.95; 
+}
+
+.social { 
+  color: var(--primary); 
+}
+
+.nav-link { color: var(--text); opacity: 0.95; }
+.social { color: var(--primary); }
+
+/* About card pastel with modern lavender styling */
+.about-card { 
+  background: linear-gradient(180deg, #FEFCFF, #F8F4FF); 
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 12px 32px rgba(54,33,74,0.06), 0 4px 16px rgba(180,150,255,0.04);
+  border: 1px solid rgba(180,150,255,0.08);
+}
+
+.resume-btn-pastel { 
+  background: linear-gradient(90deg, #C8B5FF, #E0D1FF); 
+  color: #36214A; 
+  font-weight: 600; 
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(180,150,255,0.12);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.resume-btn-pastel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(180,150,255,0.18);
+}
+
+/* Header icons with lavender theme */
+.header-icon {
+  color: var(--muted);
+  transition: all 0.3s ease;
+}
+
+.header-icon:hover {
+  color: var(--primary);
+  background: rgba(180,150,255,0.08);
+  box-shadow: 0 4px 16px rgba(180,150,255,0.06);
+}
+
+/* Typography colors for light theme */
+h1, h2, h3, .neon-title {
+  color: var(--text) !important;
+}
+
+h4, h5, h6 {
+  color: var(--muted);
+}
+
+p {
+  color: rgba(54,33,74,0.85);
+}
+
+/* Navigation with purple accents */
+.tabs button {
+  color: var(--muted);
+  transition: color 0.3s ease;
+}
+
+.tabs button.text-white,
+.tabs button:hover {
+  color: var(--primary) !important;
+}
+
+/* Underline accent color */
+.bg-cyan-400 {
+  background-color: var(--primary) !important;
+}
+
+.nav-link { color: var(--text); opacity: 0.95; }
+.social { color: var(--primary); }
+
+/* AGGRESSIVE OVERRIDE: Force light theme hero to match dark theme exactly */
+/* Target Tailwind classes directly */
+.hero .text-7xl,
+.hero .lg\:text-8xl,
+.hero [class*="text-7xl"],
+.hero [class*="text-8xl"] {
+  font-size: 48px !important;
+  letter-spacing: 2px !important;
+  font-weight: 700 !important;
+  line-height: 1.05 !important;
+}
+
+.hero .text-lg,
+.hero .lg\:text-2xl,
+.hero [class*="text-lg"],
+.hero [class*="text-2xl"] {
+  font-size: 18px !important;
+  line-height: 1.9 !important;
+}
