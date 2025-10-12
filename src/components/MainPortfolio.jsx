@@ -152,7 +152,7 @@ export default function MainPortfolio({ theme, onResetTheme }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6 }}
-              className="about-wrap grid md:grid-cols-2 gap-8 items-center"
+              className="about-wrap max-w-4xl mx-auto"
             >
               <div className={`about-card p-6 rounded-lg ${theme === 'dark' ? 'card-dark' : 'card-pastel'}`}>
                 <motion.h3
@@ -179,12 +179,6 @@ export default function MainPortfolio({ theme, onResetTheme }) {
                     <a href="#" className={`inline-block px-4 py-2 rounded ${theme === 'dark' ? 'resume-btn-neon' : 'resume-btn-pastel'}`} download>Download Resume</a>
                   </div>
                 </motion.div>
-              </div>
-
-              <div className="about-media flex items-center justify-center">
-                <div className="w-56">
-                  <img src="/src/assets/profile.jpg" alt="Sowmiya" className="w-full h-auto rounded-md shadow-lg" />
-                </div>
               </div>
             </motion.div>
           </div>

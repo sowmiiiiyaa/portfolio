@@ -1,0 +1,43 @@
+/* Perfect centering for theme selector toggle */
+.theme-selector-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.theme-toggle-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}
+
+/* Ensure the toggle stays centered on all screen sizes */
+@media (max-width: 768px) {
+  .theme-toggle-center {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@media (max-width: 480px) {
+  .theme-toggle-center {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Ensure responsive centering */
+@media (orientation: landscape) and (max-height: 500px) {
+  .theme-toggle-center {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
