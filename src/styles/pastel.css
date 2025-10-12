@@ -1,34 +1,37 @@
 :root {
-  /* Modern lavender and purple theme variables */
-  --bg: linear-gradient(180deg, #F3ECFF 0%, #F9F6FF 100%); /* gentle lavender gradient */
-  --text: #36214A; /* deep purple for headings and primary text */
-  --primary: #B497FF; /* pastel purple accents */
-  --card: #FAF7F5; /* soft cream/silver for cards */
-  --muted: #8B7E95; /* muted gray-purple for secondary text */
-  --glass: rgba(255,255,255,0.6);
+  /* Harmonious lavender and purple theme variables */
+  --bg: #EFE7FB; /* soft pastel lavender background */
+  --text: #5B247A; /* deep purple for headings */
+  --secondary: #7C5E99; /* muted violet for secondary headings */
+  --body-text: #6D678D; /* elegant medium gray for body text */
+  --primary: #8F31FF; /* vibrant purple for buttons and highlights */
+  --card: #F6F5FF; /* off-white for cards */
+  --card-alt: #F3EFFE; /* pale lilac alternative */
+  --accent-blue: #68D9FF; /* aqua-blue accent */
+  --accent-pink: #FFCCF9; /* blush-pink accent */
+  --shadow: rgba(139, 55, 255, 0.15); /* gentle purple shadows */
 }
 
-/* Neon accent variables available in light theme */
+/* Gradient overlays for depth */
 :root {
-  --neon-blue: #00ffff;
-  --neon-pink: #ff00ff;
-  --neon-green: #39ff14;
+  --gradient-overlay: linear-gradient(135deg, #EFE7FB 0%, #E6E6FA 50%, #F3EFFE 100%);
+  --card-gradient: linear-gradient(145deg, #F6F5FF 0%, #F3EFFE 100%);
 }
 
 body { 
   background: var(--bg); 
-  color: var(--text); 
+  color: var(--body-text); 
 }
 
 .choose-btn { 
-  background: linear-gradient(90deg, rgba(180,150,255,0.12), rgba(180,150,255,0.18)); 
-  border: 1px solid rgba(180,150,255,0.25); 
-  color: var(--primary); 
-  box-shadow: 0 4px 18px rgba(180,150,255,0.08); 
+  background: linear-gradient(90deg, var(--primary), #A855FF); 
+  border: 1px solid rgba(143, 49, 255, 0.3); 
+  color: white; 
+  box-shadow: 0 4px 18px var(--shadow); 
 }
 
 .choose-btn:hover { 
-  box-shadow: 0 6px 28px rgba(180,150,255,0.18); 
+  box-shadow: 0 6px 28px rgba(143, 49, 255, 0.25); 
   transform: translateY(-2px); 
 }
 
@@ -146,25 +149,27 @@ header .header-icon {
 .pastel-shimmer { 
   position: absolute; 
   inset: 0; 
-  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.45), transparent 10%); 
+  background: var(--gradient-overlay);
+  opacity: 0.3;
 }
 
 .control-btn { 
   background: transparent; 
   border: none; 
-  color: var(--text); 
+  color: var(--secondary); 
 }
 
 .card-pastel { 
-  background: linear-gradient(180deg, var(--card), #F6F4F3); 
+  background: var(--card-gradient); 
   border-radius: 12px; 
   padding: 12px; 
-  box-shadow: 0 8px 18px rgba(54,33,74,0.04); 
+  box-shadow: 0 8px 24px var(--shadow), 0 2px 8px rgba(109, 103, 141, 0.08); 
+  border: 1px solid rgba(243, 239, 254, 0.8);
 }
 
 .control-dot { 
-  background: rgba(54,33,74,0.06); 
-  box-shadow: 0 0 0 6px rgba(250,245,243,0.6), 0 8px 24px rgba(180,150,255,0.06); 
+  background: var(--primary); 
+  box-shadow: 0 0 0 6px rgba(246, 245, 255, 0.8), 0 8px 24px var(--shadow); 
   position: absolute; 
   left: 50%; 
   top: 50%; 
@@ -172,70 +177,76 @@ header .header-icon {
 }
 
 .nav-link { 
-  color: var(--text); 
-  opacity: 0.95; 
+  color: var(--secondary); 
+  opacity: 0.9; 
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary);
 }
 
 .social { 
-  color: var(--primary); 
+  color: var(--accent-blue); 
 }
 
 .nav-link { color: var(--text); opacity: 0.95; }
 .social { color: var(--primary); }
 
-/* About card pastel with modern lavender styling */
+/* About card with harmonious lavender styling */
 .about-card { 
-  background: linear-gradient(180deg, #FEFCFF, #F8F4FF); 
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 12px 32px rgba(54,33,74,0.06), 0 4px 16px rgba(180,150,255,0.04);
-  border: 1px solid rgba(180,150,255,0.08);
+  background: var(--card-gradient); 
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 12px 40px var(--shadow), 0 4px 16px rgba(109, 103, 141, 0.06);
+  border: 1px solid rgba(243, 239, 254, 0.6);
 }
 
 .resume-btn-pastel { 
-  background: linear-gradient(90deg, #C8B5FF, #E0D1FF); 
-  color: #36214A; 
+  background: linear-gradient(135deg, var(--primary), #A855FF); 
+  color: white; 
   font-weight: 600; 
-  padding: 12px 24px;
-  border-radius: 8px;
-  box-shadow: 0 6px 20px rgba(180,150,255,0.12);
+  padding: 14px 28px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px var(--shadow);
   border: none;
   transition: all 0.3s ease;
 }
 
 .resume-btn-pastel:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(180,150,255,0.18);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(143, 49, 255, 0.25);
+  background: linear-gradient(135deg, #A855FF, var(--accent-blue));
 }
 
 /* Header icons with lavender theme */
 .header-icon {
-  color: var(--muted);
+  color: var(--secondary);
   transition: all 0.3s ease;
 }
 
 .header-icon:hover {
   color: var(--primary);
-  background: rgba(180,150,255,0.08);
-  box-shadow: 0 4px 16px rgba(180,150,255,0.06);
+  background: rgba(143, 49, 255, 0.08);
+  box-shadow: 0 4px 16px var(--shadow);
 }
 
-/* Typography colors for light theme */
+/* Typography colors for harmonious lavender theme */
 h1, h2, h3, .neon-title {
-  color: var(--text) !important;
+  color: var(--text) !important; /* deep purple for main headings */
 }
 
 h4, h5, h6 {
-  color: var(--muted);
+  color: var(--secondary); /* muted violet for secondary headings */
 }
 
 p {
-  color: rgba(54,33,74,0.85);
+  color: var(--body-text); /* elegant medium gray for body text */
 }
 
 /* Navigation with purple accents */
 .tabs button {
-  color: var(--muted);
+  color: var(--secondary);
   transition: color 0.3s ease;
 }
 
@@ -246,7 +257,28 @@ p {
 
 /* Underline accent color */
 .bg-cyan-400 {
-  background-color: var(--primary) !important;
+  background: linear-gradient(90deg, var(--primary), var(--accent-blue)) !important;
+}
+
+/* Links and highlights */
+a {
+  color: var(--accent-blue);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--primary);
+}
+
+/* Button variants with accent colors */
+.btn-accent-pink {
+  background: linear-gradient(135deg, var(--accent-pink), #FFB3E6);
+  color: var(--text);
+}
+
+.btn-accent-blue {
+  background: linear-gradient(135deg, var(--accent-blue), #4FC3F7);
+  color: white;
 }
 
 .nav-link { color: var(--text); opacity: 0.95; }
