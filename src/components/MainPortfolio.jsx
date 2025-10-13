@@ -194,7 +194,7 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme }) {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.08 }}
-              className="mt-3 text-lg lg:text-2xl font-nunito text-cyan-200"
+              className="mt-3 text-lg lg:text-2xl font-nunito text-cyan-200 hero-subtitle"
             >
               Aspiring DevOps Engineer | Python Automation Beginner
             </motion.p>
@@ -210,7 +210,7 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme }) {
             </motion.div>
 
             <div className="mt-4">
-              <span className="text-sm text-teal-300 italic opacity-90 animate-pulse">Always learning. Always automating.</span>
+              <span className="text-sm text-teal-300 italic opacity-90 animate-pulse hero-tagline">Always learning. Always automating.</span>
             </div>
           </div>
 

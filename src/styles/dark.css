@@ -135,6 +135,16 @@ body { background: var(--bg); color: var(--text); }
 .neon-title { color: #E8FFFF; text-shadow: 0 2px 0 rgba(0,0,0,0.6), 0 8px 24px rgba(0,255,252,0.06), 0 0 38px rgba(0,255,252,0.04); }
 .neon-subtitle { color: #8ff7f0; text-shadow: 0 4px 30px rgba(0,255,252,0.03); }
 
+/* User-requested neon glow for hero subtitle and tagline (dark theme only) */
+.hero-subtitle,
+.hero-tagline {
+  color: #18ffe6; /* neon aqua */
+  text-shadow: 0 0 8px #18ffe6, 0 0 16px #18ffe6, 0 0 24px #18ffe6;
+}
+
+.hero-subtitle { font-weight: 600; }
+.hero-tagline { font-weight: 600; }
+
 /* profile card glow */
 .profile-card { padding: 12px; border-radius: 12px; background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(255,255,255,0.01)); box-shadow: 0 20px 60px rgba(0,255,252,0.04), inset 0 1px 0 rgba(255,255,255,0.02); border: 1px solid rgba(0,255,252,0.06); }
 .profile-card img { width: 120px; height: 120px; border-radius: 10px; object-fit: cover; display:block }
