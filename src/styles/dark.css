@@ -22,10 +22,51 @@ body { background: var(--bg); color: var(--text); }
 .nav-link { color: var(--text); opacity: 0.9; }
 .social { color: var(--accent2); }
 
+/* Animated gradient background */
+.animated-bg { position: absolute; inset: 0; z-index: -2; pointer-events: none; background: linear-gradient(135deg, rgba(20,10,30,0.6), rgba(10,6,18,0.65)); background-size: 300% 300%; animation: bgShift 20s ease-in-out infinite; }
+@keyframes bgShift { 0% { background-position: 0% 50% } 50% { background-position: 100% 50% } 100% { background-position: 0% 50% } }
+
+/* Bokeh particles */
+.bokeh-container { position: fixed; inset: 0; pointer-events: none; z-index: 10; overflow: hidden; }
+.bokeh-particle { position: absolute; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, rgba(0,255,252,0.08), transparent 45%); filter: blur(18px); transition: transform 0.35s linear; opacity: 0.6; }
+
+/* Typing caret (subtle) */
+.typing-caret { border-right: 2px solid rgba(0,255,252,0.9); animation: blinkCaret 1s steps(2,end) infinite; }
+@keyframes blinkCaret { from { border-color: rgba(0,255,252,0.9) } 50% { border-color: transparent } to { border-color: rgba(0,255,252,0.9) } }
+
+/* Skill progress animations and tooltip */
+.skill-bar-bg { background: rgba(255,255,255,0.02); }
+.skill-progress { width: 0%; transition: width 1s cubic-bezier(.2,.9,.2,1); box-shadow: 0 6px 18px rgba(0,255,252,0.06), inset 0 1px 0 rgba(255,255,255,0.03); }
+.skill-progress[data-tip]:hover::after { content: attr(data-tip); position: absolute; transform: translateY(-120%); background: rgba(0,0,0,0.8); color: #e6ffff; padding: 6px 8px; border-radius: 6px; font-size: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.6); }
+
+/* Project card overlay reveal */
+.project-card .project-overlay { transition: opacity 220ms ease, pointer-events 220ms ease; }
+.project-card:hover .project-overlay { opacity: 1; pointer-events: auto; }
+
+
 /* header icons */
 .header-icon { display: inline-flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.85); padding: 6px; border-radius: 6px; }
 .header-icon svg { display: block; color: inherit; }
 .header-icon:hover { background: rgba(0,255,252,0.04); color: var(--accent1); box-shadow: 0 6px 24px rgba(0,255,252,0.06); }
+
+/* Theme toggle button */
+.theme-toggle-btn { 
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+  color: rgba(255,255,255,0.85); 
+  padding: 8px; 
+  border-radius: 8px; 
+  font-size: 16px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0,255,252,0.2);
+}
+.theme-toggle-btn:hover { 
+  background: rgba(0,255,252,0.1); 
+  color: var(--accent1); 
+  box-shadow: 0 6px 24px rgba(0,255,252,0.2);
+  transform: scale(1.05);
+}
 
 /* Cyberpunk / editor visuals */
 .editor-bg {

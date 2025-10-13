@@ -231,6 +231,26 @@ header .header-icon {
   box-shadow: 0 4px 16px var(--shadow);
 }
 
+/* Theme toggle button for pastel theme */
+.theme-toggle-btn { 
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+  color: var(--secondary); 
+  padding: 8px; 
+  border-radius: 8px; 
+  font-size: 16px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(143, 49, 255, 0.2);
+  background: rgba(143, 49, 255, 0.05);
+}
+.theme-toggle-btn:hover { 
+  color: var(--primary); 
+  background: rgba(143, 49, 255, 0.15);
+  box-shadow: 0 4px 16px var(--shadow);
+  transform: scale(1.05);
+}
+
 /* Typography colors for harmonious lavender theme */
 h1, h2, h3, .neon-title {
   color: var(--text) !important; /* deep purple for main headings */
@@ -303,3 +323,24 @@ a:hover {
   font-size: 18px !important;
   line-height: 1.9 !important;
 }
+
+/* Animated gradient background (pastel) */
+.animated-bg { position: absolute; inset: 0; z-index: -2; pointer-events: none; background: linear-gradient(120deg, rgba(239,231,251,0.6), rgba(243,239,254,0.6)); background-size: 300% 300%; animation: bgShiftPastel 24s ease-in-out infinite; }
+@keyframes bgShiftPastel { 0% { background-position: 0% 50% } 50% { background-position: 100% 50% } 100% { background-position: 0% 50% } }
+
+/* Bokeh particles */
+.bokeh-container { position: fixed; inset: 0; pointer-events: none; z-index: 10; overflow: hidden; }
+.bokeh-particle { position: absolute; width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, rgba(143,49,255,0.08), transparent 45%); filter: blur(14px); transition: transform 0.35s linear; opacity: 0.7; }
+
+/* Typing caret */
+.typing-caret { border-right: 2px solid rgba(143,49,255,0.9); animation: blinkCaret 1s steps(2,end) infinite; }
+
+/* Skill progress animations */
+.skill-bar-bg { background: var(--card-alt); }
+.skill-progress { width: 0%; transition: width 1s cubic-bezier(.2,.9,.2,1); box-shadow: 0 6px 18px rgba(143,49,255,0.06), inset 0 1px 0 rgba(255,255,255,0.6); }
+.skill-progress[data-tip]:hover::after { content: attr(data-tip); position: absolute; transform: translateY(-120%); background: rgba(95,30,120,0.95); color: #fff; padding: 6px 8px; border-radius: 6px; font-size: 12px; box-shadow: 0 6px 20px rgba(143,49,255,0.08); }
+
+/* Project card overlay reveal */
+.project-card .project-overlay { transition: opacity 220ms ease, pointer-events 220ms ease; }
+.project-card:hover .project-overlay { opacity: 1; pointer-events: auto; }
+

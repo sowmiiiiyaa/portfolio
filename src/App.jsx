@@ -22,6 +22,18 @@ export default function App() {
     }
   }, [theme])
 
+  // Function to toggle theme without navigation
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'pastel' : 'dark'
+    setTheme(newTheme)
+  }
+
+  // Function to return to home/front page
+  const goToHomePage = () => {
+    setTheme(null)
+    localStorage.removeItem('theme')
+  }
+
   return (
     <div className="min-h-screen">
       {!theme ? (
@@ -30,7 +42,8 @@ export default function App() {
         <>
           <MainPortfolio 
             theme={theme} 
-            onResetTheme={() => { setTheme(null); localStorage.removeItem('theme') }} 
+            onToggleTheme={toggleTheme}
+            onResetTheme={goToHomePage} 
             openSelector={() => setShowSelector(true)} 
           />
           {showSelector && (
@@ -38,9 +51,9 @@ export default function App() {
               <ThemeSelector onChoose={(t) => { setTheme(t); setShowSelector(false) }} />
             </div>
           )}
-          {/* Switch Mode button */}
+          {/* Switch Mode button - Always returns to home page */}
           <button 
-            onClick={() => setTheme(null)}
+            onClick={goToHomePage}
             className="fixed bottom-4 right-4 z-50 px-4 py-2 bg-gray-800 text-white rounded-lg shadow-lg hover:bg-gray-700 transition-colors"
             style={{ fontSize: '12px' }}
           >
