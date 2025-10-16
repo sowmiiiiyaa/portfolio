@@ -21,7 +21,7 @@ const Section = ({ id, title, children }) => (
   </motion.section>
 )
 
-export default function MainPortfolio({ theme, onToggleTheme, onResetTheme }) {
+export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGoToTerminal }) {
   const [activeTab, setActiveTab] = useState('about')
   const underlineRef = useRef(null)
   const aboutRef = useRef(null)
@@ -163,6 +163,13 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme }) {
 
           <div className="flex items-center gap-4">
             <a href="#contact" className="nav-link mr-4">Contact</a>
+            <button
+              onClick={onGoToTerminal}
+              className="nav-link mr-4"
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'inherit', fontFamily: 'inherit', fontSize: 'inherit' }}
+            >
+              Terminal
+            </button>
             <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="header-icon" aria-label="GitHub">GitHub</a>
             <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" className="header-icon" aria-label="LinkedIn">LinkedIn</a>
             <button
