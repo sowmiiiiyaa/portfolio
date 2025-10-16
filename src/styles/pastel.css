@@ -132,6 +132,19 @@ header .header-icon {
   font-size: 18px !important;
 }
 
+/* Light theme: tagline and subtitle text in Deep Grape for high contrast */
+.hero-subtitle,
+.hero .hero-subtitle {
+  color: #674C99 !important; /* Deep Grape */
+  font-weight: 600 !important;
+}
+
+.hero-tagline,
+.hero .hero-tagline {
+  color: #606373 !important; /* Heather Gray for subtle distinction */
+  font-weight: 500 !important;
+}
+
 .photo-bar {
   position: absolute;
   right: 2rem;
