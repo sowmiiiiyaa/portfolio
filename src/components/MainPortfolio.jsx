@@ -4,6 +4,7 @@ import profileImg from '../assets/profile.jpg'
 import project1 from '../assets/project1.jpg'
 import project2 from '../assets/project2.jpg'
 import project3 from '../assets/project3.jpg'
+import SkillGalaxy from './SkillGalaxy'
 
 const Section = ({ id, title, children }) => (
   <motion.section
@@ -268,49 +269,33 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
           </div>
         </Section>
 
-  <Section id="projects" title={<span className="font-mono-custom">Projects</span>}>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {([project1, project2, project3]).map((p, idx) => (
-              <article key={idx} className="p-4 card-dark rounded-lg project-card relative overflow-hidden">
-                <div className="h-40 bg-gray-800 rounded mb-3 overflow-hidden">
-                  <img src={p} alt={`project ${idx + 1}`} className="w-full h-full object-cover" />
-                </div>
-                <h3 className="font-semibold text-slate-100">Project {idx + 1}</h3>
-                <p className="text-sm text-slate-300">Short description about the project, tech used, and the outcome.</p>
-                <div className="project-overlay absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
-                  <div className="flex gap-3">
-                    <button className="btn-accent-pink px-4 py-2 rounded">View</button>
-                    <button className="btn-accent-blue px-4 py-2 rounded">Demo</button>
-                  </div>
-                </div>
-              </article>
-            ))}
+        <Section id="projects" title={<span className="font-mono-custom">Projects</span>}>
+          <div className="grid md:grid-cols-2 gap-6">
+            <article className={`p-4 rounded-lg project-card relative overflow-hidden ${theme === 'dark' ? 'card-dark' : 'card-pastel'}`}>
+              <div className={`h-40 rounded mb-3 overflow-hidden ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}`}>
+                {project1 ? (
+                  <img src={project1} alt="Focus Timer screenshot" className="w-full h-full object-cover" />
+                ) : null}
+              </div>
+              <h3 className={`font-semibold ${theme === 'dark' ? 'text-slate-100' : 'text-slate-900'}`}>Focus Timer</h3>
+              <p className={`text-sm ${theme === 'dark' ? 'text-slate-300' : 'text-slate-700'}`}>A web-based productivity tool that helps users stay focused by tracking work sessions and breaks. Built using React and styled-components, it features a sleek timer display, session history, and motivational UI.</p>
+            </article>
+
+            <article className={`p-4 rounded-lg project-card relative overflow-hidden ${theme === 'dark' ? 'card-dark' : 'card-pastel'}`}>
+              <div className={`h-40 rounded mb-3 overflow-hidden ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}`}>
+                {project2 ? (
+                  <img src={project2} alt="System Monitoring screenshot" className="w-full h-full object-cover" />
+                ) : null}
+              </div>
+              <h3 className={`font-semibold ${theme === 'dark' ? 'text-slate-100' : 'text-slate-900'}`}>System Monitoring</h3>
+              <p className={`text-sm ${theme === 'dark' ? 'text-slate-300' : 'text-slate-700'}`}>A desktop utility for real-time system performance tracking, developed with Python and Tkinter. Shows live CPU and memory usage, alerts for resource spikes, and a simple dashboard for quick analysis.</p>
+            </article>
           </div>
         </Section>
 
         <Section id="skills" title={<span className="skills-heading">Skills</span>}>
-          <div className="skills-section grid md:grid-cols-2 gap-6">
-            <div>
-              <h4 className="skill-label font-medium mb-2">Python</h4>
-              <div className="skill-bar-bg w-full rounded h-4 overflow-hidden mb-4">
-                <div className="skill-progress h-4 bg-gradient-to-r from-green-400 to-cyan-400" data-progress="90" data-tip="Python — 90%" />
-              </div>
-              <h4 className="skill-label font-medium mb-2">Docker & Kubernetes</h4>
-              <div className="skill-bar-bg w-full rounded h-4 overflow-hidden mb-4">
-                <div className="skill-progress h-4 bg-gradient-to-r from-purple-400 to-pink-400" data-progress="75" data-tip="Docker & K8s — 75%" />
-              </div>
-            </div>
-
-            <div>
-              <h4 className="skill-label font-medium mb-2">CI/CD (GitHub Actions, Jenkins)</h4>
-              <div className="skill-bar-bg w-full rounded h-4 overflow-hidden mb-4">
-                <div className="skill-progress h-4 bg-gradient-to-r from-yellow-400 to-red-400" data-progress="80" data-tip="CI/CD — 80%" />
-              </div>
-              <h4 className="skill-label font-medium mb-2">Infrastructure as Code</h4>
-              <div className="skill-bar-bg w-full rounded h-4 overflow-hidden mb-4">
-                <div className="skill-progress h-4 bg-gradient-to-r from-indigo-400 to-blue-400" data-progress="60" data-tip="IaC — 60%" />
-              </div>
-            </div>
+          <div className="container mx-auto px-6">
+            <SkillGalaxy theme={theme} />
           </div>
         </Section>
 

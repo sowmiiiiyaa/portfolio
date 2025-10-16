@@ -13,43 +13,38 @@ const TerminalPage = ({ theme, onToggleTheme, onBackToPortfolio }) => {
   // Command definitions with outputs
   const commands = {
     'show skills': {
-      output: [
-        '╔═══════════════════════════════════════════╗',
-        '║         DEVOPS SKILL MATRIX               ║',
-        '╚═══════════════════════════════════════════╝',
-        '',
-        '🐧 Linux Administration       ████████░░ 85%',
-        '📦 Git & Version Control      █████████░ 90%',
-        '🔧 Shell Scripting           ████████░░ 75%',
-        '⚙️  CI/CD Pipelines           ██████░░░░ 60%',
-        '🐳 Docker & Containers       █████░░░░░ 55%',
-        '☁️  Cloud Platforms           ████░░░░░░ 40%',
-        '',
-        '✓ Skills matrix loaded successfully!'
-      ]
+        output: [
+          '╔═══════════════════════════════════════════╗',
+          '║         SKILL GALAXY MATRIX               ║',
+          '╚═══════════════════════════════════════════╝',
+          '',
+          '🌐 HTML                  ████████░░ 80%   — Semantic markup, accessibility',
+          '🎨 CSS                   ████████░░ 80%   — Responsive layouts, basic animations',
+          '� Git & GitHub          ████████░░ 80%   — Branching, merging, PR workflows',
+          '🐍 Python                ███████░░░ 70%   — Automation scripts, DevOps basics',
+          '� Linux                 ██████░░░░ 60%   — CLI, permissions, admin basics',
+          '🐳 Docker                ████░░░░░░ 40%   — Container basics, Dockerfiles',
+          '',
+          '✓ Skills matrix loaded successfully!'
+        ]
     },
     'list projects': {
       output: [
         '╔═══════════════════════════════════════════╗',
-        '║         PROJECT REPOSITORY                ║',
+        '║            PROJECT REPOSITORY              ║',
         '╚═══════════════════════════════════════════╝',
         '',
-        '📁 Project 1: Automated Deployment Pipeline',
-        '   ├─ Stack: Jenkins + Docker + AWS EC2',
-        '   ├─ Status: ✓ Production',
-        '   └─ Impact: 70% faster deployments',
+        '📁 Project 1: Focus Timer',
+        '   ├─ A React productivity timer with session tracking',
+        '   ├─ Features: Start/Pause, Session history, Notification hints',
+        '   └─ Tech: React, useState, localStorage',
         '',
-        '📁 Project 2: Infrastructure as Code',
-        '   ├─ Stack: Terraform + Ansible',
-        '   ├─ Status: ✓ Production',
-        '   └─ Impact: 100% reproducible infrastructure',
+        '📁 Project 2: System Monitoring',
+        '   ├─ A Python/Tkinter dashboard for resource tracking',
+        '   ├─ Features: Live CPU & memory charts, alerts for spikes',
+        '   └─ Tech: Python, Tkinter, psutil',
         '',
-        '📁 Project 3: Monitoring Dashboard',
-        '   ├─ Stack: Prometheus + Grafana',
-        '   ├─ Status: ⚡ Active Development',
-        '   └─ Impact: 24/7 system observability',
-        '',
-        '> Found 3 projects in repository'
+        '> Found 2 projects in repository'
       ]
     },
     'fun_fact --devops': {
@@ -75,12 +70,12 @@ const TerminalPage = ({ theme, onToggleTheme, onBackToPortfolio }) => {
     'whoami': {
       output: [
         '╔═══════════════════════════════════════════╗',
-        '║         USER PROFILE                      ║',
+        '║             USER PROFILE                   ║',
         '╚═══════════════════════════════════════════╝',
         '',
         '👤 Name:     Sowmiya S',
-        '💼 Role:     Aspiring DevOps Engineer',
-        '🎓 Focus:    Python Automation & Cloud',
+        '💼 Role:     Computer Science Engineering Student',
+        '🎓 Focus:    DevOps and Automation',
         '📍 Location: Learning Mode: ON',
         '🌟 Motto:    "Always learning. Always automating."',
         '',
