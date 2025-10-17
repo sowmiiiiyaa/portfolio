@@ -1,30 +1,41 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 
-const Side = ({ title, subtitle, className }) => (
-  <div className={`flex-1 flex items-center justify-center p-12 lg:p-20 ${className}`}>
-    <div className="max-w-lg text-center">
+const Side = ({ title, subtitle, className, themeId, onSelect }) => (
+  <motion.button
+    type="button"
+    onClick={() => onSelect && onSelect(themeId)}
+    whileHover={{ scale: 1.01 }}
+    whileTap={{ scale: 0.995 }}
+    className={`theme-side-btn flex-1 flex items-center justify-center p-12 lg:p-20 ${className}`}
+    aria-label={`Choose ${themeId} theme`}
+  >
+    <div className="max-w-lg text-center pointer-events-none">
       <h2 className="text-6xl lg:text-7xl mb-6 font-extrabold tracking-tight main-headline">{title}</h2>
       <p className="text-xl lg:text-2xl opacity-90 subtitle-text">{subtitle}</p>
     </div>
-  </div>
+  </motion.button>
 )
 
 export default function ThemeSelector({ onChoose }) {
   return (
     <div className="h-screen w-screen flex relative overflow-hidden">
-      {/* Left Side - Pure Black with Neon Dark */}
+      {/* Left Side - Pure Black with Neon Dark (click anywhere to select) */}
       <Side
         title={<span className="font-orbitron text-cyan-300">Neon Dark</span>}
         subtitle="Cyber aesthetic with glowing accents and motion."
         className="bg-black text-cyan-200 relative overflow-hidden"
+        themeId="dark"
+        onSelect={onChoose}
       />
 
-      {/* Right Side - Pastel Lavender with Pastel Light */}
+      {/* Right Side - Pastel Lavender with Pastel Light (click anywhere to select) */}
       <Side
         title={<span className="font-nunito text-purple-800">Pastel Light</span>}
         subtitle="Soft, elegant tones and gentle motion."
         className="bg-gradient-to-br from-[#E6E6FA] to-[#F5E8FF] text-purple-800"
+        themeId="pastel"
+        onSelect={onChoose}
       />
 
       {/* Central floating control - Rectangle-shaped toggle perfectly centered */}

@@ -88,6 +88,19 @@
 /* Slight rounded corner on sides for a softer look */
 .dark-side, .pastel-side { border-radius: 12px; overflow: hidden; position: relative; }
 
+/* Full-side clickable styles */
+.theme-side-btn { border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 220ms ease, box-shadow 220ms ease; position: relative; }
+.theme-side-btn:focus { outline: none; box-shadow: 0 0 0 4px rgba(99,102,241,0.12); }
+.theme-side-btn:hover { transform: scale(1.006); }
+
+/* subtle glow on hover for each side */
+.theme-side-btn.bg-black:hover, .theme-side-btn.bg-black:focus { box-shadow: 0 20px 60px rgba(0,255,252,0.04), inset 0 1px 0 rgba(255,255,255,0.02); }
+.theme-side-btn.bg-gradient-to-br:hover, .theme-side-btn.bg-gradient-to-br:focus { box-shadow: 0 20px 60px rgba(143,49,255,0.04), inset 0 1px 0 rgba(255,255,255,0.02); }
+
+/* ripple visual using pseudo element (non-interfering) */
+.theme-side-btn::after { content: ''; position: absolute; width: 120px; height: 120px; border-radius: 999px; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(0.6); opacity: 0; transition: opacity 320ms ease, transform 320ms ease; pointer-events: none }
+.theme-side-btn:active::after { transform: translate(-50%, -50%) scale(1); opacity: 0.12 }
+
 /* Subtle background gradients for depth */
 .dark-side { background: linear-gradient(180deg, rgba(0,0,0,0.98), rgba(8,8,20,0.98)); }
 .pastel-side { background: linear-gradient(180deg, rgba(243,239,254,0.65), rgba(229,246,255,0.5)); }
