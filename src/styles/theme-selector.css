@@ -54,6 +54,23 @@
 	animation: fadeUp 220ms ease forwards;
 }
 
+/* Avatar styles for ThemeSelector */
+.avatar { display: inline-block; vertical-align: middle; }
+.avatar-cyber { filter: drop-shadow(0 8px 20px rgba(0,240,255,0.14)); transition: transform 420ms ease; }
+.avatar-cyber { animation: cyberPulse 3s ease-in-out infinite; }
+@keyframes cyberPulse { 0% { transform: scale(0.98); filter: drop-shadow(0 6px 16px rgba(0,240,255,0.12)) } 50% { transform: scale(1.02); filter: drop-shadow(0 14px 36px rgba(0,240,255,0.18)) } 100% { transform: scale(0.98); filter: drop-shadow(0 6px 16px rgba(0,240,255,0.12)) } }
+
+.avatar-cloud { filter: drop-shadow(0 8px 20px rgba(99,102,241,0.10)); transition: transform 420ms ease; }
+.avatar-cloud { animation: cloudPulse 4s ease-in-out infinite; }
+@keyframes cloudPulse { 0% { transform: translateY(0) scale(0.995); filter: drop-shadow(0 6px 18px rgba(170,120,240,0.06)) } 50% { transform: translateY(-4px) scale(1.01); filter: drop-shadow(0 12px 30px rgba(170,120,240,0.12)) } 100% { transform: translateY(0) scale(0.995); filter: drop-shadow(0 6px 18px rgba(170,120,240,0.06)) } }
+
+/* responsive avatar sizing */
+@media (max-width: 768px) {
+	.avatar { width: 44px; height: 44px }
+	.main-headline { font-size: 34px }
+}
+
+
 @keyframes fadeUp {
 	to { opacity: 1; transform: translateX(-50%) translateY(-6px); }
 }
@@ -72,10 +89,10 @@
 .dark-side .cyber-particles::after { content: ''; position: absolute; left: 12%; top: 18%; width: 8px; height: 8px; border-radius: 50%; background: rgba(56,255,230,0.18); box-shadow: 0 0 18px rgba(56,255,230,0.08), 40px 80px 20px rgba(56,255,230,0.06), 120px 40px 30px rgba(255,120,200,0.06); filter: blur(4px); }
 
 /* Pastel gradients and soft bubbles */
-.pastel-side .pastel-gradients { position: absolute; inset: 0; z-index: 0; background: radial-gradient(circle at 20% 20%, rgba(243,239,254,0.7), transparent 25%), radial-gradient(circle at 80% 80%, rgba(230,246,255,0.6), transparent 30%); background-size: 200% 200%; animation: pastelShift 18s linear infinite; }
+.pastel-side .pastel-gradients { position: absolute; inset: 0; z-index: 0; background: radial-gradient(circle at 20% 20%, rgba(250,248,255,0.85), transparent 25%), radial-gradient(circle at 80% 80%, rgba(243,250,255,0.85), transparent 30%); background-size: 200% 200%; animation: pastelShift 18s linear infinite; }
 @keyframes pastelShift { 0% { background-position: 0% 50% } 50% { background-position: 100% 50% } 100% { background-position: 0% 50% } }
 .pastel-side .pastel-bubbles { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
-.pastel-side .pastel-bubbles::after { content: ''; position: absolute; right: 18%; bottom: 20%; width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.12)); filter: blur(6px); opacity: 0.9; }
+.pastel-side .pastel-bubbles::after { content: ''; position: absolute; right: 18%; bottom: 20%; width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.5)); filter: blur(6px); opacity: 0.95; }
 
 /* Headline animations */
 .intro-headline { z-index: 12; margin-bottom: 8px; }
@@ -95,7 +112,7 @@
 
 /* subtle glow on hover for each side */
 .theme-side-btn.bg-black:hover, .theme-side-btn.bg-black:focus { box-shadow: 0 20px 60px rgba(0,255,252,0.04), inset 0 1px 0 rgba(255,255,255,0.02); }
-.theme-side-btn.bg-gradient-to-br:hover, .theme-side-btn.bg-gradient-to-br:focus { box-shadow: 0 20px 60px rgba(143,49,255,0.04), inset 0 1px 0 rgba(255,255,255,0.02); }
+.theme-side-btn.bg-gradient-to-br:hover, .theme-side-btn.bg-gradient-to-br:focus { box-shadow: 0 20px 60px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.02); }
 
 /* ripple visual using pseudo element (non-interfering) */
 .theme-side-btn::after { content: ''; position: absolute; width: 120px; height: 120px; border-radius: 999px; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(0.6); opacity: 0; transition: opacity 320ms ease, transform 320ms ease; pointer-events: none }
@@ -103,7 +120,16 @@
 
 /* Subtle background gradients for depth */
 .dark-side { background: linear-gradient(180deg, rgba(0,0,0,0.98), rgba(8,8,20,0.98)); }
-.pastel-side { background: linear-gradient(180deg, rgba(243,239,254,0.65), rgba(229,246,255,0.5)); }
+
+/* Pastel / light theme: color swap only (layout and interactions unchanged) */
+.pastel-side {
+	--accent-rgb: 99,102,241; /* indigo-ish accent for light theme */
+	--accent-glow: rgba(99,102,241,0.06); /* same intensity as dark but different hue */
+	--particle-color: rgba(99,102,241,0.12);
+	--text-color: #0f172a; /* slate-900 for strong readability on light bg */
+	background: linear-gradient(180deg, rgba(250,250,252,0.98), rgba(244,245,249,0.98));
+	color: var(--text-color);
+}
 
 /* Ensure the switcher has rounded edges and balanced spacing */
 .theme-switcher .switcher-inner { border-radius: 20px; }
@@ -114,4 +140,9 @@
 	.theme-btn { width: 44px; height: 44px; }
 	.theme-center-coin { width: 52px; height: 52px; }
 }
+
+
+/* Pastel-side: ensure readable darker text on light background (color-only changes) */
+.pastel-side { color: #0f172a; }
+.pastel-side .subtitle-text { color: rgba(15,23,42,0.9); text-shadow: 0 2px 6px rgba(0,0,0,0.06); }
 
