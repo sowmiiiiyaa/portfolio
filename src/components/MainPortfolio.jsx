@@ -25,6 +25,7 @@ const Section = ({ id, title, children }) => (
 
 export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGoToTerminal }) {
   const [activeTab, setActiveTab] = useState('about')
+  const [resumeMsgVisible, setResumeMsgVisible] = useState(false)
   const underlineRef = useRef(null)
   const aboutRef = useRef(null)
   const projectsRef = useRef(null)
@@ -307,8 +308,28 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
                   <p className="mt-3">I’m currently exploring DevOps tools and cloud technologies — because I believe automation isn’t just about saving time, it’s about unlocking creativity and innovation.</p>
                   <p className="mt-3">Whether it’s a script that simplifies a complex task or a system that deploys itself, I love creating things that just work — beautifully.</p>
 
-                  <div className="mt-6">
-                    <a href="#" className={`inline-block px-4 py-2 rounded ${theme === 'dark' ? 'resume-btn-neon' : 'resume-btn-pastel'}`} download>Download Resume</a>
+                  <div className="mt-6" style={{ position: 'relative' }}>
+                    <a
+                      href="#"
+                      className={`inline-block px-4 py-2 rounded ${theme === 'dark' ? 'resume-btn-neon' : 'resume-btn-pastel'}`}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        // show message for 2.5s
+                        setResumeMsgVisible(true)
+                        window.setTimeout(() => setResumeMsgVisible(false), 2500)
+                      }}
+                      download
+                    >
+                      Download Resume
+                    </a>
+
+                    {/* ephemeral resume message, centered beneath the button */}
+                    <div
+                      aria-hidden={!resumeMsgVisible}
+                      className={`resume-msg ${resumeMsgVisible ? 'visible' : ''} ${theme === 'dark' ? 'resume-msg-dark' : 'resume-msg-light'}`}
+                    >
+                      Resume will be available soon.
+                    </div>
                   </div>
                 </motion.div>
               </div>
