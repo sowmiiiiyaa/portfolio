@@ -18,14 +18,9 @@ const TerminalPage = ({ theme, onToggleTheme, onBackToPortfolio }) => {
           '║         SKILL GALAXY MATRIX               ║',
           '╚═══════════════════════════════════════════╝',
           '',
-          '🌐 HTML                  ████████░░ 80%   — Semantic markup, accessibility',
-          '🎨 CSS                   ████████░░ 80%   — Responsive layouts, basic animations',
-          '� Git & GitHub          ████████░░ 80%   — Branching, merging, PR workflows',
-          '🐍 Python                ███████░░░ 70%   — Automation scripts, DevOps basics',
-          '� Linux                 ██████░░░░ 60%   — CLI, permissions, admin basics',
-          '🐳 Docker                ████░░░░░░ 40%   — Container basics, Dockerfiles',
-          '',
-          '✓ Skills matrix loaded successfully!'
+          // NOTE: This static array is kept for fallback but the executeCommand handler
+          // will produce a richer, styled block for 'show skills'.
+          'Use the `show skills` command to render the interactive skill matrix.'
         ]
     },
     'list projects': {
@@ -73,11 +68,10 @@ const TerminalPage = ({ theme, onToggleTheme, onBackToPortfolio }) => {
         '║             USER PROFILE                   ║',
         '╚═══════════════════════════════════════════╝',
         '',
-        '👤 Name:     Sowmiya S',
-        '💼 Role:     Computer Science Engineering Student',
-        '🎓 Focus:    DevOps and Automation',
-        '📍 Location: Learning Mode: ON',
-        '🌟 Motto:    "Always learning. Always automating."',
+  '👤 Name:     Sowmiya S',
+  '💼 Role:     Computer Science Engineering Student',
+  '🎓 Focus:    DevOps and Automation',
+  '🌟 Motto:    "Always learning. Always automating."',
         '',
         '🔗 Connect:',
         '   GitHub:   github.com/sowmiiiiyaa',
@@ -148,6 +142,41 @@ const TerminalPage = ({ theme, onToggleTheme, onBackToPortfolio }) => {
     const trimmedCmd = cmd.trim().toLowerCase()
     const commandData = commands[trimmedCmd]
 
+    // Special handling for 'show skills' — render ASCII progress bars (retro terminal look)
+    if (trimmedCmd === 'show skills') {
+      const asciiBar = (pct) => {
+        const total = 10
+        const filled = Math.round(pct / 10)
+        const full = '▓'
+        const empty = '░'
+        return full.repeat(filled) + empty.repeat(total - filled)
+      }
+
+      const rows = [
+        '╔═══════════════════════════════════════════╗',
+        '║         SKILL GALAXY MATRIX               ║',
+        '╚═══════════════════════════════════════════╝',
+        '',
+        `🌐 HTML        ${asciiBar(85)} ${String(85).padStart(3)}%   — Semantic markup, accessibility`,
+        `🎨 CSS         ${asciiBar(85)} ${String(85).padStart(3)}%   — Responsive layouts, basic animations`,
+        `🔧 Git & GitHub ${asciiBar(80)} ${String(80).padStart(3)}%   — Branching, merging, PR workflows`,
+        `🐍 Python      ${asciiBar(90)} ${String(90).padStart(3)}%   — Automation scripts, DevOps`,
+        `🐧 Linux       ${asciiBar(30)} ${String(30).padStart(3)}%   — CLI, permissions, administration`,
+        `🐳 Docker      ${asciiBar(20)} ${String(20).padStart(3)}%   — Container basics, Dockerfiles`,
+        '',
+        '🔭 Currently Learning: Docker, Linux, CI/CD (focused projects & labs)',
+        '',
+        '✓ Skills matrix loaded successfully!'
+      ]
+
+      setCommandHistory(prev => [
+        ...prev,
+        { type: 'input', text: cmd },
+        { type: 'output', lines: rows }
+      ])
+      return
+    }
+
     if (commandData) {
       if (commandData.clearScreen) {
         setCommandHistory([])
@@ -162,14 +191,14 @@ const TerminalPage = ({ theme, onToggleTheme, onBackToPortfolio }) => {
       setCommandHistory(prev => [
         ...prev,
         { type: 'input', text: cmd },
-        { 
-          type: 'output', 
+        {
+          type: 'output',
           lines: [
             `❌ Command not found: ${cmd}`,
             '',
             '💡 Type "help" for available commands',
             ''
-          ] 
+          ]
         }
       ])
     }
@@ -335,6 +364,21 @@ const TerminalPage = ({ theme, onToggleTheme, onBackToPortfolio }) => {
                             transition={{ delay: i * 0.03 }}
                           >
                             {line}
+                          </motion.div>
+                        ))}
+                      </div>
+                    )}
+                    {item.type === 'skills' && (
+                      <div className="output-block skills-matrix">
+                        {item.data.map((s, idx) => (
+                          <motion.div key={s.name} className="skill-row" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: idx * 0.03 }}>
+                            <div className="skill-icon">{s.icon}</div>
+                            <div className="skill-name">{s.name}</div>
+                            <div className="skill-bar-bg" role="img" aria-label={`${s.name} proficiency ${s.pct}%`}>
+                              <div className="skill-progress" style={{ width: `${s.pct}%` }} data-tip={`${s.pct}%`} />
+                            </div>
+                            <div className="skill-pct">{s.pct}%</div>
+                            <div className="skill-note">— {s.note}</div>
                           </motion.div>
                         ))}
                       </div>
