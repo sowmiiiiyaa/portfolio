@@ -5,6 +5,7 @@ import project1 from '../assets/project1.jpg'
 import project2 from '../assets/project2.jpg'
 import project3 from '../assets/project3.jpg'
 import SkillGalaxy from './SkillGalaxy'
+import ConstellationBackground from './ConstellationBackground'
 
 const Section = ({ id, title, children }) => (
   <motion.section
@@ -130,6 +131,8 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
 
   return (
     <div className="min-h-screen editor-bg relative">
+      {/* Constellation background (theme-aware) */}
+      <ConstellationBackground theme={theme === 'dark' ? 'dark' : 'light'} id="constellation-portfolio" />
       <div className="neon-grid" />
     <div className="digital-lines" />
     <div className="stars" />

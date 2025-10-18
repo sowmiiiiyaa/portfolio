@@ -26,6 +26,46 @@ body { background: var(--bg); color: var(--text); }
 .animated-bg { position: absolute; inset: 0; z-index: -2; pointer-events: none; background: linear-gradient(135deg, rgba(20,10,30,0.6), rgba(10,6,18,0.65)); background-size: 300% 300%; animation: bgShift 20s ease-in-out infinite; }
 @keyframes bgShift { 0% { background-position: 0% 50% } 50% { background-position: 100% 50% } 100% { background-position: 0% 50% } }
 
+/* Additional animated overlay: soft drifting glow + subtle particle layer for dark theme */
+.animated-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(600px 300px at 10% 20%, rgba(0,255,252,0.06), transparent 20%), radial-gradient(400px 200px at 80% 80%, rgba(139,92,246,0.04), transparent 20%);
+  filter: blur(48px);
+  opacity: 0.9;
+  animation: driftDark 28s ease-in-out infinite;
+}
+
+.animated-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-image: radial-gradient(circle at 15% 25%, rgba(0,255,252,0.04) 0.6px, transparent 0.7px), radial-gradient(circle at 80% 70%, rgba(139,92,246,0.03) 0.6px, transparent 0.7px);
+  background-size: 1200px 1200px, 1000px 1000px;
+  opacity: 0.6;
+  mix-blend-mode: screen;
+  animation: particleDrift 60s linear infinite;
+}
+
+@keyframes driftDark {
+  0% { transform: translateY(0) translateX(0) scale(1) }
+  50% { transform: translateY(-30px) translateX(20px) scale(1.02) }
+  100% { transform: translateY(0) translateX(0) scale(1) }
+}
+
+@keyframes particleDrift {
+  0% { background-position: 0 0, 0 0 }
+  100% { background-position: 300px 200px, -300px -200px }
+}
+
+/* Smooth transitions when switching themes */
+.animated-bg, .animated-bg::before, .animated-bg::after { transition: opacity 600ms ease, filter 800ms ease, background 600ms ease }
+
 /* Bokeh particles */
 .bokeh-container { position: fixed; inset: 0; pointer-events: none; z-index: 10; overflow: hidden; }
 .bokeh-particle { position: absolute; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, rgba(0,255,252,0.08), transparent 45%); filter: blur(18px); transition: transform 0.35s linear; opacity: 0.6; }

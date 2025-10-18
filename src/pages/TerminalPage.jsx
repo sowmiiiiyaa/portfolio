@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import './TerminalPage.css'
+import ConstellationBackground from '../components/ConstellationBackground'
 
 const TerminalPage = ({ theme, onToggleTheme, onBackToPortfolio }) => {
   const [currentCommand, setCurrentCommand] = useState('')
@@ -233,13 +234,8 @@ const TerminalPage = ({ theme, onToggleTheme, onBackToPortfolio }) => {
 
   return (
     <div className={`terminal-page ${theme === 'dark' ? 'theme-dark' : 'theme-light'}`}>
-      {/* Animated Background */}
-      <div className="terminal-bg">
-        <div className="grid-pattern"></div>
-        <div className="glow-orb orb-1"></div>
-        <div className="glow-orb orb-2"></div>
-        <div className="glow-orb orb-3"></div>
-      </div>
+      {/* Constellation background — theme-aware, non-interactive */}
+      <ConstellationBackground theme={theme === 'dark' ? 'dark' : 'light'} id="constellation-terminal" />
 
       {/* Navigation Bar */}
       <motion.nav 
