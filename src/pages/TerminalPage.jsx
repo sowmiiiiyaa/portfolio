@@ -81,7 +81,7 @@ const TerminalPage = ({ theme, onToggleTheme, onBackToPortfolio }) => {
         '',
         '🔗 Connect:',
         '   GitHub:   github.com/sowmiiiiyaa',
-        '   LinkedIn: linkedin.com/in/sowmiya',
+  '   LinkedIn: https://www.linkedin.com/in/sowmiya-s-241486346/',
         '',
         '> Profile loaded successfully'
       ]

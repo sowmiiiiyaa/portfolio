@@ -129,6 +129,9 @@ body { background: var(--bg); color: var(--text); }
 }
 .hero h1 { font-size: 48px; letter-spacing: 2px; font-weight: 700; text-transform: uppercase; }
 .hero .accent { color: var(--purple); }
+
+/* Nudge hero-text inside dark container to align with About Me inner heading */
+
 .hero p { max-width: 900px; margin: 18px auto; color: rgba(230,255,255,0.85); line-height: 1.9; }
 
 /* Home neon title/subtitle */
@@ -171,6 +174,43 @@ body { background: var(--bg); color: var(--text); }
 .terminal {
   background: linear-gradient(180deg, rgba(10,10,10,0.7), rgba(0,0,0,0.5)); border-radius: 8px; padding: 12px; color: #9bf7ff;
   box-shadow: 0 12px 40px rgba(0,255,252,0.06);
+}
+
+/* Floating terminal quick-access button (dark theme) */
+.floating-terminal-btn {
+  position: fixed;
+  right: 1.25rem; /* align with other controls */
+  bottom: 4.5rem; /* sits just above typical Switch Mode placement */
+  min-width: 120px;
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 9999px; /* pill */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(10,10,10,0.85), rgba(30,30,30,0.6));
+  color: #bff7ff;
+  border: 1px solid rgba(0,255,252,0.12);
+  z-index: 99999;
+  box-shadow: 0 10px 40px rgba(0,255,252,0.12), 0 4px 18px rgba(0,0,0,0.6);
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 220ms ease, background 180ms ease;
+}
+.floating-terminal-btn:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,255,252,0.18), 0 6px 28px rgba(0,0,0,0.6); }
+.floating-terminal-btn .ft-label { font-size: 14px; font-weight: 700; letter-spacing: 0.6px; }
+.floating-terminal-btn.ft-dark { box-shadow: 0 12px 50px rgba(0,255,252,0.14), 0 6px 30px rgba(0,0,0,0.6); }
+.floating-terminal-btn.ft-dark:hover { box-shadow: 0 28px 90px rgba(0,255,252,0.22), 0 8px 40px rgba(0,0,0,0.6); }
+
+/* cyan neon pulse for dark theme */
+.floating-terminal-btn.ft-dark::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  filter: blur(12px);
+  background: radial-gradient(circle, rgba(0,255,252,0.06), transparent 40%);
+  z-index: -1;
+  transition: opacity 240ms ease;
 }
 
 /* Clean terminal input: remove browser decoration buttons (clear, calendar, autofill icons) */

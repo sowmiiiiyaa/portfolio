@@ -21,6 +21,8 @@
 body { 
   background: var(--bg); 
   color: var(--body-text); 
+  /* Use the same site body font as the rest of the project for parity */
+  font-family: "Nunito", system-ui, sans-serif;
 }
 
 .choose-btn { 
@@ -82,28 +84,29 @@ header .header-icon {
   border-radius: 6px;
 }
 
-/* Center the hero (name + tagline) across the full viewport in the light theme
-   without changing colors. This mirrors the dark theme behavior exactly. */
+/* Layout parity with dark theme: left-align hero text and keep same flex/container
+   behavior. Only position/alignments are changed here; colors/typography remain the same. */
 .hero {
-  min-height: 360px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  text-align: center; 
-  position: relative; 
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* match dark theme center container */
+  text-align: left;
+  position: relative;
   z-index: 5;
   padding-top: 0;
   padding-bottom: 0;
 }
 
 .hero-text {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  width: 100%;
-  max-width: none;
+  position: static; /* flow with flex layout, not absolutely centered */
+  left: auto;
+  top: auto;
+  transform: none;
+  text-align: left; /* match dark theme left alignment */
+  width: auto;
+  max-width: 900px; /* same max-width as dark theme */
+  margin: 0; /* align with dark theme container */
   z-index: 5;
 }
 
@@ -120,16 +123,19 @@ header .header-icon {
   text-transform: uppercase !important;
   margin: 0 !important;
   line-height: 1.05 !important;
+  /* Ensure the same heading font is used in light theme */
+  font-family: "Orbitron", system-ui, sans-serif !important;
 }
 
-.hero-text p,
-.hero .hero-text p,
-.hero-text motion.p,
-.hero motion.p {
+.hero-text > .mt-4 p,
+.hero > .hero-text > .mt-4 p,
+.hero-text > .mt-4 motion.p {
+  /* Only the main descriptive paragraph should use the small text metrics */
   max-width: 900px !important;
-  margin: 18px auto !important;
+  margin: 18px 0 !important;
   line-height: 1.9 !important;
-  font-size: 18px !important;
+  font-size: 14px !important; /* small/subtle size like dark theme */
+  font-family: inherit !important;
 }
 
 /* Light theme: tagline and subtitle text in Deep Grape for high contrast */
@@ -145,12 +151,39 @@ header .header-icon {
   font-weight: 500 !important;
 }
 
-.photo-bar {
+/* Pastel-themed soft lavender glow for subtitle and tagline (light-theme only)
+   - Uses a gentle halo and soft spread tuned for light backgrounds
+   - Keeps text readable while giving a luminous pastel effect */
+.hero-subtitle,
+.hero .hero-subtitle,
+.hero-tagline,
+.hero .hero-tagline {
+  /* stronger, more defined lavender/violet glow tuned for light backgrounds */
+  /* deeper halo + increased spread and opacity for better contrast */
+  color: var(--text) !important; /* use the deep purple text for readability */
+  text-shadow:
+    0 0 6px rgba(124, 58, 237, 0.28),    /* subtle inner tint - #7C3AED */
+    0 0 14px rgba(143, 49, 255, 0.30),   /* broader halo - #8F31FF */
+    0 6px 28px rgba(164, 143, 232, 0.20); /* soft spread - #a48fe8 */
+  transition: color 160ms ease, text-shadow 220ms ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure tagline and micro lines align left in light theme */
+.hero .hero-tagline, .hero-tagline { display: block; text-align: left; }
+
+photo-bar {
   position: absolute;
   right: 2rem;
   top: 50%;
   transform: translateY(-50%);
 }
+
+/* photo bar sizing copied from dark theme to avoid shifting between themes */
+.photo-bar { width: 80px; height: 220px; display: flex; align-items: center; justify-content: center; }
+.photo-bar-inner { width: 48px; height: 180px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius: 14px; display:flex; align-items:center; justify-content:center; box-shadow: 0 16px 40px rgba(0,0,0,0.6), 0 0 30px rgba(0,200,150,0.04); border: 1px solid rgba(255,255,255,0.03); }
+.photo-bar-inner img { width: 36px; height: 120px; border-radius: 8px; object-fit: cover; display: block; }
 
 @media (max-width: 768px) {
   /* On small screens let the hero stack vertically as before */
@@ -257,6 +290,49 @@ header .header-icon {
   border: 1px solid rgba(143, 49, 255, 0.2);
   background: rgba(143, 49, 255, 0.05);
 }
+
+/* Floating terminal quick-access button (pastel/light theme) */
+.floating-terminal-btn {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 4.5rem; /* place above Switch Mode */
+  min-width: 120px;
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(243,239,254,0.98));
+  color: var(--text);
+  border: 1px solid rgba(143,49,255,0.12);
+  z-index: 99999;
+  box-shadow: 0 10px 40px rgba(143,49,255,0.08), 0 4px 18px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 220ms ease, background 180ms ease;
+}
+.floating-terminal-btn:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(143,49,255,0.14), 0 6px 28px rgba(0,0,0,0.08); }
+.floating-terminal-btn .ft-label { font-size: 14px; font-weight: 700; letter-spacing: 0.4px; }
+.floating-terminal-btn.ft-pastel { box-shadow: 0 12px 50px rgba(164,143,232,0.12), 0 6px 30px rgba(0,0,0,0.06); }
+.floating-terminal-btn.ft-pastel:hover { box-shadow: 0 28px 90px rgba(216,180,255,0.18), 0 8px 40px rgba(0,0,0,0.06); }
+.floating-terminal-btn.ft-pastel .ft-label {
+  /* soft luminous light purple glow for light theme (readable on pale backgrounds) */
+  text-shadow: 0 0 10px rgba(216,180,255,0.65), /* #d8b4ff halo */
+               0 6px 18px rgba(164,143,232,0.16); /* #a48fe8 spread */
+  color: var(--text);
+}
+
+/* pastel glow */
+.floating-terminal-btn.ft-pastel::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 9999px;
+  filter: blur(14px);
+  background: radial-gradient(circle, rgba(216,180,255,0.12), transparent 40%);
+  z-index: -1;
+  transition: opacity 220ms ease;
+}
 .theme-toggle-btn:hover { 
   color: var(--primary); 
   background: rgba(143, 49, 255, 0.15);
@@ -267,6 +343,8 @@ header .header-icon {
 /* Typography colors for harmonious lavender theme */
 h1, h2, h3, .neon-title {
   color: var(--text) !important; /* deep purple for main headings */
+  /* Headings should use Orbitron to match the dark theme */
+  font-family: "Orbitron", system-ui, sans-serif !important;
 }
 
 h4, h5, h6 {
@@ -337,6 +415,21 @@ a:hover {
   line-height: 1.9 !important;
 }
 
+/* Extra high-specificity rules targeting the exact classes used in MainPortfolio.jsx */
+.hero .text-7xl.font-orbitron, .hero-text .text-7xl.font-orbitron, .hero .lg\:text-8xl.font-orbitron {
+  font-size: 48px !important;
+  letter-spacing: 2px !important;
+  font-weight: 700 !important;
+  line-height: 1.05 !important;
+  font-family: "Orbitron", system-ui, sans-serif !important;
+}
+
+.hero .text-lg.font-nunito, .hero-text .text-lg.font-nunito, .hero .lg\:text-2xl.font-nunito {
+  font-size: 18px !important;
+  line-height: 1.9 !important;
+  font-family: "Nunito", system-ui, sans-serif !important;
+}
+
 /* Animated gradient background (pastel) */
 .animated-bg { position: absolute; inset: 0; z-index: -2; pointer-events: none; background: linear-gradient(120deg, rgba(239,231,251,0.6), rgba(243,239,254,0.6)); background-size: 300% 300%; animation: bgShiftPastel 24s ease-in-out infinite; }
 @keyframes bgShiftPastel { 0% { background-position: 0% 50% } 50% { background-position: 100% 50% } 100% { background-position: 0% 50% } }
@@ -356,4 +449,113 @@ a:hover {
 /* Project card overlay reveal */
 .project-card .project-overlay { transition: opacity 220ms ease, pointer-events 220ms ease; }
 .project-card:hover .project-overlay { opacity: 1; pointer-events: auto; }
+
+/* Card lift parity for light theme: match dark theme motion & timing
+   while keeping pastel-friendly shadow colors for consistent color scheme */
+.card-pastel:hover,
+.card-pastel:focus-within,
+.project-card.card-pastel:hover,
+.project-card.card-pastel:focus-within,
+.about-card.card-pastel:hover,
+.about-card.card-pastel:focus-within {
+  transform: translateY(-6px);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+  /* two-layer shadow similar intensity to dark theme but using pastel tones */
+  box-shadow: 0 28px 80px rgba(143, 49, 255, 0.08), 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* tactile feedback for active state on touch */
+.card-pastel:active,
+.project-card.card-pastel:active,
+.about-card.card-pastel:active {
+  transform: translateY(-3px);
+}
+
+/* High-specificity interaction parity overrides (force same motion & timing as dark theme) */
+header nav a.nav-link, header nav button.nav-link, header .header-icon, .theme-toggle-btn, .resume-btn-pastel, .tabs button, a {
+  transition: color 0.3s ease, transform 220ms ease, box-shadow 220ms ease !important;
+}
+
+/* Hover / focus / active parity */
+header nav a.nav-link:hover, header nav button.nav-link:hover, header .header-icon:hover, .theme-toggle-btn:hover, .resume-btn-pastel:hover, .tabs button:hover, a:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 28px 80px rgba(143, 49, 255, 0.08) !important;
+}
+
+/* Tactile feedback for touch devices */
+header nav a.nav-link:active, header nav button.nav-link:active, header .header-icon:active, .theme-toggle-btn:active, .resume-btn-pastel:active, .tabs button:active, a:active {
+  transform: translateY(-1px) !important;
+}
+
+/* Ensure theme selector buttons also get the same lift */
+.theme-btn:hover, .theme-side-btn:hover { transform: translateY(-4px) scale(1.03) !important; box-shadow: 0 12px 32px rgba(0,0,0,0.06) !important; transition: transform 180ms ease, box-shadow 180ms ease !important; }
+
+/* Force orb hover ring timing parity (additional safety) */
+.skill-galaxy.theme-light .orb:hover::after { transition: opacity 180ms ease, box-shadow 220ms ease !important; }
+
+/* Specific tabs (About / Projects) hover parity */
+.nav-tab {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 220ms ease, box-shadow 220ms ease !important;
+}
+.nav-tab:hover, .nav-tab:focus {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 32px rgba(143, 49, 255, 0.12) !important;
+  color: var(--primary) !important;
+}
+
+/* NAVIGATION TYPOGRAPHY PARITY (match dark theme metrics precisely) */
+/* Do not change colors; only copy font family, size, weight, spacing, underline thickness and animations */
+header nav a.nav-link,
+header nav button.nav-link,
+header .tabs button.nav-tab {
+  /* Use the same monospaced heading used by the site for tabs */
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace !important;
+  font-size: 0.875rem !important; /* text-sm */
+  line-height: 1.2 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  background: transparent !important;
+  padding: 0 !important; /* spacing controlled by .tabs gap */
+  margin: 0 !important;
+  text-transform: none !important;
+  white-space: nowrap !important;
+  transition: color 0.3s ease, transform 220ms ease, box-shadow 220ms ease !important;
+}
+
+/* Force the same horizontal spacing between nav items as the dark theme */
+header .tabs { gap: 1.5rem !important; }
+
+/* Hover + active interaction: same motion and underline behaviour (no color changes) */
+header nav a.nav-link:hover,
+header nav button.nav-link:hover,
+header .tabs button.nav-tab:hover {
+  transform: translateY(-2px) !important;
+  text-decoration: none !important; /* underline is handled by the animated bar */
+}
+
+header nav a.nav-link:active,
+header nav button.nav-link:active,
+header .tabs button.nav-tab:active {
+  transform: translateY(-1px) !important;
+}
+
+/* Underline bar thickness & transition parity — the element is created in DOM as an absolute bar
+   (the JS sets left/width). Ensure thickness, rounding and transitions match the dark theme. */
+header .tabs .underline, header .tabs > .underline, .tabs > .absolute[style] {
+  height: 2px !important; /* h-0.5 */
+  border-radius: 2px !important;
+  transition: left 280ms ease, width 280ms ease !important;
+}
+
+/* Responsive: keep same font-size at large screens (prevent Tailwind utilities from overriding) */
+@media (min-width: 1024px) {
+  header nav a.nav-link,
+  header nav button.nav-link,
+  header .tabs button.nav-tab {
+    font-size: 0.875rem !important;
+  }
+}
 

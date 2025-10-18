@@ -16,7 +16,7 @@ const Section = ({ id, title, children }) => (
     className="py-20"
   >
     <div className="container mx-auto px-6">
-      <h2 className="text-2xl font-semibold mb-6">{title}</h2>
+      {title ? <h2 className="text-2xl font-semibold mb-6">{title}</h2> : null}
       {children}
     </div>
   </motion.section>
@@ -58,7 +58,9 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
   useEffect(() => {
     const el = heroRef.current
     if (!el) return
-    const full = el.dataset.text || el.innerText
+    // Preserve visible spaces reliably by using non-breaking spaces when typing
+    const raw = el.dataset.text || el.innerText
+    const full = raw.replace(/ /g, '\u00A0')
     el.innerText = ''
     let i = 0
     const t = setInterval(() => {
@@ -146,13 +148,13 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
             <button
               ref={aboutRef}
               onClick={() => { setActiveTab('about'); window.location.hash = '#about' }}
-              className={`text-sm font-mono-custom ${activeTab === 'about' ? 'text-white' : 'text-slate-400'}`}>
+              className={`nav-tab text-sm font-mono-custom ${activeTab === 'about' ? 'text-white' : 'text-slate-400'}`}>
               About
             </button>
             <button
               ref={projectsRef}
               onClick={() => { setActiveTab('projects'); window.location.hash = '#projects' }}
-              className={`text-sm font-mono-custom ${activeTab === 'projects' ? 'text-white' : 'text-slate-400'}`}>
+              className={`nav-tab text-sm font-mono-custom ${activeTab === 'projects' ? 'text-white' : 'text-slate-400'}`}>
               Projects
             </button>
             <div
@@ -172,7 +174,7 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
               Terminal
             </button>
             <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="header-icon" aria-label="GitHub">GitHub</a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" className="header-icon" aria-label="LinkedIn">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/sowmiya-s-241486346/" target="_blank" rel="noopener noreferrer" className="header-icon" aria-label="LinkedIn">LinkedIn</a>
             <button
               className="header-icon theme-toggle-btn"
               onClick={onToggleTheme}
@@ -184,10 +186,13 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
         </nav>
   </header>
       <main>
-        <div className="hero flex items-center justify-between gap-8 px-4 lg:px-0">
-          {/* Left: neon heading + subtitle */}
-          <div className="hero-text max-w-3xl text-left">
-            <motion.h1
+        {theme === 'dark' ? (
+          <div className="container mx-auto px-6 hero-container-dark">
+            <div className="hero flex items-center justify-between gap-8 lg:px-0">
+              {/* Left: neon heading + subtitle */}
+              <div className="about-wrap max-w-4xl mx-auto">
+                <div className="hero-text max-w-full text-left">
+                <motion.h1
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
@@ -220,17 +225,56 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
             <div className="mt-4">
               <span className="text-sm text-teal-300 italic opacity-90 animate-pulse hero-tagline">Always learning. Always automating.</span>
             </div>
-          </div>
-
-          {/* Right: profile card */}
-          <div className="photo-bar" aria-hidden>
-              <div className="photo-bar-inner profile-card">
-                <img src={profileImg} alt="Sowmiya" />
+                </div>
               </div>
-          </div>
-        </div>
 
-        <Section id="about" title={"About Me"}>
+              {/* Right: profile card removed per user request */}
+            </div>
+          </div>
+        ) : (
+          <div className="hero flex items-center justify-between gap-8 px-4 lg:px-0">
+            {/* Left: neon heading + subtitle */}
+            <div className="hero-text max-w-3xl text-left">
+              <motion.h1
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
+                className="text-7xl lg:text-8xl font-orbitron tracking-widest text-white leading-tight neon-title font-extrabold typing-caret"
+                ref={heroRef}
+                data-text="SOWMIYA S"
+              >
+                SOWMIYA S
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.08 }}
+                className="mt-3 text-lg lg:text-2xl font-nunito text-cyan-200 hero-subtitle"
+              >
+                Aspiring DevOps Engineer | Python Automation Beginner
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.12 }}
+                className="mt-4 text-sm leading-8 text-slate-200"
+              >
+                <p>I'm currently learning to automate workflows and bridge development with operations using Python. Excited to grow my skills and explore new technologies in the DevOps world!</p>
+              </motion.div>
+
+              <div className="mt-4">
+                <span className="text-sm text-teal-300 italic opacity-90 animate-pulse hero-tagline">Always learning. Always automating.</span>
+              </div>
+            </div>
+
+            {/* Right: profile card removed per user request */}
+          </div>
+        )}
+
+  <Section id="about" title={null}>
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -303,11 +347,20 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
           <div className="max-w-xl">
             <div className="flex flex-col gap-3">
               <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social">GitHub</a>
-              <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" className="social">LinkedIn</a>
+              <a href="https://www.linkedin.com/in/sowmiya-s-241486346/" target="_blank" rel="noopener noreferrer" className="social">LinkedIn</a>
             </div>
           </div>
         </Section>
       </main>
+      {/* Floating terminal quick-access button (theme-aware styling applied via CSS) */}
+      <button
+        className={`floating-terminal-btn ${theme === 'dark' ? 'ft-dark' : 'ft-pastel'}`}
+        aria-label="Open Terminal"
+        onClick={onGoToTerminal}
+        title="Open Terminal"
+      >
+        <span className="ft-label">Terminal</span>
+      </button>
     </div>
   )
 }
