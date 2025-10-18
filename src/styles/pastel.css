@@ -551,8 +551,8 @@ header nav a.nav-link:active, header nav button.nav-link:active, header .header-
 header nav a.nav-link,
 header nav button.nav-link,
 header .tabs button.nav-tab {
-  /* Use the same monospaced heading used by the site for tabs */
-  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace !important;
+  /* Use Moonspace across all navigation elements for cohesive branding */
+  font-family: "Moonspace", monospace !important;
   font-size: 0.875rem !important; /* text-sm */
   line-height: 1.2 !important;
   font-weight: 600 !important;

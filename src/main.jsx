@@ -4,6 +4,7 @@ import App from './App'
 import './styles/tailwind.css'
 import './styles/constellation.css'
 import './styles/toast.css'
+import './styles/projects.css'
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>

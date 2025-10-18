@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import profileImg from '../assets/profile.jpg'
+import profileImg from '../../pfp/1000106259 (1).png'
 import project1 from '../assets/project1.jpg'
 import project2 from '../assets/project2.jpg'
 import project3 from '../assets/project3.jpg'
@@ -141,9 +141,9 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
     <div className="animated-bg" aria-hidden />
       <div id="neon-cursor"><div className="trail" /></div>
   <header className="py-6 px-6 flex items-center justify-between relative" style={{ zIndex: 9999, pointerEvents: 'auto' }}>
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-full bg-gray-300 overflow-hidden">
-            <img src={profileImg} alt="Sowmiya" className="w-full h-full object-cover" />
+          <div className="flex items-center gap-4">
+          <div className="w-12 h-12 rounded-full bg-gray-300 overflow-hidden avatar-root" aria-hidden>
+            <img src={profileImg} alt="Sowmiya" className="w-full h-full object-cover avatar-img" />
           </div>
         </div>
 
@@ -160,6 +160,11 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
               onClick={() => { setActiveTab('projects'); window.location.hash = '#projects' }}
               className={`nav-tab text-sm font-mono-custom ${activeTab === 'projects' ? 'text-white' : 'text-slate-400'}`}>
               Projects
+            </button>
+            <button
+              onClick={() => { setActiveTab('skills'); window.location.hash = '#skills' }}
+              className={`nav-tab text-sm font-mono-custom ${activeTab === 'skills' ? 'text-white' : 'text-slate-400'}`}>
+              Skills
             </button>
             <div
               ref={underlineRef}
@@ -340,23 +345,28 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
         <Section id="projects" title={<span className="font-mono-custom">Projects</span>}>
           <div className="grid md:grid-cols-2 gap-6">
             <article className={`p-4 rounded-lg project-card relative overflow-hidden ${theme === 'dark' ? 'card-dark' : 'card-pastel'}`}>
-              <div className={`h-40 rounded mb-3 overflow-hidden ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}`}>
-                {project1 ? (
-                  <img src={project1} alt="Focus Timer screenshot" className="w-full h-full object-cover" />
-                ) : null}
+              <div className="project-icon-wrap mb-3 flex items-center justify-center">
+                {/* Timer SVG icon for Focus Timer */}
+                <svg className={`project-icon ${theme === 'dark' ? 'icon-dark' : 'icon-light'}`} width="68" height="68" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                  <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.6" fill="none" />
+                  <path d="M12 8v4l2 1" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M9 3h6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </div>
-              <h3 className={`font-semibold ${theme === 'dark' ? 'text-slate-100' : 'text-slate-900'}`}>Focus Timer</h3>
-              <p className={`text-sm ${theme === 'dark' ? 'text-slate-300' : 'text-slate-700'}`}>A web-based productivity tool that helps users stay focused by tracking work sessions and breaks. Built using React and styled-components, it features a sleek timer display, session history, and motivational UI.</p>
+              <h3 className={`font-semibold text-center ${theme === 'dark' ? 'text-slate-100' : 'text-slate-900'}`}>Focus Timer</h3>
+              <p className={`text-sm text-center ${theme === 'dark' ? 'text-slate-300' : 'text-slate-700'}`}>A web-based productivity tool that helps users stay focused by tracking work sessions and breaks. Built using React and styled-components, it features a sleek timer display, session history, and motivational UI.</p>
             </article>
 
             <article className={`p-4 rounded-lg project-card relative overflow-hidden ${theme === 'dark' ? 'card-dark' : 'card-pastel'}`}>
-              <div className={`h-40 rounded mb-3 overflow-hidden ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}`}>
-                {project2 ? (
-                  <img src={project2} alt="System Monitoring screenshot" className="w-full h-full object-cover" />
-                ) : null}
+              <div className="project-icon-wrap mb-3 flex items-center justify-center">
+                {/* Monitor SVG icon for System Monitoring */}
+                <svg className={`project-icon ${theme === 'dark' ? 'icon-dark' : 'icon-light'}`} width="68" height="68" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                  <rect x="3" y="4" width="18" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.6" fill="none" />
+                  <path d="M8 20h8M12 16v4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </div>
-              <h3 className={`font-semibold ${theme === 'dark' ? 'text-slate-100' : 'text-slate-900'}`}>System Monitoring</h3>
-              <p className={`text-sm ${theme === 'dark' ? 'text-slate-300' : 'text-slate-700'}`}>A desktop utility for real-time system performance tracking, developed with Python and Tkinter. Shows live CPU and memory usage, alerts for resource spikes, and a simple dashboard for quick analysis.</p>
+              <h3 className={`font-semibold text-center ${theme === 'dark' ? 'text-slate-100' : 'text-slate-900'}`}>System Monitoring</h3>
+              <p className={`text-sm text-center ${theme === 'dark' ? 'text-slate-300' : 'text-slate-700'}`}>A desktop utility for real-time system performance tracking, developed with Python and Tkinter. Shows live CPU and memory usage, alerts for resource spikes, and a simple dashboard for quick analysis.</p>
             </article>
           </div>
         </Section>

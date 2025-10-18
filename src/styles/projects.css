@@ -1,0 +1,42 @@
+/* Project icons styling for MainPortfolio */
+.project-icon-wrap { display: flex; justify-content: center; align-items: center; }
+.project-icon { color: #9b7bd1; width: 68px; height: 68px; border-radius: 12px; padding: 8px; }
+
+/* Dark theme: neon glow on dark cards */
+.card-dark .project-icon.icon-dark {
+  color: #16e6f5; /* neon aqua */
+  box-shadow: 0 8px 24px rgba(22,230,245,0.12), 0 2px 8px rgba(22,230,245,0.08);
+  filter: drop-shadow(0 0 8px rgba(22,230,245,0.14));
+  background: rgba(22,230,245,0.02);
+}
+
+/* Light theme: pastel lavender on pale cards */
+.card-pastel .project-icon.icon-light {
+  color: #b6a6e6;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  background: rgba(182,166,230,0.04);
+}
+
+/* Make sure icons are crisp and don't overflow */
+.project-icon svg { display: block; width: 100%; height: 100%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .project-icon { transition: none }
+}
+
+/* Header avatar tweaks: scale to better fill the circular crop and theme-aware glow */
+.avatar-root { display: inline-block; width: 62px; height: 62px; border-radius: 50%; overflow: hidden; position: relative; }
+.avatar-img { width: 100%; height: 100%; object-fit: cover; object-position: center center; transform-origin: center center; transform: scale(1.20); transition: transform 320ms ease, box-shadow 320ms ease; display: block }
+
+.card-dark .avatar-img { box-shadow: 0 10px 30px rgba(22,230,245,0.08), 0 2px 8px rgba(22,230,245,0.04); }
+.card-pastel .avatar-img { box-shadow: 0 8px 22px rgba(0,0,0,0.06); }
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar-img { transform: none; transition: none }
+}
+
+/* Responsive: slightly smaller avatar on narrow screens to preserve layout */
+@media (max-width: 768px) {
+  .avatar-root { width: 52px; height: 52px }
+  .avatar-img { transform: scale(1.05) }
+}

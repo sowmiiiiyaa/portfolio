@@ -89,6 +89,15 @@ body { background: var(--bg); color: var(--text); }
 .header-icon svg { display: block; color: inherit; }
 .header-icon:hover { background: rgba(0,255,252,0.04); color: var(--accent1); box-shadow: 0 6px 24px rgba(0,255,252,0.06); }
 
+/* Force Moonspace font across header navigation elements for consistent branding */
+header nav a.nav-link,
+header nav button.nav-link,
+header .tabs button.nav-tab,
+header .header-icon,
+.theme-toggle-btn {
+  font-family: "Moonspace", monospace !important;
+}
+
 /* Theme toggle button */
 .theme-toggle-btn { 
   display: inline-flex; 
