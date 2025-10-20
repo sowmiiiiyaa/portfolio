@@ -48,7 +48,7 @@
   height: 100%;
   background-size: 50px 50px;
   opacity: 0.3;
-  animation: gridMove 20s linear infinite;
+  animation: gridMove 19.8s linear infinite;
 }
 
 .theme-dark .grid-pattern {
@@ -73,7 +73,7 @@
   border-radius: 50%;
   filter: blur(80px);
   opacity: 0.3;
-  animation: floatOrb 15s ease-in-out infinite;
+  animation: floatOrb 14.8s ease-in-out infinite;
 }
 
 .orb-1 {

@@ -431,7 +431,7 @@ a:hover {
 }
 
 /* Animated gradient background (pastel) */
-.animated-bg { position: absolute; inset: 0; z-index: -2; pointer-events: none; background: linear-gradient(120deg, rgba(239,231,251,0.6), rgba(243,239,254,0.6)); background-size: 300% 300%; animation: bgShiftPastel 24s ease-in-out infinite; }
+.animated-bg { position: absolute; inset: 0; z-index: -2; pointer-events: none; background: linear-gradient(120deg, rgba(239,231,251,0.6), rgba(243,239,254,0.6)); background-size: 300% 300%; animation: bgShiftPastel 23.8s ease-in-out infinite; }
 @keyframes bgShiftPastel { 0% { background-position: 0% 50% } 50% { background-position: 100% 50% } 100% { background-position: 0% 50% } }
 
 /* Pastel overlay - soft glow and floating particles */
@@ -444,7 +444,7 @@ a:hover {
   background: radial-gradient(700px 300px at 20% 30%, rgba(143,49,255,0.06), transparent 18%), radial-gradient(400px 180px at 80% 70%, rgba(99,102,241,0.04), transparent 16%);
   filter: blur(42px);
   opacity: 0.95;
-  animation: driftPastel 30s ease-in-out infinite;
+  animation: driftPastel 29.8s ease-in-out infinite;
 }
 
 .animated-bg::after {
@@ -457,7 +457,7 @@ a:hover {
   background-size: 900px 900px, 800px 800px;
   opacity: 0.6;
   mix-blend-mode: screen;
-  animation: particleDriftPastel 48s linear infinite;
+  animation: particleDriftPastel 47.8s linear infinite;
 }
 
 @keyframes driftPastel {

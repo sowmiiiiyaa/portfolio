@@ -2,6 +2,12 @@
 .project-icon-wrap { display: flex; justify-content: center; align-items: center; }
 .project-icon { color: #9b7bd1; width: 68px; height: 68px; border-radius: 12px; padding: 8px; }
 
+/* Project icon hover animation (theme-aware via parent classes) */
+.project-icon { transition: transform 220ms ease, filter 220ms ease, box-shadow 220ms ease; }
+.project-icon:hover { transform: scale(1.09); filter: brightness(1.18); }
+.card-dark .project-icon:hover { box-shadow: 0 0 10px rgba(22,230,245,0.18) }
+.card-pastel .project-icon:hover { box-shadow: 0 0 10px rgba(188,159,251,0.14) }
+
 /* Dark theme: neon glow on dark cards */
 .card-dark .project-icon.icon-dark {
   color: #16e6f5; /* neon aqua */
