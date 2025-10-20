@@ -1,11 +1,42 @@
 /* Skill Galaxy styles - dark and light themes */
-.skill-galaxy { position: relative; width: 100%; min-height: 260px; overflow: visible; border-radius: 12px; padding: 28px 12px; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+.skill-galaxy {
+  position: relative;
+  width: 90vw;
+  max-width: 550px; /* fixed max-width as requested */
+  min-height: 140px; /* match light-theme compact size */
+  margin: 0 auto; /* center horizontally */
+  overflow: visible; /* keep glows visible */
+  border-radius: 40px; /* soft rounded edges */
+  padding: 2.2rem; /* internal padding matching light theme */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 .skill-galaxy .section-title { display: none; }
 
 /* Center and style the main Skills heading coming from MainPortfolio */
 .skills-heading { display: block; text-align: center; font-weight: 800; font-size: 20px; margin-bottom: 8px }
 .skill-galaxy .constellation { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
-.skill-galaxy .orbs-wrap { position: relative; width: 100%; height: 160px; z-index: 5; display: block }
+.skill-galaxy .orbs-wrap { position: relative; width: 100%; z-index: 5; display: flex; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 12px; padding: 6px 0; overflow-x: auto; }
+
+/* Force single-row layout: make each orb a non-wrapping flex item and give a compact size so multiple fit on one line. */
+.skill-galaxy .orb {
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+  width: 64px !important;
+  height: 64px !important;
+  min-width: 64px !important;
+  margin: 0 !important;
+  display: inline-flex;
+}
+
+/* hide horizontal scrollbar but allow scrolling by touch/trackpad (non-destructive) */
+.skill-galaxy .orbs-wrap::-webkit-scrollbar { height: 8px }
+.skill-galaxy .orbs-wrap { -ms-overflow-style: none; scrollbar-width: none; }
+.skill-galaxy .orbs-wrap::-webkit-scrollbar { display: none }
 
 /* Make light theme more compact vertically so orbs sit centered without extra top space */
 .skill-galaxy.theme-light { padding-top: 12px; padding-bottom: 12px; min-height: auto }
@@ -40,7 +71,7 @@
 .orb-popup.popup-light { background: #ffffff; border: 1px solid rgba(33,33,33,0.06); }
 
 /* Dark theme */
-.skill-galaxy.theme-dark { background: radial-gradient(1200px 600px at 20% 20%, rgba(10,8,30,0.6), transparent 10%), radial-gradient(800px 400px at 80% 80%, rgba(4,10,30,0.45), transparent 12%), linear-gradient(180deg, #020215 0%, #040417 100%); border: 1px solid rgba(255,255,255,0.03); }
+.skill-galaxy.theme-dark { background: rgba(20,22,28,0.55); border: 1px solid rgba(22,230,245,0.06); box-shadow: 0 0 30px 0 rgba(22,230,245,0.06), inset 0 0 0 1px rgba(22,230,245,0.04); }
 .skill-galaxy.theme-dark .orb { color: #fff; }
 .skill-galaxy.theme-dark .orb .orb-core { background: radial-gradient(circle at 30% 25%, rgba(255,245,200,0.42), rgba(255,180,120,0.08) 10%, transparent 22%), linear-gradient(135deg, rgba(102, 51, 153, 0.95), rgba(0, 255, 200, 0.85)); mix-blend-mode: screen; }
 .skill-galaxy.theme-dark .orb-html .orb-core { background: linear-gradient(135deg,#ff7a4a,#ffd58a); box-shadow: 0 8px 36px rgba(255,120,70,0.16); }
@@ -70,7 +101,44 @@
 .orb.is-hovered .orb-label, .orb.is-active .orb-label { font-weight: 900 }
 
 /* Light theme */
-.skill-galaxy.theme-light { background: linear-gradient(180deg, #fffaf6 0%, #fbfdff 100%); border: 1px solid rgba(20,24,30,0.04); }
+.skill-galaxy.theme-light { background: rgba(243,233,249,0.65); border: 1px solid rgba(188,159,251,0.12); box-shadow: 0 0 42px 0 rgba(188,159,251,0.08), inset 0 0 0 2px rgba(188,159,251,0.06); }
+
+.skill-galaxy.theme-dark, .skill-galaxy.theme-light {
+  /* Ensure both themes share exact sizing and layout */
+  width: 90vw;
+  max-width: 550px;
+  min-height: 140px;
+  padding: 2.2rem;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+/* Cap container size on very large screens so it stays visually consistent */
+@media (min-width: 1400px) {
+  .skill-galaxy { max-width: 550px }
+}
+
+/* Mobile responsiveness: keep both themes identical in sizing/layout */
+@media (max-width: 768px) {
+  .skill-galaxy.theme-dark, .skill-galaxy.theme-light {
+    max-width: 92vw;
+    padding: 1.2rem;
+    min-height: 180px;
+  }
+}
+
+@media (max-width: 420px) {
+  .skill-galaxy.theme-dark, .skill-galaxy.theme-light {
+    padding: 0.9rem;
+    min-height: 220px;
+    width: 94vw;
+  }
+  /* stack orbs on very small screens to avoid cramped single-line overflow */
+  .skill-galaxy .orbs-wrap { flex-wrap: wrap; justify-content: center; gap: 10px }
+}
 .skill-galaxy.theme-light .orb { color: #212121; }
 .skill-galaxy.theme-light .orb .orb-core { filter: blur(4px); opacity: 0.95; }
 /* Pastel orb colors for light theme */
