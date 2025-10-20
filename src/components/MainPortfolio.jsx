@@ -26,6 +26,8 @@ const Section = ({ id, title, children }) => (
 export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGoToTerminal }) {
   const [activeTab, setActiveTab] = useState('about')
   const [resumeMsgVisible, setResumeMsgVisible] = useState(false)
+  // state for undeployed project demo popups
+  const [demoPopup, setDemoPopup] = useState({ visible: false, id: null, rect: null })
   const underlineRef = useRef(null)
   const aboutRef = useRef(null)
   const projectsRef = useRef(null)
@@ -130,6 +132,25 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
     }
   }, [])
 
+  useEffect(() => {
+    const onDoc = (e) => {
+      // if click outside popup, close it
+      if (!demoPopup.visible) return
+      const p = document.getElementById('project-demo-popup')
+      if (p && !p.contains(e.target)) setDemoPopup({ visible: false, id: null, rect: null })
+    }
+    document.addEventListener('pointerdown', onDoc)
+    return () => document.removeEventListener('pointerdown', onDoc)
+  }, [demoPopup.visible])
+
+  const showDemoPopup = (id, anchorEl) => {
+    if (!anchorEl) return
+    const r = anchorEl.getBoundingClientRect()
+    setDemoPopup({ visible: true, id, rect: r })
+    // auto-close after 4 seconds
+    window.setTimeout(() => setDemoPopup({ visible: false, id: null, rect: null }), 4000)
+  }
+
   return (
     <div className="min-h-screen editor-bg relative">
       {/* Constellation background (theme-aware) */}
@@ -164,7 +185,7 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
             <button
               onClick={() => { setActiveTab('skills'); window.location.hash = '#skills' }}
               className={`nav-tab text-sm font-mono-custom ${activeTab === 'skills' ? 'text-white' : 'text-slate-400'}`}>
-              Skills
+              Skills & Tools
             </button>
             <div
               ref={underlineRef}
@@ -355,6 +376,12 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
               </div>
               <h3 className={`font-semibold text-center ${theme === 'dark' ? 'text-slate-100' : 'text-slate-900'}`}>Focus Timer</h3>
               <p className={`text-sm text-center ${theme === 'dark' ? 'text-slate-300' : 'text-slate-700'}`}>A web-based productivity tool that helps users stay focused by tracking work sessions and breaks. Built using React and styled-components, it features a sleek timer display, session history, and motivational UI.</p>
+              <div className="mt-4 text-center">
+                <button
+                  className={`view-demo-btn ${theme === 'dark' ? 'btn-dark' : 'btn-pastel'}`}
+                  onClick={(e) => { e.stopPropagation(); showDemoPopup('focus-timer', e.currentTarget) }}
+                >View Demo</button>
+              </div>
             </article>
 
             <article className={`p-4 rounded-lg project-card relative overflow-hidden ${theme === 'dark' ? 'card-dark' : 'card-pastel'}`}>
@@ -367,11 +394,17 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
               </div>
               <h3 className={`font-semibold text-center ${theme === 'dark' ? 'text-slate-100' : 'text-slate-900'}`}>System Monitoring</h3>
               <p className={`text-sm text-center ${theme === 'dark' ? 'text-slate-300' : 'text-slate-700'}`}>A desktop utility for real-time system performance tracking, developed with Python and Tkinter. Shows live CPU and memory usage, alerts for resource spikes, and a simple dashboard for quick analysis.</p>
+              <div className="mt-4 text-center">
+                <button
+                  className={`view-demo-btn ${theme === 'dark' ? 'btn-dark' : 'btn-pastel'}`}
+                  onClick={(e) => { e.stopPropagation(); showDemoPopup('system-monitoring', e.currentTarget) }}
+                >View Demo</button>
+              </div>
             </article>
           </div>
         </Section>
 
-        <Section id="skills" title={<span className="skills-heading">Skills</span>}>
+  <Section id="skills" title={<span className="skills-heading">Skills & Tools</span>}>
           <div className="container mx-auto px-6">
             <SkillGalaxy theme={theme} />
           </div>
@@ -405,6 +438,25 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
           </div>
         </Section>
       </main>
+      {/* Project demo popup (undeployed projects) */}
+      {demoPopup.visible && demoPopup.rect && (
+        <div
+          id="project-demo-popup"
+          className={`project-demo-popup ${theme === 'dark' ? 'dark' : 'pastel'} show`}
+          style={{
+            left: Math.min(Math.max(demoPopup.rect.left + demoPopup.rect.width / 2 - 160, 8), window.innerWidth - 328),
+            top: Math.max(demoPopup.rect.top - 12 - 72, 12)
+          }}
+        >
+          <div className="demo-loader" aria-hidden>
+            <div className="bar" />
+          </div>
+          <div className="demo-text">
+            This project is still in progress and will be uploaded or deployed soon. Please check back later!
+          </div>
+        </div>
+      )}
+
       {/* Floating terminal quick-access button (theme-aware styling applied via CSS) */}
       <button
         className={`floating-terminal-btn ${theme === 'dark' ? 'ft-dark' : 'ft-pastel'}`}

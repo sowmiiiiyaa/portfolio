@@ -47,10 +47,14 @@
 .orb { position: absolute; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; font-weight: 700; font-size: 13px; transform: translate(-50%, -50%); transition: transform 160ms ease, box-shadow 180ms ease, filter 180ms ease; }
 .orb .orb-core { position: absolute; inset: 0; border-radius: 999px; filter: blur(6px); opacity: 0.92; }
 .orb .orb-label { position: relative; z-index: 4; pointer-events: none; padding: 4px 8px; text-align: center; font-size: 13px }
+/* Legacy popup/tooltip - hidden by design: skill badges should not reveal extra info */
+.orb-popup { display: none !important; visibility: hidden !important; pointer-events: none !important; }
 .orb-popup { position: absolute; left: 50%; transform: translateX(-50%); bottom: calc(100% + 12px); min-width: 160px; max-width: 260px; background: rgba(10,10,12,0.92); color: #e6f7ff; padding: 10px 12px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.18); z-index: 50; font-size: 13px; }
 .orb-popup p { margin: 6px 0 0; font-weight: 400; font-size: 13px; line-height: 1.2; color: #dbeffd }
 
 .orb-popup .popup-header { display: flex; align-items: center; gap: 8px; justify-content: space-between }
+/* also hide popup internals as a safety net */
+.orb-popup .popup-header, .orb-popup .popup-extra, .orb-popup .learning-badge { display: none !important }
 .learning-badge { font-size: 11px; padding: 4px 8px; border-radius: 999px; background: rgba(255,255,255,0.06); color: #fff; font-weight: 700 }
 .popup-extra { margin-top: 6px; opacity: 0.92; font-size: 13px }
 

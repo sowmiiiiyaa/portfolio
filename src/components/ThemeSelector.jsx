@@ -10,6 +10,10 @@ const Side = ({ title, subtitle, className, themeId, onSelect }) => (
     className={`theme-side-btn flex-1 flex items-center justify-center p-12 lg:p-20 ${className}`}
     aria-label={`Choose ${themeId} theme`}
   >
+    {/* Background layer per side — placed inside the side so CSS descendant selectors apply */}
+    {themeId === 'dark' && <div className="bg-ripple-dark" aria-hidden />}
+    {themeId === 'pastel' && <div className="bg-drift-light" aria-hidden />}
+
     <div className="max-w-lg text-center pointer-events-none">
       <h2 className="text-6xl lg:text-7xl mb-6 font-extrabold tracking-tight main-headline">{title}</h2>
       <p className="text-xl lg:text-2xl opacity-90 subtitle-text">{subtitle}</p>

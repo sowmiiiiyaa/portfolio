@@ -103,7 +103,7 @@ const TerminalPage = ({ theme, onToggleTheme, onBackToPortfolio }) => {
 
   // Command suggestion buttons
   const commandButtons = [
-    { cmd: 'show skills', icon: '🎯', label: 'Skills' },
+  { cmd: 'show skills', icon: '🎯', label: 'Skills & Tools' },
     { cmd: 'list projects', icon: '📁', label: 'Projects' },
     { cmd: 'whoami', icon: '👤', label: 'Profile' },
     { cmd: 'fun_fact --devops', icon: '💡', label: 'Fun Fact' }
