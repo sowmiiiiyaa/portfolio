@@ -379,9 +379,28 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
 
         <Section id="contact" title="Contact">
           <div className="max-w-xl">
-            <div className="flex flex-col gap-3">
-              <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social">GitHub</a>
-              <a href="https://www.linkedin.com/in/sowmiya-s-241486346/" target="_blank" rel="noopener noreferrer" className="social">LinkedIn</a>
+            <div className="contact-card card-shadow p-4 rounded-lg">
+              <div className="contact-list" role="list">
+                <a role="listitem" href="https://github.com/" target="_blank" rel="noopener noreferrer" className="contact-item" aria-label="GitHub profile">
+                  {/* GitHub icon (simple) */}
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden focusable="false"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.16 6.84 9.49.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1.01.07 1.54 1.04 1.54 1.04.9 1.54 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.98 1.03-2.68-.1-.26-.45-1.28.1-2.67 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 6.8c.85.004 1.71.115 2.51.34 1.9-1.29 2.74-1.02 2.74-1.02.55 1.39.2 2.41.1 2.67.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85 0 1.34-.01 2.42-.01 2.75 0 .27.18.58.69.48A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z" fill="currentColor"/></svg>
+                  <span className="contact-label">GitHub</span>
+                </a>
+
+                <a role="listitem" href="https://www.linkedin.com/in/sowmiya-s-241486346/" target="_blank" rel="noopener noreferrer" className="contact-item" aria-label="LinkedIn profile">
+                  {/* LinkedIn icon (simple) */}
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden focusable="false"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0zM8 8h4.8v2h.1c.7-1.3 2.4-2.7 4.9-2.7C22.2 7.3 24 9.4 24 13v9h-5v-8.2c0-2-1.8-2.3-2.3-2.3-1.2 0-2 0.8-2.3 1.6-.1.2-.1.5-.1.8V22H8V8z" fill="currentColor"/></svg>
+                  <span className="contact-label">LinkedIn</span>
+                </a>
+
+                <a role="listitem" href="mailto:sowmiyaa757@gmail.com" className="contact-item contact-email" aria-label="Send email to Sowmiya" title="sowmiyaa757@gmail.com">
+                  {/* Envelope icon */}
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden focusable="false"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/></svg>
+                  <span className="contact-label">sowmiyaa757 [at] gmail [dot] com</span>
+                </a>
+              </div>
+
+              <div className="contact-footer mt-3 text-sm text-muted">Feel free to reach out for collaborations or portfolio feedback!</div>
             </div>
           </div>
         </Section>
