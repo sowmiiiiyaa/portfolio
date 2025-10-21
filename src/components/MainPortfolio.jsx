@@ -333,7 +333,7 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
                       <img src={profileImg} alt="Profile photo of Sowmiya S" className="profile-avatar" />
                     </div>
                     <div className="greeting-text">
-                      <p className="greeting-line">Hey, I’m Sowmiya—passionate about DevOps, web design, and creative automation!</p>
+                      <p className="greeting-line">Hey, I’m Sowmiya—passionate about DevOps and creative automation!</p>
                       <p className="greeting-sub">Aspiring DevOps Engineer | Python Automation Beginner</p>
                     </div>
                   </div>
