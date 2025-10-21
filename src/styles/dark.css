@@ -89,6 +89,20 @@ body { background: var(--bg); color: var(--text); }
 .header-icon svg { display: block; color: inherit; }
 .header-icon:hover { background: rgba(0,255,252,0.04); color: var(--accent1); box-shadow: 0 6px 24px rgba(0,255,252,0.06); }
 
+/* Site title placed in header (dark theme) */
+.site-title {
+  position: absolute;
+  left: 1.1rem;
+  top: 0.9rem;
+  font-family: "Moonspace", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem; /* slightly larger */
+  color: #32f5ff; /* neon cyan/blue for dark theme */
+  text-shadow: 0 2px 10px rgba(50,245,255,0.14);
+  z-index: 10000;
+  pointer-events: none;
+}
+
 /* Force Moonspace font across header navigation elements for consistent branding */
 header nav a.nav-link,
 header nav button.nav-link,
@@ -274,6 +288,28 @@ header .header-icon,
   z-index: -1;
   transition: opacity 240ms ease;
 }
+
+/* Floating Switch Mode button (dark theme) */
+.floating-switch-btn {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  min-width: 120px;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99998;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 220ms ease, background 180ms ease;
+}
+.floating-switch-btn .ft-label{ font-weight:700; font-size:13px }
+.floating-switch-btn.ft-dark{ background: rgba(10,10,10,0.85); color:#bff7ff; border:1px solid rgba(0,255,252,0.08); box-shadow:0 10px 40px rgba(0,255,252,0.06) }
+.floating-switch-btn:hover{ transform: translateY(-3px) }
+
+@media (max-width:900px){ .floating-switch-btn{ display:none !important } }
 
 /* Clean terminal input: remove browser decoration buttons (clear, calendar, autofill icons) */
 .terminal input {

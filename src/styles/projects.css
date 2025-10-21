@@ -80,6 +80,11 @@
 .project-demo-popup .demo-text { flex: 1; color: #e6f7ff; font-size: 13px; line-height: 1.2 }
 .project-demo-popup .demo-text small { display: block; opacity: 0.92; font-size: 12px; margin-top: 6px; color: rgba(230,247,255,0.84) }
 
+/* Pastel (light) theme: the default light-ish demo-text color is too faint on pale backgrounds.
+  Override the demo-text color when the popup has the .pastel variant so the message is readable. */
+.project-demo-popup.pastel .demo-text { color: var(--body-text, #3B2B4A); }
+.project-demo-popup.pastel .demo-text small { color: rgba(59,43,74,0.9); }
+
 /* Theme variants */
 .project-demo-popup.dark { background: linear-gradient(180deg, rgba(8,10,14,0.98), rgba(12,14,18,0.98)); border: 1px solid rgba(22,230,245,0.16); box-shadow: 0 14px 48px rgba(10,20,30,0.6), 0 2px 12px rgba(22,230,245,0.06); }
 .project-demo-popup.pastel { background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,245,255,0.98)); border: 1px solid rgba(188,159,251,0.12); color: #2b1e3a }
@@ -90,4 +95,26 @@
 
 @media (prefers-reduced-motion: reduce) {
   .project-demo-popup, .project-demo-popup .demo-loader .bar::after { transition: none !important; animation: none !important }
+}
+
+/* Profile greeting (About section) */
+.profile-greeting { display: flex; align-items: center; gap: 16px; padding: 8px 0 12px; }
+.profile-avatar-wrap { flex: 0 0 auto; width: 96px; height: 96px; border-radius: 9999px; overflow: hidden; display: inline-block; }
+.profile-avatar { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 9999px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+.greeting-text { display: flex; flex-direction: column; gap: 6px; }
+.greeting-line { font-size: 1.25rem; margin: 0; font-weight: 700; }
+.greeting-sub { margin: 0; font-size: 0.95rem; color: rgba(0,0,0,0.6); }
+
+/* Theme-specific glows */
+.card-dark .profile-avatar { box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 28px rgba(0,240,255,0.12); }
+.card-dark .greeting-line, .card-dark .greeting-sub { color: #dff9ff; }
+.card-pastel .profile-avatar { box-shadow: 0 12px 40px rgba(0,0,0,0.06), 0 0 18px rgba(188,159,251,0.12); }
+.card-pastel .greeting-line { color: #4b2f63; }
+.card-pastel .greeting-sub { color: #5a4a72; }
+
+/* Mobile: stack avatar and greeting */
+@media (max-width: 640px) {
+  .profile-greeting { flex-direction: column; align-items: center; text-align: center; }
+  .profile-avatar-wrap { width: 120px; height: 120px; }
+  .greeting-line { font-size: 1.15rem; }
 }

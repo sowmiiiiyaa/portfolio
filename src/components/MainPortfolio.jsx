@@ -161,12 +161,10 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
     {/* animated background layer */}
     <div className="animated-bg" aria-hidden />
       <div id="neon-cursor"><div className="trail" /></div>
-  <header className="py-6 px-6 flex items-center justify-between relative" style={{ zIndex: 9999, pointerEvents: 'auto' }}>
-          <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-full bg-gray-300 overflow-hidden avatar-root" aria-hidden>
-            <img src={profileImg} alt="Sowmiya" className="w-full h-full object-cover avatar-img" />
-          </div>
-        </div>
+  <header className="py-6 px-6 flex items-center justify-end relative" style={{ zIndex: 9999, pointerEvents: 'auto' }}>
+            {/* top-left site title (branding) */}
+            <div className="site-title" aria-hidden="false">Sowmiya's Portfolio</div>
+            {/* header avatar removed per user request (we'll show a friendlier profile in the About section) */}
 
         <nav className="flex items-center gap-6 relative">
           <div className="tabs flex items-center gap-6">
@@ -329,6 +327,18 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
                   transition={{ duration: 0.8, delay: 0.1 }}
                   className="text-sm leading-8 text-slate-200"
                 >
+                  {/* New profile greeting: avatar + friendly line */}
+                  <div className="profile-greeting card-profile-greeting" role="region" aria-label="Profile greeting">
+                    <div className="profile-avatar-wrap" aria-hidden>
+                      <img src={profileImg} alt="Profile photo of Sowmiya S" className="profile-avatar" />
+                    </div>
+                    <div className="greeting-text">
+                      <p className="greeting-line">Hey, I’m Sowmiya—passionate about DevOps, web design, and creative automation!</p>
+                      <p className="greeting-sub">Aspiring DevOps Engineer | Python Automation Beginner</p>
+                    </div>
+                  </div>
+
+                  <p className="sr-only">Main About text follows</p>
                   <p>Hey there! I’m Sowmiy S, a developer who loves bringing automation to life with Python.</p>
                   <p className="mt-3">In a world that never stops evolving, I find my spark in writing code that makes systems faster, smarter, and smoother.</p>
                   <p className="mt-3">I’m currently exploring DevOps tools and cloud technologies — because I believe automation isn’t just about saving time, it’s about unlocking creativity and innovation.</p>
