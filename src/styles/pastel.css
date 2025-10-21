@@ -144,6 +144,15 @@ header .header-icon {
   font-family: "Orbitron", system-ui, sans-serif !important;
 }
 
+/* Make the main hero heading (SOWMIYA S) a deep/dark purple in pastel theme */
+.hero-text h1.neon-title,
+.hero-text .neon-title,
+.hero .hero-text h1.neon-title,
+.hero .hero-text h1 {
+  color: var(--text, #5B247A) !important;
+  text-shadow: none !important; /* remove neon glow for stronger crisp text */
+}
+
 .hero-text > .mt-4 p,
 .hero > .hero-text > .mt-4 p,
 .hero-text > .mt-4 motion.p {
