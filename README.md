@@ -12,6 +12,21 @@ Section-wise content: About Me, Skills & Tools, Projects, and Contact.
 
 Mobile menu with access to theme switch and social links.
 
+Vercel deploy
+--------------
+
+To deploy this site to Vercel:
+
+- Connect the GitHub repository in the Vercel dashboard and use the `main` branch. Vercel will run `npm run build` and serve the `dist` folder using the included `vercel.json`.
+- Or use the Vercel CLI from the project root:
+
+```powershell
+npx vercel --prod
+```
+
+Make sure `build` script is `vite build` (already set in `package.json`).
+
+
 Live Demo
 Main Site: [your surge URL here]
 
