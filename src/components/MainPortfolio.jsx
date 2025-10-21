@@ -145,11 +145,32 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
 
   const showDemoPopup = (id, anchorEl) => {
     if (!anchorEl) return
+    // We still capture the anchor rect for analytics or future positioning,
+    // but the popup will render as a centered modal for a clearer experience.
     const r = anchorEl.getBoundingClientRect()
     setDemoPopup({ visible: true, id, rect: r })
-    // auto-close after 4 seconds
-    window.setTimeout(() => setDemoPopup({ visible: false, id: null, rect: null }), 4000)
+    // auto-close after 3 seconds
+    window.setTimeout(() => setDemoPopup({ visible: false, id: null, rect: null }), 3000)
   }
+
+  // popup ref for focus management
+  const popupRef = useRef(null)
+
+  // When the demo popup becomes visible, focus it and add Escape key handling.
+  useEffect(() => {
+    if (!demoPopup.visible) return
+    const prevActive = document.activeElement
+    const el = popupRef.current
+    if (el) el.focus()
+    const onKey = (e) => {
+      if (e.key === 'Escape') setDemoPopup({ visible: false, id: null, rect: null })
+    }
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      if (prevActive && typeof prevActive.focus === 'function') prevActive.focus()
+    }
+  }, [demoPopup.visible])
 
   return (
     <div className="min-h-screen editor-bg relative">
@@ -329,7 +350,16 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
                   transition={{ duration: 0.8, delay: 0.1 }}
                   className="text-sm leading-8 text-slate-200"
                 >
-                  <p>Hey there! I’m Sowmiy S, a developer who loves bringing automation to life with Python.</p>
+                    <div className="profile-greeting">
+                      <div className="profile-avatar-wrap">
+                        <img src={profileImg} alt="Profile photo of Sowmiya S" className="profile-avatar" />
+                      </div>
+                      <div className="greeting-text">
+                        <p className="greeting-line">Hey, I’m Sowmiya — passionate about DevOps and creative automation!</p>
+                        <p className="greeting-sub">Aspiring DevOps Engineer | Python Automation Beginner</p>
+                      </div>
+                    </div>
+                    <p className="mt-3">I’m a developer who loves bringing automation to life with Python.</p>
                   <p className="mt-3">In a world that never stops evolving, I find my spark in writing code that makes systems faster, smarter, and smoother.</p>
                   <p className="mt-3">I’m currently exploring DevOps tools and cloud technologies — because I believe automation isn’t just about saving time, it’s about unlocking creativity and innovation.</p>
                   <p className="mt-3">Whether it’s a script that simplifies a complex task or a system that deploys itself, I love creating things that just work — beautifully.</p>
@@ -438,21 +468,33 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
           </div>
         </Section>
       </main>
-      {/* Project demo popup (undeployed projects) */}
+      {/* Project demo modal (undeployed projects) - centered, theme-aware, accessible */}
       {demoPopup.visible && demoPopup.rect && (
         <div
           id="project-demo-popup"
+          ref={popupRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="project-demo-title"
+          aria-describedby="project-demo-desc"
+          tabIndex={-1}
           className={`project-demo-popup ${theme === 'dark' ? 'dark' : 'pastel'} show`}
+          onClick={(e) => e.stopPropagation()}
           style={{
+            position: 'fixed',
             left: Math.min(Math.max(demoPopup.rect.left + demoPopup.rect.width / 2 - 160, 8), window.innerWidth - 328),
-            top: Math.max(demoPopup.rect.top - 12 - 72, 12)
+            top: Math.max(demoPopup.rect.top - 12 - 72 + demoPopup.rect.height, 12),
+            zIndex: 99999
           }}
         >
           <div className="demo-loader" aria-hidden>
             <div className="bar" />
           </div>
           <div className="demo-text">
-            This project is still in progress and will be uploaded or deployed soon. Please check back later!
+            <h4 id="project-demo-title" className="sr-only" style={{ margin: 0 }}>Project demo not available yet</h4>
+            <p id="project-demo-desc" style={{ margin: 0 }}>
+              This project is in progress and will be uploaded or deployed soon. Please check back later!
+            </p>
           </div>
         </div>
       )}

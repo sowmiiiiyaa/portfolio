@@ -17,8 +17,8 @@ function randomBetween(min, max) { return Math.random() * (max - min) + min }
 
 export default function SkillGalaxy({ theme = 'dark' }) {
   const containerRef = useRef(null)
-  // no active/hovered state: badges should not open popups or show extra info
-  const [unused, setUnused] = useState(null)
+  const [active, setActive] = useState(null)
+  const [hovered, setHovered] = useState(null)
   const [orbs, setOrbs] = useState([])
 
   useEffect(() => {
@@ -44,7 +44,15 @@ export default function SkillGalaxy({ theme = 'dark' }) {
     return () => window.removeEventListener('resize', onR)
   }, [])
 
-  // No global click handlers required — popups removed per design
+  // click outside to close
+  useEffect(() => {
+    const onDoc = (e) => {
+      if (!containerRef.current) return
+      if (!containerRef.current.contains(e.target)) setActive(null)
+    }
+    document.addEventListener('pointerdown', onDoc)
+    return () => document.removeEventListener('pointerdown', onDoc)
+  }, [])
 
   return (
     <div ref={containerRef} className={`skill-galaxy ${theme === 'dark' ? 'theme-dark' : 'theme-light'}`} role="region" aria-label="Skill Galaxy">
@@ -66,13 +74,15 @@ export default function SkillGalaxy({ theme = 'dark' }) {
         {orbs.map((o) => (
           <motion.button
             key={o.id}
-            className={`orb orb-${o.id}`}
+            className={`orb orb-${o.id} ${active === o.id ? 'is-active' : ''} ${hovered === o.id ? 'is-hovered' : ''}`}
             style={{ left: `${o.x}px`, top: `${o.y}px`, width: o.size, height: o.size, minWidth: o.size }}
             initial={{ scale: 0.96, opacity: 0.98 }}
             whileHover={{ y: -8, scale: 1.06 }}
             whileTap={{ y: -4, scale: 1.02 }}
-            // keep interactions purely visual; do not modify component state or open popups
-            type="button"
+            onClick={(ev) => { ev.stopPropagation(); setActive(active === o.id ? null : o.id) }}
+            onMouseEnter={() => setHovered(o.id)}
+            onMouseLeave={() => setHovered((prev) => prev === o.id ? null : prev)}
+            title={o.label}
           >
             <span className="orb-core" />
             <span className="orb-label">{o.label}</span>
