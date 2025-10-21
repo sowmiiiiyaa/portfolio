@@ -99,8 +99,30 @@
 
 /* Profile greeting (About section) */
 .profile-greeting { display: flex; align-items: center; gap: 16px; padding: 8px 0 12px; }
-.profile-avatar-wrap { flex: 0 0 auto; width: 96px; height: 96px; border-radius: 9999px; overflow: hidden; display: inline-block; }
-.profile-avatar { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 9999px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+
+/* Make the white circular frame part of the wrapper, then scale the image only so the face fills the frame */
+.profile-avatar-wrap {
+  flex: 0 0 auto;
+  width: 96px;
+  height: 96px;
+  border-radius: 9999px;
+  overflow: hidden;
+  display: inline-block;
+  background: #ffffff; /* white ring */
+  padding: 6px; /* thickness of white frame */
+  box-sizing: border-box;
+}
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 9999px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  transform-origin: center center;
+  transform: scale(1.18); /* zoom image only */
+  transition: transform 320ms ease, box-shadow 320ms ease;
+}
 .greeting-text { display: flex; flex-direction: column; gap: 6px; }
 .greeting-line { font-size: 1.25rem; margin: 0; font-weight: 700; }
 .greeting-sub { margin: 0; font-size: 0.95rem; color: rgba(0,0,0,0.6); }
@@ -115,6 +137,10 @@
 /* Mobile: stack avatar and greeting */
 @media (max-width: 640px) {
   .profile-greeting { flex-direction: column; align-items: center; text-align: center; }
-  .profile-avatar-wrap { width: 120px; height: 120px; }
+  .profile-avatar-wrap { width: 120px; height: 120px; padding: 8px; }
   .greeting-line { font-size: 1.15rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-avatar { transform: none !important; transition: none !important }
 }
