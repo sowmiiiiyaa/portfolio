@@ -12,10 +12,17 @@ export default function App() {
     // Apply theme by toggling a root class. Both theme css files are bundled
     // into the build so we no longer rely on injecting a runtime /src link.
     const root = document.documentElement
-    root.classList.remove('theme-dark', 'theme-pastel')
+    // Clear known theme classes
+    root.classList.remove('theme-dark', 'theme-light', 'theme-pastel')
     if (theme) {
       localStorage.setItem('theme', theme)
-      root.classList.add(theme === 'dark' ? 'theme-dark' : 'theme-pastel')
+      if (theme === 'dark') {
+        root.classList.add('theme-dark')
+      } else {
+        // Some CSS uses .theme-light while other component styles use `-pastel`
+        // class suffixes (e.g. .card-pastel). Add both to ensure rules match.
+        root.classList.add('theme-light', 'theme-pastel')
+      }
     } else {
       localStorage.removeItem('theme')
     }
