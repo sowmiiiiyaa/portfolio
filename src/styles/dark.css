@@ -131,6 +131,16 @@ header .header-icon,
   transform: scale(1.05);
 }
 
+/* Responsive: on small screens hide full navigation but keep theme toggle (emoji) visible */
+@media (max-width: 768px) {
+  header nav .tabs { display: none !important; }
+  header nav .nav-link { display: none !important; }
+  header nav .header-icon { display: none !important; }
+  /* ensure theme toggle remains visible and placed at the far right */
+  header nav { gap: 0.5rem; }
+  header nav .theme-toggle-btn { display: inline-flex !important; margin-left: 0.25rem; }
+}
+
 /* Contact card (dark) */
 .contact-card { background: linear-gradient(180deg, rgba(6,6,12,0.72), rgba(10,8,20,0.56)); border: 1px solid rgba(0,255,252,0.04); }
 .contact-list { display: flex; flex-direction: column; gap: 8px }

@@ -1,26 +1,50 @@
-# Sowmiya S — Personal Portfolio (React + Tailwind + Framer Motion)
+Sowmiya's Portfolio
+A modern, fully responsive personal portfolio site designed and coded by Sowmiya S for the Basher Portfolio Contest’25.
 
-This is a minimal portfolio scaffold with a theme selection screen (Dark Neon and Light Pastel). It uses React, Vite, Tailwind CSS and Framer Motion.
+Features
+Dual-theme support (light/dark), with smooth toggle and glowing accent effects.
 
-Getting started
+Fully responsive: mobile-first with hamburger menu, keyboard accessible navigation.
 
-1. Install dependencies
+Animated skills section, unique "Terminal" access shortcut, and modern UI.
 
-   npm install
+Section-wise content: About Me, Skills & Tools, Projects, and Contact.
 
-2. Start dev server
+Mobile menu with access to theme switch and social links.
 
-   npm run dev
+Live Demo
+Main Site: [your surge URL here]
 
-What changed / Files
+GitHub Repo: [your GitHub repo link]
 
-- `src/components/ThemeSelector.jsx` — split-screen theme chooser
-- `src/components/MainPortfolio.jsx` — main site and sections
-- `src/styles/dark.css`, `src/styles/pastel.css` — theme palettes
-- `src/styles/tailwind.css` — Tailwind entry
+Setup & Deployment
+Clone this repository:
+git clone https://github.com/yourusername/your-portfolio-repo.git
 
-Notes
+Install dependencies:
+npm install (if using React/Vite)
 
-- Theme selection is stored in localStorage. Use the "Change Theme" link in the header to go back.
-- Replace placeholder images in `src/assets` with real images.
-- Tailwind must be installed and PostCSS configured; files are included.
+Run locally:
+npm run dev or npm start
+
+Build for production:
+npm run build
+
+Deploy:
+Uses Surge, deploy by running npx surge ./dist yourcustom.surge.sh
+
+Tech Stack
+React + Vite (or your chosen stack)
+
+CSS3/Flexbox/Animations
+
+Surge for hosting and domain
+
+GitHub for version control
+
+Credits & Licensing
+All design and code by Sowmiya S.
+
+Icons and assets: [icon source, if used]
+
+Free for academic and contest evaluation use only.

@@ -205,6 +205,15 @@ photo-bar {
   .photo-bar { position: static; transform: none; margin-top: 1.25rem; }
 }
 
+/* Responsive: hide the full header navigation on small screens but keep the theme emoji */
+@media (max-width: 768px) {
+  header nav .tabs { display: none !important; }
+  header nav .nav-link { display: none !important; }
+  header nav .header-icon { display: none !important; }
+  header nav { gap: 0.5rem; }
+  header nav .theme-toggle-btn { display: inline-flex !important; margin-left: 0.25rem; }
+}
+
 .pastel-shimmer { 
   position: absolute; 
   inset: 0; 
