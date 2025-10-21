@@ -3,7 +3,7 @@
   --bg: #EFE7FB; /* soft pastel lavender background */
   --text: #5B247A; /* deep purple for headings */
   --secondary: #7C5E99; /* muted violet for secondary headings */
-  --body-text: #6D678D; /* elegant medium gray for body text */
+  --body-text: #3B2B4A; /* darker grape for improved contrast on pale backgrounds */
   --primary: #8F31FF; /* vibrant purple for buttons and highlights */
   --card: #F6F5FF; /* off-white for cards */
   --card-alt: #F3EFFE; /* pale lilac alternative */
@@ -333,17 +333,21 @@ photo-bar {
   z-index: -1;
   transition: opacity 220ms ease;
 }
-.theme-toggle-btn:hover { 
-  color: var(--primary); 
-  background: rgba(143, 49, 255, 0.15);
-  box-shadow: 0 4px 16px var(--shadow);
-  transform: scale(1.05);
-}
-
-/* Typography colors for harmonious lavender theme */
-h1, h2, h3, .neon-title {
-  color: var(--text) !important; /* deep purple for main headings */
-  /* Headings should use Orbitron to match the dark theme */
+/* Floating Switch Mode button (pastel) */
+.floating-switch-btn {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  min-width: 120px;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99998;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 220ms ease, background 180ms ease;
   font-family: "Orbitron", system-ui, sans-serif !important;
 }
 
