@@ -55,10 +55,14 @@ header {
   top: 0.9rem;
   font-family: "Moonspace", system-ui, sans-serif;
   font-weight: 700;
-  font-size: 1.2rem; /* slightly larger */
+  font-size: 1.6rem; /* increased for stronger branding */
   color: var(--text, #5B247A); /* pastel purple for light theme */
   z-index: 10000;
   pointer-events: none;
+}
+
+@media (max-width: 420px) {
+  .site-title { font-size: 1rem; left: 0.8rem; top: 0.6rem; }
 }
 
 /* Avatar sizing inside header (matches the header avatar in dark theme) */
