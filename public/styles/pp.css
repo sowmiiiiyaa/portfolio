@@ -1,0 +1,653 @@
+:root {
+  /* Harmonious lavender and purple theme variables */
+  --bg: #EFE7FB; /* soft pastel lavender background */
+  --text: #5B247A; /* deep purple for headings */
+  --secondary: #7C5E99; /* muted violet for secondary headings */
+  --body-text: #3B2B4A; /* darker grape for improved contrast on pale backgrounds */
+  --primary: #8F31FF; /* vibrant purple for buttons and highlights */
+  --card: #F6F5FF; /* off-white for cards */
+  --card-alt: #F3EFFE; /* pale lilac alternative */
+  --accent-blue: #68D9FF; /* aqua-blue accent */
+  --accent-pink: #FFCCF9; /* blush-pink accent */
+  --shadow: rgba(139, 55, 255, 0.15); /* gentle purple shadows */
+}
+
+/* Gradient overlays for depth */
+:root {
+  --gradient-overlay: linear-gradient(135deg, #EFE7FB 0%, #E6E6FA 50%, #F3EFFE 100%);
+  --card-gradient: linear-gradient(145deg, #F6F5FF 0%, #F3EFFE 100%);
+}
+
+body { 
+  background: var(--bg); 
+  color: var(--body-text); 
+  /* Use the same site body font as the rest of the project for parity */
+  font-family: "Nunito", system-ui, sans-serif;
+}
+
+.choose-btn { 
+  background: linear-gradient(90deg, var(--primary), #A855FF); 
+  border: 1px solid rgba(143, 49, 255, 0.3); 
+  color: white; 
+  box-shadow: 0 4px 18px var(--shadow); 
+}
+
+.choose-btn:hover { 
+  box-shadow: 0 6px 28px rgba(143, 49, 255, 0.25); 
+  transform: translateY(-2px); 
+}
+
+/* Ensure the light theme header layout, spacing and typography match the dark theme
+   exactly while preserving all colors/backgrounds. These rules only affect layout
+   and font metrics (size, weight, spacing) for header elements. */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* keep the exact same box sizing as the rest of the app */
+  box-sizing: border-box;
+}
+
+/* Site title placed in header (pastel/light theme) */
+.site-title {
+  position: absolute;
+  left: 1.1rem;
+  top: 0.9rem;
+  font-family: "Moonspace", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem; /* increased for stronger branding */
+  color: var(--text, #5B247A); /* pastel purple for light theme */
+  z-index: 10000;
+  pointer-events: none;
+}
+
+@media (max-width: 420px) {
+  .site-title { font-size: 1rem; left: 0.8rem; top: 0.6rem; }
+}
+
+/* Avatar sizing inside header (matches the header avatar in dark theme) */
+header .w-12.h-12 {
+  width: 3rem; /* 48px */
+  height: 3rem;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+/* Tabs / nav spacing and typography — match dark theme metrics */
+header .tabs {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* same as gap-6 */
+}
+
+header .tabs button,
+header nav a {
+  font-size: 0.875rem; /* text-sm */
+  line-height: 1.2;
+  font-family: inherit; /* preserve the existing font-family but keep metrics consistent */
+  font-weight: 600; /* match header weight in dark theme */
+  letter-spacing: 0.02em;
+  background: transparent; /* do not touch colors */
+  border: none;
+  padding: 0;
+}
+
+/* Header action icons / buttons spacing (no color changes) */
+header .header-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px; /* same as dark theme */
+  border-radius: 6px;
+}
+
+/* Layout parity with dark theme: left-align hero text and keep same flex/container
+   behavior. Only position/alignments are changed here; colors/typography remain the same. */
+.hero {
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center horizontally */
+  text-align: center; /* center text for pastel theme */
+  position: relative;
+  z-index: 5;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.hero-text {
+  position: static;
+  left: auto;
+  top: auto;
+  transform: none;
+  text-align: center; /* center the hero content */
+  width: auto;
+  max-width: 900px;
+  margin: 0 auto;
+  z-index: 5;
+}
+
+/* Force light theme hero typography to match dark theme exactly */
+.hero-text h1,
+.hero-text .neon-title,
+.hero .hero-text h1,
+.hero .hero-text .neon-title,
+.hero-text motion.h1,
+.hero motion.h1 {
+  font-size: 48px !important; 
+  letter-spacing: 2px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  margin: 0 !important;
+  line-height: 1.05 !important;
+  /* Ensure the same heading font is used in light theme */
+  font-family: "Orbitron", system-ui, sans-serif !important;
+}
+
+/* Make the main hero heading (SOWMIYA S) a deep/dark purple in pastel theme */
+.hero-text h1.neon-title,
+.hero-text .neon-title,
+.hero .hero-text h1.neon-title,
+.hero .hero-text h1 {
+  color: var(--text, #5B247A) !important;
+  text-shadow: none !important; /* remove neon glow for stronger crisp text */
+}
+
+.hero-text > .mt-4 p,
+.hero > .hero-text > .mt-4 p,
+.hero-text > .mt-4 motion.p {
+  /* Only the main descriptive paragraph should use the small text metrics */
+  max-width: 900px !important;
+  margin: 18px 0 !important;
+  line-height: 1.9 !important;
+  font-size: 14px !important; /* small/subtle size like dark theme */
+  font-family: inherit !important;
+}
+
+/* Light theme: tagline and subtitle text in Deep Grape for high contrast */
+.hero-subtitle,
+.hero .hero-subtitle {
+  color: #674C99 !important; /* Deep Grape */
+  font-weight: 600 !important;
+}
+
+.hero-tagline,
+.hero .hero-tagline {
+  color: #606373 !important; /* Heather Gray for subtle distinction */
+  font-weight: 500 !important;
+}
+
+/* Pastel-themed soft lavender glow for subtitle and tagline (light-theme only)
+   - Uses a gentle halo and soft spread tuned for light backgrounds
+   - Keeps text readable while giving a luminous pastel effect */
+.hero-subtitle,
+.hero .hero-subtitle,
+.hero-tagline,
+.hero .hero-tagline {
+  /* stronger, more defined lavender/violet glow tuned for light backgrounds */
+  /* deeper halo + increased spread and opacity for better contrast */
+  color: var(--text) !important; /* use the deep purple text for readability */
+  text-shadow:
+    0 0 6px rgba(124, 58, 237, 0.28),    /* subtle inner tint - #7C3AED */
+    0 0 14px rgba(143, 49, 255, 0.30),   /* broader halo - #8F31FF */
+    0 6px 28px rgba(164, 143, 232, 0.20); /* soft spread - #a48fe8 */
+  transition: color 160ms ease, text-shadow 220ms ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure tagline and micro lines align left in light theme */
+.hero .hero-tagline, .hero-tagline { display: block; text-align: left; }
+
+photo-bar {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* photo bar sizing copied from dark theme to avoid shifting between themes */
+.photo-bar { width: 80px; height: 220px; display: flex; align-items: center; justify-content: center; }
+.photo-bar-inner { width: 48px; height: 180px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius: 14px; display:flex; align-items:center; justify-content:center; box-shadow: 0 16px 40px rgba(0,0,0,0.6), 0 0 30px rgba(0,200,150,0.04); border: 1px solid rgba(255,255,255,0.03); }
+.photo-bar-inner img { width: 36px; height: 120px; border-radius: 8px; object-fit: cover; display: block; }
+
+@media (max-width: 768px) {
+  /* On small screens let the hero stack vertically as before */
+  .hero { display: block; padding-left: 1rem; padding-right: 1rem; }
+  .hero-text { position: static; transform: none; text-align: left; width: auto; max-width: none; }
+  .photo-bar { position: static; transform: none; margin-top: 1.25rem; }
+}
+
+/* Responsive: hide the full header navigation on small screens but keep the theme emoji */
+@media (max-width: 768px) {
+  header nav .tabs { display: none !important; }
+  header nav .nav-link { display: none !important; }
+  header nav .header-icon { display: none !important; }
+  header nav { gap: 0.5rem; }
+  header nav .theme-toggle-btn { display: inline-flex !important; margin-left: 0.25rem; }
+}
+
+.pastel-shimmer { 
+  position: absolute; 
+  inset: 0; 
+  background: var(--gradient-overlay);
+  opacity: 0.3;
+}
+
+.control-btn { 
+  background: transparent; 
+  border: none; 
+  color: var(--secondary); 
+}
+
+.card-pastel { 
+  background: var(--card-gradient); 
+  border-radius: 12px; 
+  padding: 12px; 
+  box-shadow: 0 8px 24px var(--shadow), 0 2px 8px rgba(109, 103, 141, 0.08); 
+  border: 1px solid rgba(243, 239, 254, 0.8);
+}
+
+.control-dot { 
+  background: var(--primary); 
+  box-shadow: 0 0 0 6px rgba(246, 245, 255, 0.8), 0 8px 24px var(--shadow); 
+  position: absolute; 
+  left: 50%; 
+  top: 50%; 
+  transform: translate(-50%, -50%); 
+}
+
+.nav-link { 
+  color: var(--secondary); 
+  opacity: 0.9; 
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary);
+}
+
+.social { 
+  color: var(--accent-blue); 
+}
+
+.nav-link { color: var(--text); opacity: 0.95; }
+.social { color: var(--primary); }
+
+/* About card with harmonious lavender styling */
+.about-card { 
+  background: var(--card-gradient); 
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 12px 40px var(--shadow), 0 4px 16px rgba(109, 103, 141, 0.06);
+  border: 1px solid rgba(243, 239, 254, 0.6);
+}
+
+.resume-btn-pastel { 
+  background: linear-gradient(135deg, var(--primary), #A855FF); 
+  color: white; 
+  font-weight: 600; 
+  padding: 14px 28px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px var(--shadow);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.resume-btn-pastel:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(143, 49, 255, 0.25);
+  background: linear-gradient(135deg, #A855FF, var(--accent-blue));
+}
+
+/* Header icons with lavender theme */
+.header-icon {
+  color: var(--secondary);
+  transition: all 0.3s ease;
+}
+
+.header-icon:hover {
+  color: var(--primary);
+  background: rgba(143, 49, 255, 0.08);
+  box-shadow: 0 4px 16px var(--shadow);
+}
+
+/* Theme toggle button for pastel theme */
+.theme-toggle-btn { 
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+  color: var(--secondary); 
+  padding: 8px; 
+  border-radius: 8px; 
+  font-size: 16px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(143, 49, 255, 0.2);
+  background: rgba(143, 49, 255, 0.05);
+}
+
+/* Floating terminal quick-access button (pastel/light theme) */
+.floating-terminal-btn {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 4.5rem; /* place above Switch Mode */
+  min-width: 120px;
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(243,239,254,0.98));
+  color: var(--text);
+  border: 1px solid rgba(143,49,255,0.12);
+  z-index: 99999;
+  box-shadow: 0 10px 40px rgba(143,49,255,0.08), 0 4px 18px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 220ms ease, background 180ms ease;
+}
+.floating-terminal-btn:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(143,49,255,0.14), 0 6px 28px rgba(0,0,0,0.08); }
+.floating-terminal-btn .ft-label { font-size: 14px; font-weight: 700; letter-spacing: 0.4px; }
+.floating-terminal-btn.ft-pastel { box-shadow: 0 12px 50px rgba(164,143,232,0.12), 0 6px 30px rgba(0,0,0,0.06); }
+.floating-terminal-btn.ft-pastel:hover { box-shadow: 0 28px 90px rgba(216,180,255,0.18), 0 8px 40px rgba(0,0,0,0.06); }
+.floating-terminal-btn.ft-pastel .ft-label {
+  /* soft luminous light purple glow for light theme (readable on pale backgrounds) */
+  text-shadow: 0 0 10px rgba(216,180,255,0.65), /* #d8b4ff halo */
+               0 6px 18px rgba(164,143,232,0.16); /* #a48fe8 spread */
+  color: var(--text);
+}
+
+/* pastel glow */
+.floating-terminal-btn.ft-pastel::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 9999px;
+  filter: blur(14px);
+  background: radial-gradient(circle, rgba(216,180,255,0.12), transparent 40%);
+  z-index: -1;
+  transition: opacity 220ms ease;
+}
+/* Floating Switch Mode button (pastel) */
+.floating-switch-btn {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  min-width: 120px;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99998;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 220ms ease, background 180ms ease;
+  font-family: "Orbitron", system-ui, sans-serif !important;
+}
+
+h4, h5, h6 {
+  color: var(--secondary); /* muted violet for secondary headings */
+}
+
+p {
+  color: var(--body-text); /* elegant medium gray for body text */
+}
+
+/* Navigation with purple accents */
+.tabs button {
+  color: var(--secondary);
+  transition: color 0.3s ease;
+}
+
+.tabs button.text-white,
+.tabs button:hover {
+  color: var(--primary) !important;
+}
+
+/* Underline accent color */
+.bg-cyan-400 {
+  background: linear-gradient(90deg, var(--primary), var(--accent-blue)) !important;
+}
+
+/* Links and highlights */
+a {
+  color: var(--accent-blue);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--primary);
+}
+
+/* Button variants with accent colors */
+.btn-accent-pink {
+  background: linear-gradient(135deg, var(--accent-pink), #FFB3E6);
+  color: var(--text);
+}
+
+.btn-accent-blue {
+  background: linear-gradient(135deg, var(--accent-blue), #4FC3F7);
+  color: white;
+}
+
+.nav-link { color: var(--text); opacity: 0.95; }
+.social { color: var(--primary); }
+
+/* AGGRESSIVE OVERRIDE: Force light theme hero to match dark theme exactly */
+/* Target Tailwind classes directly */
+.hero .text-7xl,
+.hero .lg\:text-8xl,
+.hero [class*="text-7xl"],
+.hero [class*="text-8xl"] {
+  font-size: 48px !important;
+  letter-spacing: 2px !important;
+  font-weight: 700 !important;
+  line-height: 1.05 !important;
+}
+
+.hero .text-lg,
+.hero .lg\:text-2xl,
+.hero [class*="text-lg"],
+.hero [class*="text-2xl"] {
+  font-size: 18px !important;
+  line-height: 1.9 !important;
+}
+
+/* Extra high-specificity rules targeting the exact classes used in MainPortfolio.jsx */
+.hero .text-7xl.font-orbitron, .hero-text .text-7xl.font-orbitron, .hero .lg\:text-8xl.font-orbitron {
+  font-size: 48px !important;
+  letter-spacing: 2px !important;
+  font-weight: 700 !important;
+  line-height: 1.05 !important;
+  font-family: "Orbitron", system-ui, sans-serif !important;
+}
+
+.hero .text-lg.font-nunito, .hero-text .text-lg.font-nunito, .hero .lg\:text-2xl.font-nunito {
+  font-size: 18px !important;
+  line-height: 1.9 !important;
+  font-family: "Nunito", system-ui, sans-serif !important;
+}
+
+/* Animated gradient background (pastel) */
+.animated-bg { position: absolute; inset: 0; z-index: -2; pointer-events: none; background: linear-gradient(120deg, rgba(239,231,251,0.6), rgba(243,239,254,0.6)); background-size: 300% 300%; animation: bgShiftPastel 23.8s ease-in-out infinite; }
+@keyframes bgShiftPastel { 0% { background-position: 0% 50% } 50% { background-position: 100% 50% } 100% { background-position: 0% 50% } }
+
+/* Pastel overlay - soft glow and floating particles */
+.animated-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(700px 300px at 20% 30%, rgba(143,49,255,0.06), transparent 18%), radial-gradient(400px 180px at 80% 70%, rgba(99,102,241,0.04), transparent 16%);
+  filter: blur(42px);
+  opacity: 0.95;
+  animation: driftPastel 29.8s ease-in-out infinite;
+}
+
+.animated-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-image: radial-gradient(circle at 25% 25%, rgba(143,49,255,0.05) 0.6px, transparent 0.7px), radial-gradient(circle at 75% 75%, rgba(99,102,241,0.04) 0.6px, transparent 0.7px);
+  background-size: 900px 900px, 800px 800px;
+  opacity: 0.6;
+  mix-blend-mode: screen;
+  animation: particleDriftPastel 47.8s linear infinite;
+}
+
+@keyframes driftPastel {
+  0% { transform: translateY(0) translateX(0) scale(1) }
+  50% { transform: translateY(-24px) translateX(-18px) scale(1.01) }
+  100% { transform: translateY(0) translateX(0) scale(1) }
+}
+
+@keyframes particleDriftPastel {
+  0% { background-position: 0 0, 0 0 }
+  100% { background-position: -260px 180px, 260px -180px }
+}
+
+/* Smooth transitions when switching themes */
+.animated-bg, .animated-bg::before, .animated-bg::after { transition: opacity 600ms ease, filter 800ms ease, background 600ms ease }
+
+/* Bokeh particles */
+.bokeh-container { position: fixed; inset: 0; pointer-events: none; z-index: 10; overflow: hidden; }
+.bokeh-particle { position: absolute; width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, rgba(143,49,255,0.08), transparent 45%); filter: blur(14px); transition: transform 0.35s linear; opacity: 0.7; }
+
+/* Typing caret */
+.typing-caret { border-right: 2px solid rgba(143,49,255,0.9); animation: blinkCaret 1s steps(2,end) infinite; }
+
+/* Skill progress animations */
+.skill-bar-bg { background: var(--card-alt); }
+.skill-progress { width: 0%; transition: width 1s cubic-bezier(.2,.9,.2,1); box-shadow: 0 6px 18px rgba(143,49,255,0.06), inset 0 1px 0 rgba(255,255,255,0.6); }
+.skill-progress[data-tip]:hover::after { content: attr(data-tip); position: absolute; transform: translateY(-120%); background: rgba(95,30,120,0.95); color: #fff; padding: 6px 8px; border-radius: 6px; font-size: 12px; box-shadow: 0 6px 20px rgba(143,49,255,0.08); }
+
+/* Project card overlay reveal */
+.project-card .project-overlay { transition: opacity 220ms ease, pointer-events 220ms ease; }
+.project-card:hover .project-overlay { opacity: 1; pointer-events: auto; }
+
+/* Card lift parity for light theme: match dark theme motion & timing
+   while keeping pastel-friendly shadow colors for consistent color scheme */
+.card-pastel:hover,
+.card-pastel:focus-within,
+.project-card.card-pastel:hover,
+.project-card.card-pastel:focus-within,
+.about-card.card-pastel:hover,
+.about-card.card-pastel:focus-within {
+  transform: translateY(-6px);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+  /* two-layer shadow similar intensity to dark theme but using pastel tones */
+  box-shadow: 0 28px 80px rgba(143, 49, 255, 0.08), 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* tactile feedback for active state on touch */
+.card-pastel:active,
+.project-card.card-pastel:active,
+.about-card.card-pastel:active {
+  transform: translateY(-3px);
+}
+
+/* High-specificity interaction parity overrides (force same motion & timing as dark theme) */
+header nav a.nav-link, header nav button.nav-link, header .header-icon, .theme-toggle-btn, .resume-btn-pastel, .tabs button, a {
+  transition: color 0.3s ease, transform 220ms ease, box-shadow 220ms ease !important;
+}
+
+/* Hover / focus / active parity */
+header nav a.nav-link:hover, header nav button.nav-link:hover, header .header-icon:hover, .theme-toggle-btn:hover, .resume-btn-pastel:hover, .tabs button:hover, a:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 28px 80px rgba(143, 49, 255, 0.08) !important;
+}
+
+/* Tactile feedback for touch devices */
+header nav a.nav-link:active, header nav button.nav-link:active, header .header-icon:active, .theme-toggle-btn:active, .resume-btn-pastel:active, .tabs button:active, a:active {
+  transform: translateY(-1px) !important;
+}
+
+/* Ensure theme selector buttons also get the same lift */
+.theme-btn:hover, .theme-side-btn:hover { transform: translateY(-4px) scale(1.03) !important; box-shadow: 0 12px 32px rgba(0,0,0,0.06) !important; transition: transform 180ms ease, box-shadow 180ms ease !important; }
+
+/* Force orb hover ring timing parity (additional safety) */
+.skill-galaxy.theme-light .orb:hover::after { transition: opacity 180ms ease, box-shadow 220ms ease !important; }
+
+/* Specific tabs (About / Projects) hover parity */
+.nav-tab {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 220ms ease, box-shadow 220ms ease !important;
+}
+.nav-tab:hover, .nav-tab:focus {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 32px rgba(143, 49, 255, 0.12) !important;
+  color: var(--primary) !important;
+}
+
+/* NAVIGATION TYPOGRAPHY PARITY (match dark theme metrics precisely) */
+/* Do not change colors; only copy font family, size, weight, spacing, underline thickness and animations */
+header nav a.nav-link,
+header nav button.nav-link,
+header .tabs button.nav-tab {
+  /* Use Moonspace across all navigation elements for cohesive branding */
+  font-family: "Moonspace", monospace !important;
+  font-size: 0.875rem !important; /* text-sm */
+  line-height: 1.2 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  background: transparent !important;
+  padding: 0 !important; /* spacing controlled by .tabs gap */
+  margin: 0 !important;
+  text-transform: none !important;
+  white-space: nowrap !important;
+  transition: color 0.3s ease, transform 220ms ease, box-shadow 220ms ease !important;
+}
+
+/* Force the same horizontal spacing between nav items as the dark theme */
+header .tabs { gap: 1.5rem !important; }
+
+/* Hover + active interaction: same motion and underline behaviour (no color changes) */
+header nav a.nav-link:hover,
+header nav button.nav-link:hover,
+header .tabs button.nav-tab:hover {
+  transform: translateY(-2px) !important;
+  text-decoration: none !important; /* underline is handled by the animated bar */
+}
+
+/* Contact email styling (pastel theme) */
+.contact-email { font-family: "Moonspace", monospace !important; color: var(--text); text-decoration: none; opacity: 0.95; display: inline-block }
+.card-pastel .contact-email:hover { color: var(--primary); transform: translateY(-2px); }
+
+/* Contact card (pastel) */
+.contact-card { background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,250,255,0.98)); border: 1px solid rgba(143,49,255,0.04); }
+.contact-list { display: flex; flex-direction: column; gap: 8px }
+.contact-item { display: inline-flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; color: var(--text); text-decoration: none; font-family: "Moonspace", monospace !important; font-size: 0.95rem }
+.contact-item svg { color: inherit }
+.contact-item:hover, .contact-item:focus { background: rgba(143,49,255,0.04); transform: translateY(-2px); outline: none }
+.contact-item:focus { box-shadow: 0 6px 20px rgba(143,49,255,0.06); }
+.contact-footer { color: rgba(33,33,33,0.6) }
+
+header nav a.nav-link:active,
+header nav button.nav-link:active,
+header .tabs button.nav-tab:active {
+  transform: translateY(-1px) !important;
+}
+
+/* Underline bar thickness & transition parity — the element is created in DOM as an absolute bar
+   (the JS sets left/width). Ensure thickness, rounding and transitions match the dark theme. */
+header .tabs .underline, header .tabs > .underline, .tabs > .absolute[style] {
+  height: 2px !important; /* h-0.5 */
+  border-radius: 2px !important;
+  transition: left 280ms ease, width 280ms ease !important;
+}
+
+/* Responsive: keep same font-size at large screens (prevent Tailwind utilities from overriding) */
+@media (min-width: 1024px) {
+  header nav a.nav-link,
+  header nav button.nav-link,
+  header .tabs button.nav-tab {
+    font-size: 0.875rem !important;
+  }
+}
+

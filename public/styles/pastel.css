@@ -107,8 +107,8 @@ header .header-icon {
   min-height: 360px;
   display: flex;
   align-items: center;
-  justify-content: center; /* match dark theme center container */
-  text-align: left;
+  justify-content: center; /* center horizontally */
+  text-align: center; /* center text for pastel theme */
   position: relative;
   z-index: 5;
   padding-top: 0;
@@ -116,14 +116,14 @@ header .header-icon {
 }
 
 .hero-text {
-  position: static; /* flow with flex layout, not absolutely centered */
+  position: static;
   left: auto;
   top: auto;
   transform: none;
-  text-align: left; /* match dark theme left alignment */
+  text-align: center; /* center the hero content */
   width: auto;
-  max-width: 900px; /* same max-width as dark theme */
-  margin: 0; /* align with dark theme container */
+  max-width: 900px;
+  margin: 0 auto;
   z-index: 5;
 }
 
@@ -283,21 +283,26 @@ photo-bar {
   border: 1px solid rgba(243, 239, 254, 0.6);
 }
 
-.resume-btn-pastel { 
-  background: linear-gradient(135deg, var(--primary), #A855FF); 
-  color: white; 
-  font-weight: 600; 
+.resume-btn-pastel {
+  /* Pale card-style background with dark/purple text for good contrast in pastel theme */
+  background: linear-gradient(135deg, var(--card), var(--card-alt));
+  color: var(--text); /* deep purple text */
+  font-weight: 700;
   padding: 14px 28px;
   border-radius: 10px;
   box-shadow: 0 8px 24px var(--shadow);
-  border: none;
-  transition: all 0.3s ease;
+  border: 1px solid rgba(143,49,255,0.08);
+  transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease, color 160ms ease;
 }
 
-.resume-btn-pastel:hover {
+.resume-btn-pastel:hover,
+.resume-btn-pastel:focus {
   transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(143, 49, 255, 0.25);
+  box-shadow: 0 12px 32px rgba(143, 49, 255, 0.12);
+  /* On hover/focus switch to the purple gradient and use white text for contrast */
   background: linear-gradient(135deg, #A855FF, var(--accent-blue));
+  color: #ffffff;
+  outline: none;
 }
 
 /* Header icons with lavender theme */

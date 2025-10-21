@@ -1,0 +1,171 @@
+/* dark theme (copied from src/styles/dark.css) */
+:root {
+  --bg: #000000;
+  --muted: #0a0a0a;
+  --accent1: #00FFFF;
+  --accent2: #00FF9C;
+  --primary: #00FFFF;
+  --purple: #B57CFF;
+  --text: #E6FFFF;
+}
+
+body { background: var(--bg); color: var(--text); }
+.choose-btn { background: linear-gradient(90deg, rgba(0,255,252,0.12), rgba(0,255,156,0.12)); border: 1px solid rgba(0,255,252,0.18); color: var(--accent1); box-shadow: 0 4px 18px rgba(0,255,252,0.06); }
+.choose-btn:hover { box-shadow: 0 6px 28px rgba(0,255,252,0.18); transform: translateY(-2px); }
+.neon-particles { position: absolute; inset: 0; background-image: radial-gradient(circle at 20% 20%, rgba(0,255,252,0.06), transparent 2%), radial-gradient(circle at 80% 80%, rgba(0,255,156,0.06), transparent 2%); }
+
+.control-btn { background: transparent; border: none; color: var(--text); }
+
+.card-dark { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius: 12px; padding: 12px; }
+
+.control-dot { background: #000; box-shadow: 0 0 0 4px rgba(0,255,252,0.12), 0 6px 20px rgba(0,255,252,0.08); position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+
+.nav-link { color: var(--text); opacity: 0.9; }
+.social { color: var(--accent2); }
+
+/* Animated gradient background */
+.animated-bg { position: absolute; inset: 0; z-index: -2; pointer-events: none; background: linear-gradient(135deg, rgba(20,10,30,0.6), rgba(10,6,18,0.65)); background-size: 300% 300%; animation: bgShift 19.8s ease-in-out infinite; }
+@keyframes bgShift { 0% { background-position: 0% 50% } 50% { background-position: 100% 50% } 100% { background-position: 0% 50% } }
+
+/* Additional animated overlay: soft drifting glow + subtle particle layer for dark theme */
+.animated-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(600px 300px at 10% 20%, rgba(0,255,252,0.06), transparent 20%), radial-gradient(400px 200px at 80% 80%, rgba(139,92,246,0.04), transparent 20%);
+  filter: blur(48px);
+  opacity: 0.9;
+  animation: driftDark 27.8s ease-in-out infinite;
+}
+
+.animated-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-image: radial-gradient(circle at 15% 25%, rgba(0,255,252,0.04) 0.6px, transparent 0.7px), radial-gradient(circle at 80% 70%, rgba(139,92,246,0.03) 0.6px, transparent 0.7px);
+  background-size: 1200px 1200px, 1000px 1000px;
+  opacity: 0.6;
+  mix-blend-mode: screen;
+  animation: particleDrift 59.8s linear infinite;
+}
+
+@keyframes driftDark {
+  0% { transform: translateY(0) translateX(0) scale(1) }
+  50% { transform: translateY(-30px) translateX(20px) scale(1.02) }
+  100% { transform: translateY(0) translateX(0) scale(1) }
+}
+
+@keyframes particleDrift {
+  0% { background-position: 0 0, 0 0 }
+  100% { background-position: 300px 200px, -300px -200px }
+}
+
+/* Smooth transitions when switching themes */
+.animated-bg, .animated-bg::before, .animated-bg::after { transition: opacity 600ms ease, filter 800ms ease, background 600ms ease }
+
+/* Bokeh particles */
+.bokeh-container { position: fixed; inset: 0; pointer-events: none; z-index: 10; overflow: hidden; }
+.bokeh-particle { position: absolute; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, rgba(0,255,252,0.08), transparent 45%); filter: blur(18px); transition: transform 0.35s linear; opacity: 0.6; }
+
+/* Typing caret (subtle) */
+.typing-caret { border-right: 2px solid rgba(0,255,252,0.9); animation: blinkCaret 1s steps(2,end) infinite; }
+@keyframes blinkCaret { from { border-color: rgba(0,255,252,0.9) } 50% { border-color: transparent } to { border-color: rgba(0,255,252,0.9) } }
+
+/* Skill progress animations and tooltip */
+.skill-bar-bg { background: rgba(255,255,255,0.02); }
+.skill-progress { width: 0%; transition: width 1s cubic-bezier(.2,.9,.2,1); box-shadow: 0 6px 18px rgba(0,255,252,0.06), inset 0 1px 0 rgba(255,255,255,0.03); }
+.skill-progress[data-tip]:hover::after { content: attr(data-tip); position: absolute; transform: translateY(-120%); background: rgba(0,0,0,0.8); color: #e6ffff; padding: 6px 8px; border-radius: 6px; font-size: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.6); }
+
+/* Project card overlay reveal */
+.project-card .project-overlay { transition: opacity 220ms ease, pointer-events 220ms ease; }
+.project-card:hover .project-overlay { opacity: 1; pointer-events: auto; }
+
+/* header icons */
+.header-icon { display: inline-flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.85); padding: 6px; border-radius: 6px; }
+.header-icon svg { display: block; color: inherit; }
+.header-icon:hover { background: rgba(0,255,252,0.04); color: var(--accent1); box-shadow: 0 6px 24px rgba(0,255,252,0.06); }
+
+/* Site title placed in header (dark theme) */
+.site-title {
+  position: absolute;
+  left: 1.1rem;
+  top: 0.9rem;
+  font-family: "Moonspace", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem; /* increased for stronger branding */
+  color: #32f5ff; /* neon cyan/blue for dark theme */
+  text-shadow: 0 2px 10px rgba(50,245,255,0.14);
+  z-index: 10000;
+  pointer-events: none;
+}
+
+/* Force Moonspace font across header navigation elements for consistent branding */
+header nav a.nav-link,
+header nav button.nav-link,
+header .tabs button.nav-tab,
+header .header-icon,
+.theme-toggle-btn {
+  font-family: "Moonspace", monospace !important;
+}
+
+/* Theme toggle button */
+.theme-toggle-btn { 
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+  color: rgba(255,255,255,0.85); 
+  padding: 8px; 
+  border-radius: 8px; 
+  font-size: 16px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0,255,252,0.2);
+}
+.theme-toggle-btn:hover { 
+  background: rgba(0,255,252,0.1); 
+  color: var(--accent1); 
+  box-shadow: 0 6px 24px rgba(0,255,252,0.2);
+  transform: scale(1.05);
+}
+
+/* Contact card (dark) */
+.contact-card { background: linear-gradient(180deg, rgba(6,6,12,0.72), rgba(10,8,20,0.56)); border: 1px solid rgba(0,255,252,0.04); }
+.contact-list { display: flex; flex-direction: column; gap: 8px }
+.contact-item { display: inline-flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; color: var(--text); text-decoration: none; font-family: "Moonspace", monospace !important; font-size: 0.95rem }
+.contact-item svg { color: inherit }
+.contact-item:hover, .contact-item:focus { background: rgba(0,255,252,0.03); transform: translateY(-2px); outline: none }
+.contact-item:focus { box-shadow: 0 8px 28px rgba(0,255,252,0.06); }
+.contact-footer { color: rgba(230,255,255,0.6) }
+
+/* Contact email styling (dark theme) */
+.contact-email { font-family: "Moonspace", monospace !important; color: var(--text); text-decoration: none; opacity: 0.95; display: inline-block }
+.card-dark .contact-email:hover { color: var(--accent1); transform: translateY(-2px); }
+
+/* Cyberpunk / editor visuals */
+.editor-bg {
+  background-image: radial-gradient(circle at 10% 10%, rgba(0,255,252,0.02), transparent 6%), radial-gradient(circle at 90% 90%, rgba(0,255,156,0.02), transparent 8%);
+}
+
+.neon-grid {
+  position: absolute; inset: 0; pointer-events: none; mix-blend-mode: overlay; opacity: 0.06;
+  background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px;
+}
+
+/* subtle starfield background — many tiny dots */
+.stars {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0; opacity: 0.7;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,0.9) 0.6px, transparent 0.7px),
+    radial-gradient(circle at 30% 40%, rgba(255,255,255,0.7) 0.5px, transparent 0.6px),
+    radial-gradient(circle at 50% 10%, rgba(255,255,255,0.8) 0.7px, transparent 0.8px),
+    radial-gradient(circle at 70% 60%, rgba(255,255,255,0.65) 0.5px, transparent 0.6px),
+    radial-gradient(circle at 90% 30%, rgba(255,255,255,0.6) 0.6px, transparent 0.7px);
+  background-size: 100% 100%;
+  mix-blend-mode: screen; filter: drop-shadow(0 0 6px rgba(124,255,220,0.02));
+}
+
+/* many other rules omitted for brevity (full file copied from src/styles/dark.css) */

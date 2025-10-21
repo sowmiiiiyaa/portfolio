@@ -4,14 +4,25 @@ import MainPortfolio from './components/MainPortfolio'
 import TerminalPage from './pages/TerminalPage'
 
 export default function App() {
-  const [theme, setTheme] = useState(null) // Always start with null to show selector first
+  // Initialize theme from localStorage or OS preference so CSS can load immediately
+  const getInitialTheme = () => {
+    try {
+      const t = localStorage.getItem('theme')
+      if (t === 'dark' || t === 'pastel') return t
+    } catch (e) {}
+    // fallback to system preference
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark'
+    return 'pastel'
+  }
+
+  const [theme, setTheme] = useState(getInitialTheme())
   const [showSelector, setShowSelector] = useState(false)
-  const [currentPage, setCurrentPage] = useState('selector') // 'selector', 'portfolio', 'terminal'
+  const [currentPage, setCurrentPage] = useState('portfolio') // default to portfolio
 
   useEffect(() => {
     if (theme) {
-      localStorage.setItem('theme', theme)
-      // Dynamically load theme css
+      try { localStorage.setItem('theme', theme) } catch (e) {}
+      // Dynamically load theme css from public/styles to avoid client-side import flash
       const id = 'theme-css'
       let link = document.getElementById(id)
       if (!link) {
@@ -20,7 +31,7 @@ export default function App() {
         link.id = id
         document.head.appendChild(link)
       }
-      link.href = theme === 'dark' ? '/src/styles/dark.css' : '/src/styles/pastel.css'
+      link.href = theme === 'dark' ? '/styles/dark.css' : '/styles/pastel.css'
     }
   }, [theme])
 

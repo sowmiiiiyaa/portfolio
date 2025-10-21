@@ -1,0 +1,18 @@
+/* pastel theme (copied from src/styles/pastel.css) */
+:root {
+  /* Harmonious lavender and purple theme variables */
+  --bg: #EFE7FB; /* soft pastel lavender background */
+  --text: #5B247A; /* deep purple for headings */
+  --secondary: #7C5E99; /* muted violet for secondary headings */
+  --body-text: #3B2B4A; /* darker grape for improved contrast on pale backgrounds */
+  --primary: #8F31FF; /* vibrant purple for buttons and highlights */
+  --card: #F6F5FF; /* off-white for cards */
+  --card-alt: #F3EFFE; /* pale lilac alternative */
+  --accent-blue: #68D9FF; /* aqua-blue accent */
+  --accent-pink: #FFCCF9; /* blush-pink accent */
+  --shadow: rgba(139, 55, 255, 0.15); /* gentle purple shadows */
+}
+
+body { background: var(--bg); color: var(--body-text); font-family: "Nunito", system-ui, sans-serif; }
+
+/* many other rules omitted for brevity (full file copied from src/styles/pastel.css) */

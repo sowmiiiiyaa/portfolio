@@ -260,7 +260,7 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
             </div>
           </div>
         ) : (
-          <div className="hero flex items-center justify-between gap-8 px-4 lg:px-0">
+          <div className={`hero flex items-center ${theme === 'pastel' ? 'justify-center' : 'justify-between'} gap-8 px-4 lg:px-0`}>
             {/* Left: neon heading + subtitle */}
             <div className="hero-text max-w-3xl text-left">
               <motion.h1
@@ -312,22 +312,16 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
               className="about-wrap max-w-4xl mx-auto"
             >
               <div className={`about-card p-6 rounded-lg ${theme === 'dark' ? 'card-dark' : 'card-pastel'}`}>
-                <motion.h3
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.05 }}
-                  className={`text-2xl font-extrabold mb-4 ${theme === 'dark' ? 'neon-heading' : ''}`}
-                >About Me</motion.h3>
+                <div className="about-header-row">
+                  <motion.h3
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.05 }}
+                    className={`text-2xl font-extrabold mb-4 ${theme === 'dark' ? 'neon-heading' : ''}`}
+                  >About Me</motion.h3>
 
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.8, delay: 0.1 }}
-                  className="text-sm leading-8 text-slate-200"
-                >
-                  {/* New profile greeting: avatar + friendly line */}
+                  {/* New profile greeting: avatar + friendly line (moved next to heading) */}
                   <div className="profile-greeting card-profile-greeting" role="region" aria-label="Profile greeting">
                     <div className="profile-avatar-wrap" aria-hidden>
                       <img src={profileImg} alt="Profile photo of Sowmiya S" className="profile-avatar" />
@@ -337,7 +331,15 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
                       <p className="greeting-sub">Aspiring DevOps Engineer | Python Automation Beginner</p>
                     </div>
                   </div>
+                </div>
 
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.8, delay: 0.1 }}
+                  className="text-sm leading-8 text-slate-200"
+                >
                   <p className="sr-only">Main About text follows</p>
                   <p>Hey there! I’m Sowmiy S, a developer who loves bringing automation to life with Python.</p>
                   <p className="mt-3">In a world that never stops evolving, I find my spark in writing code that makes systems faster, smarter, and smoother.</p>
