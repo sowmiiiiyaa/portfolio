@@ -9,20 +9,27 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState('selector') // 'selector', 'portfolio', 'terminal'
 
   useEffect(() => {
+    // Apply theme by toggling a root class. Both theme css files are bundled
+    // into the build so we no longer rely on injecting a runtime /src link.
+    const root = document.documentElement
+    root.classList.remove('theme-dark', 'theme-pastel')
     if (theme) {
       localStorage.setItem('theme', theme)
-      // Dynamically load theme css
-      const id = 'theme-css'
-      let link = document.getElementById(id)
-      if (!link) {
-        link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.id = id
-        document.head.appendChild(link)
-      }
-      link.href = theme === 'dark' ? '/src/styles/dark.css' : '/src/styles/pastel.css'
+      root.classList.add(theme === 'dark' ? 'theme-dark' : 'theme-pastel')
+    } else {
+      localStorage.removeItem('theme')
     }
   }, [theme])
+
+  // On mount, restore previously chosen theme (if any) and go straight to portfolio
+  // so returning visitors see their selected theme immediately.
+  useEffect(() => {
+    const saved = localStorage.getItem('theme')
+    if (saved) {
+      setTheme(saved)
+      setCurrentPage('portfolio')
+    }
+  }, [])
 
   // Function to toggle theme without navigation
   const toggleTheme = () => {
