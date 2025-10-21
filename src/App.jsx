@@ -73,14 +73,7 @@ export default function App() {
               <ThemeSelector onChoose={(t) => { setTheme(t); setShowSelector(false) }} />
             </div>
           )}
-          {/* Switch Mode button - Always returns to home page */}
-          <button 
-            onClick={goToHomePage}
-            className="fixed bottom-4 right-4 z-50 px-4 py-2 bg-gray-800 text-white rounded-lg shadow-lg hover:bg-gray-700 transition-colors"
-            style={{ fontSize: '12px' }}
-          >
-            Switch Mode
-          </button>
+          {/* Switch Mode removed from floating fixed position; use in-menu Switch Mode instead */}
         </>
       )}
       

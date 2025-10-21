@@ -25,6 +25,7 @@ const Section = ({ id, title, children }) => (
 
 export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGoToTerminal }) {
   const [activeTab, setActiveTab] = useState('about')
+  const [menuOpen, setMenuOpen] = useState(false)
   const [resumeMsgVisible, setResumeMsgVisible] = useState(false)
   // state for undeployed project demo popups
   const [demoPopup, setDemoPopup] = useState({ visible: false, id: null, rect: null })
@@ -155,6 +156,13 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
 
   // popup ref for focus management
   const popupRef = useRef(null)
+  // mobile menu ref
+  const menuRef = useRef(null)
+  // hamburger ref to prevent outside-click handler race
+  const hamburgerRef = useRef(null)
+  // keep a ref to the first and last menu items for simple focus trap
+  const firstMenuItemRef = useRef(null)
+  const lastMenuItemRef = useRef(null)
 
   // When the demo popup becomes visible, focus it and add Escape key handling.
   useEffect(() => {
@@ -172,6 +180,58 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
     }
   }, [demoPopup.visible])
 
+  // Close mobile menu on outside click or Escape; trap focus and lock body scroll when open
+  useEffect(() => {
+    const onDoc = (e) => {
+      if (!menuOpen) return
+      const m = menuRef.current
+      // ignore clicks on the hamburger button itself to avoid toggle race
+      if (hamburgerRef.current && hamburgerRef.current.contains(e.target)) return
+      if (m && !m.contains(e.target)) setMenuOpen(false)
+    }
+    const onKey = (e) => {
+      if (!menuOpen) return
+      if (e.key === 'Escape') {
+        setMenuOpen(false)
+        return
+      }
+      if (e.key === 'Tab') {
+        // Basic focus trap: keep focus inside the menu
+        const first = firstMenuItemRef.current
+        const last = lastMenuItemRef.current
+        if (!first || !last) return
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first.focus();
+        }
+      }
+    }
+
+    // lock body scroll when menu open
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+
+    document.addEventListener('pointerdown', onDoc)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('pointerdown', onDoc)
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [menuOpen])
+
+  // Focus trap and scroll lock when menuOpen
+  // (Consolidated) move focus to the first menu item when opening
+  useEffect(() => {
+    if (menuOpen) {
+      setTimeout(() => { if (firstMenuItemRef.current) firstMenuItemRef.current.focus() }, 40)
+    }
+  }, [menuOpen])
+
   return (
     <div className="min-h-screen editor-bg relative">
       {/* Constellation background (theme-aware) */}
@@ -182,12 +242,10 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
     {/* animated background layer */}
     <div className="animated-bg" aria-hidden />
       <div id="neon-cursor"><div className="trail" /></div>
-  <header className="py-6 px-6 flex items-center justify-between relative" style={{ zIndex: 9999, pointerEvents: 'auto' }}>
+  <header className={`py-6 px-6 flex items-center justify-between relative ${theme === 'dark' ? 'hdr-dark' : 'hdr-pastel'}`} style={{ zIndex: 9999, pointerEvents: 'auto' }}>
           <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-full bg-gray-300 overflow-hidden avatar-root" aria-hidden>
-            <img src={profileImg} alt="Sowmiya" className="w-full h-full object-cover avatar-img" />
+            <div className="site-brand">Sowmiya's Portfolio</div>
           </div>
-        </div>
 
         <nav className="flex items-center gap-6 relative">
           <div className="tabs flex items-center gap-6">
@@ -215,7 +273,7 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
             />
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 nav-right">
             <a href="#contact" className="nav-link mr-4">Contact</a>
             <button
               onClick={onGoToTerminal}
@@ -230,12 +288,51 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
               className="header-icon theme-toggle-btn"
               onClick={onToggleTheme}
               aria-label="Toggle theme"
+              style={menuOpen ? { display: 'none' } : undefined}
             >
               {theme === 'dark' ? '☀️' : '🌙'}
             </button>
           </div>
+          {/* hamburger for small screens */}
+          <button
+            ref={hamburgerRef}
+            className={`hamburger-btn ${theme === 'dark' ? 'hamburger-dark' : 'hamburger-light'}`}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-controls="mobile-nav"
+            aria-expanded={menuOpen}
+            aria-pressed={menuOpen}
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            {/* SVG icon ensures crisp rendering and easy theming */}
+            <svg width="22" height="16" viewBox="0 0 24 16" fill="none" aria-hidden focusable="false" className="hamburger-svg">
+              <rect x="0" y="0" width="24" height="2" rx="1" />
+              <rect x="0" y="7" width="24" height="2" rx="1" />
+              <rect x="0" y="14" width="24" height="2" rx="1" />
+            </svg>
+          </button>
         </nav>
   </header>
+  {/* Mobile slide-down menu */}
+  {/* backdrop to dim/blur the page while menu is open */}
+  <div className={`mobile-backdrop ${menuOpen ? 'open' : ''}`} aria-hidden={!menuOpen} onClick={() => setMenuOpen(false)} />
+
+  <div id="mobile-nav" ref={menuRef} className={`mobile-menu ${menuOpen ? 'open' : ''} ${theme === 'dark' ? 'dark' : 'pastel'}`} role="menu" aria-hidden={!menuOpen}>
+    <div className="mobile-menu-inner" role="none">
+      <ul role="menu">
+        <li><button ref={firstMenuItemRef} onClick={() => { setActiveTab('about'); setMenuOpen(false); window.location.hash = '#about' }} role="menuitem">About</button></li>
+        <li><button onClick={() => { setActiveTab('projects'); setMenuOpen(false); window.location.hash = '#projects' }} role="menuitem">Projects</button></li>
+        <li><button onClick={() => { setActiveTab('skills'); setMenuOpen(false); window.location.hash = '#skills' }} role="menuitem">Skills & Tools</button></li>
+        <li><a href="#contact" onClick={() => setMenuOpen(false)} role="menuitem">Contact</a></li>
+        <li><button onClick={() => { onGoToTerminal(); setMenuOpen(false) }} role="menuitem">Terminal</button></li>
+        <li><a href="https://github.com/" target="_blank" rel="noopener noreferrer" role="menuitem" onClick={() => setMenuOpen(false)}>GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/sowmiya-s-241486346/" target="_blank" rel="noopener noreferrer" role="menuitem" onClick={() => setMenuOpen(false)}>LinkedIn</a></li>
+      </ul>
+    </div>
+    <div className="mobile-menu-footer" role="toolbar" aria-label="Mobile actions">
+      {/* Terminal already exists as a menu item above; remove duplicate footer button to avoid two Terminal entries on mobile */}
+      <button ref={lastMenuItemRef} className="mobile-theme-btn" onClick={() => { onToggleTheme() }} aria-label="Switch Mode">Switch Mode</button>
+    </div>
+  </div>
       <main>
         {theme === 'dark' ? (
           <div className="container mx-auto px-6 hero-container-dark">
@@ -499,15 +596,27 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
         </div>
       )}
 
-      {/* Floating terminal quick-access button (theme-aware styling applied via CSS) */}
-      <button
-        className={`floating-terminal-btn ${theme === 'dark' ? 'ft-dark' : 'ft-pastel'}`}
-        aria-label="Open Terminal"
-        onClick={onGoToTerminal}
-        title="Open Terminal"
-      >
-        <span className="ft-label">Terminal</span>
-      </button>
+      {/* Floating terminal quick-access button (hidden while mobile menu is open) */}
+      {!menuOpen && (
+        <button
+          className={`floating-terminal-btn ${theme === 'dark' ? 'ft-dark' : 'ft-pastel'}`}
+          aria-label="Open Terminal"
+          onClick={onGoToTerminal}
+          title="Open Terminal"
+        >
+          <span className="ft-label">Terminal</span>
+        </button>
+      )}
+      {!menuOpen && (
+        <button
+          className={`floating-switch-btn ${theme === 'dark' ? 'ft-dark' : 'ft-pastel'}`}
+          aria-label="Open theme selector"
+          onClick={() => { if (typeof onResetTheme === 'function') onResetTheme(); }}
+          title="Switch Mode"
+        >
+          <span className="ft-label">Switch Mode</span>
+        </button>
+      )}
     </div>
   )
 }
