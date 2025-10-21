@@ -162,6 +162,8 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
     <div className="animated-bg" aria-hidden />
       <div id="neon-cursor"><div className="trail" /></div>
   <header className="py-6 px-6 flex items-center justify-end relative" style={{ zIndex: 9999, pointerEvents: 'auto' }}>
+            {/* top-left site title (branding) */}
+            <div className="site-title" aria-hidden="false">Sowmiya's Portfolio</div>
             {/* header avatar removed per user request (we'll show a friendlier profile in the About section) */}
 
         <nav className="flex items-center gap-6 relative">
