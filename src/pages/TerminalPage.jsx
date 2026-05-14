@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import './TerminalPage.css'
 import ConstellationBackground from '../components/ConstellationBackground'
 
-const TerminalPage = ({ theme, onToggleTheme, onBackToPortfolio }) => {
+const TerminalPage = ({ onBackToPortfolio }) => {
   const [currentCommand, setCurrentCommand] = useState('')
   const [commandHistory, setCommandHistory] = useState([])
   const [userName, setUserName] = useState('sowmiya')
@@ -233,9 +233,9 @@ const TerminalPage = ({ theme, onToggleTheme, onBackToPortfolio }) => {
   }
 
   return (
-    <div className={`terminal-page ${theme === 'dark' ? 'theme-dark' : 'theme-light'}`}>
-      {/* Constellation background — theme-aware, non-interactive */}
-      <ConstellationBackground theme={theme === 'dark' ? 'dark' : 'light'} id="constellation-terminal" />
+    <div className={`terminal-page theme-dark`}>
+      {/* Constellation background — dark-only */}
+      <ConstellationBackground theme="dark" id="constellation-terminal" />
 
       {/* Navigation Bar */}
       <motion.nav 
@@ -264,16 +264,7 @@ const TerminalPage = ({ theme, onToggleTheme, onBackToPortfolio }) => {
           DevOps Terminal
         </motion.h1>
 
-        <motion.button
-          className="theme-toggle-btn"
-          onClick={onToggleTheme}
-          whileHover={{ scale: 1.1, rotate: 180 }}
-          whileTap={{ scale: 0.9 }}
-          transition={{ duration: 0.3 }}
-          aria-label="Toggle theme"
-        >
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </motion.button>
+            {/* theme toggle removed — dark-only */}
       </motion.nav>
 
       {/* Main Terminal Window */}

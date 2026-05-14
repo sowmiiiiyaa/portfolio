@@ -1,9 +1,9 @@
 import React from 'react'
 import '../styles/toast.css'
 
-export default function Toast({ message, theme = 'dark' }) {
+export default function Toast({ message }) {
   return (
-    <div className={`site-toast ${theme === 'dark' ? 'toast-dark' : 'toast-light'}`} role="status" aria-live="polite">
+    <div className={`site-toast toast-dark`} role="status" aria-live="polite">
       {message}
     </div>
   )

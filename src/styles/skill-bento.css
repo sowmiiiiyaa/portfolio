@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root{
+  --bg: #0B0F19;
+  --card: #111827;
+  --border: #1F2937;
+  --primary: #3B82F6;
+  --secondary: #14B8A6;
+  --text: #F9FAFB;
+  --muted: #9CA3AF;
+}
+
+.skills-bento-section { color: var(--text); font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+.bento-heading { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 1.875rem; text-align: left; color: var(--text); margin: 0 0 8px 0; }
+
+/* Card foundation: rounded-2xl, subtle glass, soft shadow, restrained borders */
+.bento-card {
+  background: linear-gradient(180deg, rgba(17,24,39,0.74), rgba(16,20,26,0.6));
+  border: 1px solid var(--border);
+  border-radius: 1.25rem; /* rounded-2xl */
+  padding: 1.125rem 1.25rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(3,6,12,0.55);
+  transition: transform 200ms cubic-bezier(.2,.9,.3,1), border-color 240ms ease, box-shadow 240ms ease;
+}
+.bento-card:hover { transform: translateY(-6px); border-color: rgba(59,130,246,0.60); box-shadow: 0 20px 48px rgba(3,6,12,0.65); }
+.bento-feature { padding: 1.5rem 1.75rem; display:block }
+
+.bento-card-inner { display:flex; flex-direction:column; gap:10px }
+.bento-card-header { display:flex; align-items:center; justify-content:space-between; gap:12px }
+.bento-card-title { font-family: 'Space Grotesk', sans-serif; font-weight:700; font-size:1.125rem; color:var(--text); margin:0 }
+.bento-card-count { font-family: 'JetBrains Mono', monospace; color:var(--muted); background:transparent; padding:6px 8px; border-radius:8px; font-size:0.82rem; opacity:0.85 }
+.bento-pill { font-family: 'JetBrains Mono', monospace; font-size:0.8rem; color:var(--text); background: linear-gradient(90deg, rgba(59,130,246,0.08), rgba(20,184,166,0.04)); padding:6px 10px; border-radius:999px }
+
+.bento-card-sub { color: var(--muted); font-size:0.95rem; margin:0; opacity:0.95 }
+
+.bento-skill-list { display:flex; flex-wrap:wrap; gap:12px; margin-top:8px }
+.bento-skill-tag {
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(255,255,255,0.02);
+  color: var(--text);
+  padding:8px 12px;
+  border-radius: 999px;
+  font-size:0.88rem;
+  border: 1px solid rgba(255,255,255,0.03);
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 160ms ease;
+}
+.bento-skill-tag:hover { background: rgba(59,130,246,0.04); border-color: rgba(59,130,246,0.22); color: var(--text); transform: translateY(-2px); }
+.bento-skill-learning { border-color: var(--secondary); color: var(--secondary); background: rgba(20,184,166,0.05) }
+
+/* Featured card styling */
+.bento-feature { display:flex; align-items:flex-start; justify-content:space-between }
+.bento-feature .bento-card-title { font-size:1.375rem }
+.bento-feature .bento-skill-list { gap:14px }
+.bento-feature::before { content: ''; position: absolute; left: 8px; right: 8px; top: 8px; bottom: 8px; border-radius: 1.25rem; pointer-events: none; box-shadow: inset 0 1px 0 rgba(255,255,255,0.02); }
+
+/* subtle numeric badge in top-right using the count element */
+.bento-card-header .bento-card-count { color: var(--muted); opacity: 0.7 }
+
+/* Responsive spacing and grid polish */
+@media (min-width: 1024px) {
+  .skills-bento-section { padding-left: 0; padding-right: 0 }
+  .bento-card { min-height: 160px }
+  .bento-feature { min-height: 120px }
+}
+
+/* reduce motion for reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+  .bento-card { transition: none !important; transform: none !important }
+  .bento-skill-tag:hover { transform: none }
+}
+
+/* Compact dashboard layout */
+.learning-bar { background: linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.008)); border: 1px solid rgba(255,255,255,0.02); padding: 10px 14px; border-radius: 1rem; backdrop-filter: blur(8px); display:flex; align-items:center }
+.learning-inner { display:flex; align-items:center; justify-content:space-between; width:100%; gap:12px }
+.learning-left { display:flex; flex-direction:column }
+.learning-title { font-family: 'Space Grotesk'; font-size:1rem; margin:0; color:var(--text) }
+.learning-sub { margin:0; font-size:0.85rem; color:var(--muted); }
+.learning-tags { display:flex; gap:10px; align-items:center }
+
+.compact-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; align-items:start }
+.compact-module { background: linear-gradient(180deg, rgba(17,24,39,0.66), rgba(12,16,22,0.55)); border: 1px solid var(--border); border-radius: 1rem; padding: 12px; min-height: 110px; display:flex; flex-direction:column; justify-content:space-between }
+.module-header { display:flex; align-items:center; justify-content:space-between; gap:8px }
+.module-title { font-family:'Space Grotesk'; font-size:1rem; margin:0; color:var(--text) }
+.module-meta { font-family:'JetBrains Mono'; color:var(--muted); font-size:0.78rem; opacity:0.8 }
+.module-body { margin-top:6px }
+.module-tags { display:flex; flex-wrap:wrap; gap:8px }
+.compact-tag { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background: rgba(255,255,255,0.02); color:var(--text); font-family:'JetBrains Mono'; font-size:0.82rem; border:1px solid rgba(255,255,255,0.03); }
+.compact-tag .tag-icon { opacity:0.22; margin-right:4px }
+.compact-tag-learning { color:var(--muted); border-style: dashed; border-color: rgba(156,163,175,0.28); background: rgba(156,163,175,0.03) }
+
+/* make the section ~40% shorter by reducing card padding and heights */
+@media (min-width: 1024px) {
+  .skills-bento-section { padding-top: 12px; padding-bottom: 12px }
+  .compact-module { padding: 10px; min-height: 92px }
+  .learning-bar { padding: 8px 12px }
+}
+
+/* Visibility fixes: ensure learning and cloud headings and learning-tags are readable on dark backgrounds */
+.skills-bento-section .learning-title { color: #FFFFFF !important; text-shadow: 0 1px 0 rgba(0,0,0,0.35); }
+.skills-bento-section .learning-sub { color: rgba(255,255,255,0.78) !important; }
+.skills-bento-section .module-title { color: #FFFFFF !important; text-shadow: 0 1px 0 rgba(0,0,0,0.28); }
+.skills-bento-section .compact-tag-learning { color: rgba(255,255,255,0.88) !important; border-color: rgba(255,255,255,0.06) !important; background: rgba(255,255,255,0.02) !important; opacity:1 !important }
+.skills-bento-section .compact-tag-learning .tag-icon { opacity:0.28 !important }
+
+
+
+/* Compact dashboard layout */
+.learning-bar { background: linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.008)); border: 1px solid rgba(255,255,255,0.02); padding: 10px 14px; border-radius: 1rem; backdrop-filter: blur(8px); display:flex; align-items:center }
+.learning-inner { display:flex; align-items:center; justify-content:space-between; width:100%; gap:12px }
+.learning-left { display:flex; flex-direction:column }
+.learning-title { font-family: 'Space Grotesk'; font-size:1rem; margin:0; color:var(--text) }
+.learning-sub { margin:0; font-size:0.85rem; color:var(--muted); }
+.learning-tags { display:flex; gap:10px; align-items:center }
+
+.compact-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; align-items:start }
+.compact-module { background: linear-gradient(180deg, rgba(17,24,39,0.66), rgba(12,16,22,0.55)); border: 1px solid var(--border); border-radius: 1rem; padding: 12px; min-height: 110px; display:flex; flex-direction:column; justify-content:space-between }
+.module-header { display:flex; align-items:center; justify-content:space-between; gap:8px }
+.module-title { font-family:'Space Grotesk'; font-size:1rem; margin:0; color:var(--text) }
+.module-meta { font-family:'JetBrains Mono'; color:var(--muted); font-size:0.78rem; opacity:0.8 }
+.module-body { margin-top:6px }
+.module-tags { display:flex; flex-wrap:wrap; gap:8px }
+.compact-tag { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background: rgba(255,255,255,0.02); color:var(--text); font-family:'JetBrains Mono'; font-size:0.82rem; border:1px solid rgba(255,255,255,0.03); }
+.compact-tag .tag-icon { opacity:0.22; margin-right:4px }
+.compact-tag-learning { color:var(--muted); border-style: dashed; border-color: rgba(156,163,175,0.28); background: rgba(156,163,175,0.03) }
+
+/* make the section ~40% shorter by reducing card padding and heights */
+@media (min-width: 1024px) {
+  .skills-bento-section { padding-top: 12px; padding-bottom: 12px }
+  .compact-module { padding: 10px; min-height: 92px }
+  .learning-bar { padding: 8px 12px }
+}
+

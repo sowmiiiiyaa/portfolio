@@ -4,7 +4,7 @@ import profileImg from '../assets/profile.jpg'
 import project1 from '../assets/project1.jpg'
 import project2 from '../assets/project2.jpg'
 import project3 from '../assets/project3.jpg'
-import SkillGalaxy from './SkillGalaxy'
+import SkillBento from './SkillBento'
 import ConstellationBackground from './ConstellationBackground'
 
 const Section = ({ id, title, children }) => (
@@ -203,13 +203,7 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
             </button>
             <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="header-icon" aria-label="GitHub">GitHub</a>
             <a href="https://www.linkedin.com/in/sowmiya-s-241486346/" target="_blank" rel="noopener noreferrer" className="header-icon" aria-label="LinkedIn">LinkedIn</a>
-            <button
-              className="header-icon theme-toggle-btn"
-              onClick={onToggleTheme}
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? '☀️' : '🌙'}
-            </button>
+            {/* theme toggle removed (dark-only) */}
           </div>
         </nav>
   </header>
@@ -260,7 +254,7 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
             </div>
           </div>
         ) : (
-          <div className={`hero flex items-center ${theme === 'pastel' ? 'justify-center' : 'justify-between'} gap-8 px-4 lg:px-0`}>
+            <div className="hero flex items-center justify-between gap-8 px-4 lg:px-0">
             {/* Left: neon heading + subtitle */}
             <div className="hero-text max-w-3xl text-left">
               <motion.h1
@@ -311,14 +305,14 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
               transition={{ duration: 0.6 }}
               className="about-wrap max-w-4xl mx-auto"
             >
-              <div className={`about-card p-6 rounded-lg ${theme === 'dark' ? 'card-dark' : 'card-pastel'}`}>
+              <div className={`about-card p-6 rounded-lg card-dark`}>
                 <div className="about-header-row">
                   <motion.h3
                     initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.05 }}
-                    className={`text-2xl font-extrabold mb-4 ${theme === 'dark' ? 'neon-heading' : ''}`}
+                    className={`text-2xl font-extrabold mb-4 neon-heading`}
                   >About Me</motion.h3>
 
                   {/* New profile greeting: avatar + friendly line (moved next to heading) */}
@@ -349,7 +343,7 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
                   <div className="mt-6" style={{ position: 'relative' }}>
                     <a
                       href="#"
-                      className={`inline-block px-4 py-2 rounded ${theme === 'dark' ? 'resume-btn-neon' : 'resume-btn-pastel'}`}
+                      className={`inline-block px-4 py-2 rounded resume-btn-neon`}
                       onClick={(e) => {
                         e.preventDefault()
                         // show message for 2.5s
@@ -364,7 +358,7 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
                     {/* ephemeral resume message, centered beneath the button */}
                     <div
                       aria-hidden={!resumeMsgVisible}
-                      className={`resume-msg ${resumeMsgVisible ? 'visible' : ''} ${theme === 'dark' ? 'resume-msg-dark' : 'resume-msg-light'}`}
+                      className={`resume-msg ${resumeMsgVisible ? 'visible' : ''} resume-msg-dark`}
                     >
                       Resume will be available soon.
                     </div>
@@ -377,38 +371,38 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
 
         <Section id="projects" title={<span className="font-mono-custom">Projects</span>}>
           <div className="grid md:grid-cols-2 gap-6">
-            <article className={`p-4 rounded-lg project-card relative overflow-hidden ${theme === 'dark' ? 'card-dark' : 'card-pastel'}`}>
+            <article className={`p-4 rounded-lg project-card relative overflow-hidden card-dark`}>
               <div className="project-icon-wrap mb-3 flex items-center justify-center">
                 {/* Timer SVG icon for Focus Timer */}
-                <svg className={`project-icon ${theme === 'dark' ? 'icon-dark' : 'icon-light'}`} width="68" height="68" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                <svg className={`project-icon icon-dark`} width="68" height="68" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
                   <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.6" fill="none" />
                   <path d="M12 8v4l2 1" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                   <path d="M9 3h6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <h3 className={`font-semibold text-center ${theme === 'dark' ? 'text-slate-100' : 'text-slate-900'}`}>Focus Timer</h3>
-              <p className={`text-sm text-center ${theme === 'dark' ? 'text-slate-300' : 'text-slate-700'}`}>A web-based productivity tool that helps users stay focused by tracking work sessions and breaks. Built using React and styled-components, it features a sleek timer display, session history, and motivational UI.</p>
+              <h3 className={`font-semibold text-center text-slate-100`}>Focus Timer</h3>
+              <p className={`text-sm text-center text-slate-300`}>A web-based productivity tool that helps users stay focused by tracking work sessions and breaks. Built using React and styled-components, it features a sleek timer display, session history, and motivational UI.</p>
               <div className="mt-4 text-center">
                 <button
-                  className={`view-demo-btn ${theme === 'dark' ? 'btn-dark' : 'btn-pastel'}`}
+                  className={`view-demo-btn btn-dark`}
                   onClick={(e) => { e.stopPropagation(); showDemoPopup('focus-timer', e.currentTarget) }}
                 >View Demo</button>
               </div>
             </article>
 
-            <article className={`p-4 rounded-lg project-card relative overflow-hidden ${theme === 'dark' ? 'card-dark' : 'card-pastel'}`}>
+            <article className={`p-4 rounded-lg project-card relative overflow-hidden card-dark`}>
               <div className="project-icon-wrap mb-3 flex items-center justify-center">
                 {/* Monitor SVG icon for System Monitoring */}
-                <svg className={`project-icon ${theme === 'dark' ? 'icon-dark' : 'icon-light'}`} width="68" height="68" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                <svg className={`project-icon icon-dark`} width="68" height="68" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
                   <rect x="3" y="4" width="18" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.6" fill="none" />
                   <path d="M8 20h8M12 16v4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <h3 className={`font-semibold text-center ${theme === 'dark' ? 'text-slate-100' : 'text-slate-900'}`}>System Monitoring</h3>
-              <p className={`text-sm text-center ${theme === 'dark' ? 'text-slate-300' : 'text-slate-700'}`}>A desktop utility for real-time system performance tracking, developed with Python and Tkinter. Shows live CPU and memory usage, alerts for resource spikes, and a simple dashboard for quick analysis.</p>
+              <h3 className={`font-semibold text-center text-slate-100`}>System Monitoring</h3>
+              <p className={`text-sm text-center text-slate-300`}>A desktop utility for real-time system performance tracking, developed with Python and Tkinter. Shows live CPU and memory usage, alerts for resource spikes, and a simple dashboard for quick analysis.</p>
               <div className="mt-4 text-center">
                 <button
-                  className={`view-demo-btn ${theme === 'dark' ? 'btn-dark' : 'btn-pastel'}`}
+                  className={`view-demo-btn btn-dark`}
                   onClick={(e) => { e.stopPropagation(); showDemoPopup('system-monitoring', e.currentTarget) }}
                 >View Demo</button>
               </div>
@@ -416,9 +410,9 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
           </div>
         </Section>
 
-  <Section id="skills" title={<span className="skills-heading">Skills & Tools</span>}>
+        <Section id="skills" title={<span className="skills-heading">Skills & Tools</span>}>
           <div className="container mx-auto px-6">
-            <SkillGalaxy theme={theme} />
+            <SkillBento />
           </div>
         </Section>
 
@@ -454,7 +448,7 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
       {demoPopup.visible && demoPopup.rect && (
         <div
           id="project-demo-popup"
-          className={`project-demo-popup ${theme === 'dark' ? 'dark' : 'pastel'} show`}
+          className={`project-demo-popup dark show`}
           style={{
             left: Math.min(Math.max(demoPopup.rect.left + demoPopup.rect.width / 2 - 160, 8), window.innerWidth - 328),
             top: Math.max(demoPopup.rect.top - 12 - 72, 12)
@@ -471,7 +465,7 @@ export default function MainPortfolio({ theme, onToggleTheme, onResetTheme, onGo
 
       {/* Floating terminal quick-access button (theme-aware styling applied via CSS) */}
       <button
-        className={`floating-terminal-btn ${theme === 'dark' ? 'ft-dark' : 'ft-pastel'}`}
+        className={`floating-terminal-btn ft-dark`}
         aria-label="Open Terminal"
         onClick={onGoToTerminal}
         title="Open Terminal"

@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react'
 
 // Constellation background: drifting glowing dots and connecting lines.
 // Theme-aware colors and subtle opacities per user request.
-export default function ConstellationBackground({ theme = 'dark', id }) {
+export default function ConstellationBackground({ id }) {
   const ref = useRef(null)
   const raf = useRef(null)
 
@@ -46,12 +46,12 @@ export default function ConstellationBackground({ theme = 'dark', id }) {
       lineAlpha: 0.32
     }
 
-    const pal = theme === 'dark' ? dark : light
+    const pal = dark
 
     // Particle config
     const baseCount = Math.round((width * height) / 60000) // scales with viewport
   // boost light-theme density and allow a higher cap to help visibility on pale backgrounds
-  const count = Math.max(18, Math.min(180, Math.floor(baseCount * (theme === 'dark' ? 1.0 : 1.0))))
+  const count = Math.max(18, Math.min(180, Math.floor(baseCount * 1.0)))
     const particles = []
     for (let i = 0; i < count; i++) {
       particles.push({
@@ -59,7 +59,7 @@ export default function ConstellationBackground({ theme = 'dark', id }) {
         y: Math.random() * height,
         vx: (Math.random() - 0.5) * 0.2,
         vy: (Math.random() - 0.5) * 0.2,
-  r: (theme === 'dark' ? 1.1 + Math.random() * 1.6 : 2.8 + Math.random() * 4.0),
+    r: (1.1 + Math.random() * 1.6),
         hueMix: Math.random() > 0.86
       })
     }
@@ -129,7 +129,7 @@ export default function ConstellationBackground({ theme = 'dark', id }) {
       window.removeEventListener('resize', resize)
       if (raf.current) cancelAnimationFrame(raf.current)
     }
-  }, [theme])
+  }, [])
 
   return <canvas id={id} ref={ref} className="constellation-canvas" aria-hidden />
 }

@@ -15,7 +15,7 @@ const skillsData = [
 
 function randomBetween(min, max) { return Math.random() * (max - min) + min }
 
-export default function SkillGalaxy({ theme = 'dark' }) {
+export default function SkillGalaxy() {
   const containerRef = useRef(null)
   // no active/hovered state: badges should not open popups or show extra info
   const [unused, setUnused] = useState(null)
@@ -47,11 +47,11 @@ export default function SkillGalaxy({ theme = 'dark' }) {
   // No global click handlers required — popups removed per design
 
   return (
-    <div ref={containerRef} className={`skill-galaxy ${theme === 'dark' ? 'theme-dark' : 'theme-light'}`} role="region" aria-label="Skill Galaxy">
+    <div ref={containerRef} className={`skill-galaxy theme-dark`} role="region" aria-label="Skill Galaxy">
       <svg className="constellation" viewBox="0 0 1000 500" preserveAspectRatio="none" aria-hidden>
         {/* map some lines between related skills */}
         {orbs.length > 1 && (
-          <g stroke={theme === 'dark' ? 'rgba(180,220,255,0.25)' : 'rgba(120,120,140,0.12)'} strokeWidth="1">
+          <g stroke={'rgba(180,220,255,0.25)'} strokeWidth="1">
             {/* Python <-> CI/CD */}
             <line x1={orbs[0].x} y1={orbs[0].y} x2={orbs[3]?.x} y2={orbs[3]?.y} />
             {/* Docker <-> Kubernetes */}

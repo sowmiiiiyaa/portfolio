@@ -1,251 +1,81 @@
-/* Skill Galaxy styles - dark and light themes */
+/* Skill Galaxy - Dark-only styles */
 .skill-galaxy {
   position: relative;
   width: 90vw;
-  max-width: 560px; /* fixed max-width as requested (matched across themes) */
-  margin: 0 auto; /* ensure centered horizontally */
-  display: flex; 
-  flex-wrap: wrap; 
-  overflow: visible; /* keep glows visible */
-  border-radius: 40px; /* soft rounded edges */
-  gap: 1.6rem; 
+  max-width: 560px;
+  margin: 0 auto;
   display: flex;
+  flex-wrap: wrap;
+  overflow: visible;
+  border-radius: 40px;
+  gap: 1.6rem;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 1.2rem 1.6rem;
+  min-height: 140px;
+  background: rgba(20,22,28,0.55);
+  border: 1px solid rgba(22,230,245,0.06);
+  box-shadow: 0 0 18px 4px rgba(22,230,245,0.18), inset 0 0 0 1px rgba(22,230,245,0.04);
 }
-.skill-galaxy .section-title { display: none; }
 
-/* Center and style the main Skills heading coming from MainPortfolio */
+.skill-galaxy .section-title { display: none; }
 .skills-heading { display: block; text-align: center; font-weight: 800; font-size: 20px; margin-bottom: 8px }
 .skill-galaxy .constellation { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
-.skill-galaxy .orbs-wrap { position: relative; width: 100%; z-index: 5; display: flex; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 12px; padding: 6px 0; overflow-x: auto; }
+.skill-galaxy .orbs-wrap { position: relative; width: 100%; z-index: 5; display: flex; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 12px; padding: 6px 0; overflow-x: auto; height: 160px }
 
-/* Force single-row layout: make each orb a non-wrapping flex item and give a compact size so multiple fit on one line. */
 .skill-galaxy .orb {
-  position: relative !important;
-  left: auto !important;
-  top: auto !important;
-  width: 64px !important;
-  height: 64px !important;
-  min-width: 64px !important;
-  margin: 0 !important;
+  position: relative;
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  margin: 0;
   display: inline-flex;
+  border-radius: 999px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  transform: translate(-50%, -50%);
+  transition: transform 160ms ease, box-shadow 180ms ease, filter 180ms ease;
 }
 
-/* hide horizontal scrollbar but allow scrolling by touch/trackpad (non-destructive) */
-.skill-galaxy .orbs-wrap::-webkit-scrollbar { height: 8px }
-.skill-galaxy .orbs-wrap { -ms-overflow-style: none; scrollbar-width: none; }
-.skill-galaxy .orbs-wrap::-webkit-scrollbar { display: none }
-
-/* Make light theme more compact vertically so orbs sit centered without extra top space */
-.skill-galaxy.theme-light { padding-top: 12px; padding-bottom: 12px; min-height: auto }
-.skill-galaxy.theme-light .orbs-wrap { height: 120px }
-.skill-galaxy.theme-dark .orbs-wrap { height: 160px }
-
-/* Orb base styles */
-.orb { position: absolute; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; font-weight: 700; font-size: 13px; transform: translate(-50%, -50%); transition: transform 160ms ease, box-shadow 180ms ease, filter 180ms ease; }
-.orb .orb-core { position: absolute; inset: 0; border-radius: 999px; filter: blur(6px); opacity: 0.92; }
+.orb .orb-core { position: absolute; inset: 0; border-radius: 999px; filter: blur(6px); opacity: 0.92 }
 .orb .orb-label { position: relative; z-index: 4; pointer-events: none; padding: 4px 8px; text-align: center; font-size: 13px }
-.orb-popup { position: absolute; left: 50%; transform: translateX(-50%); bottom: calc(100% + 12px); min-width: 160px; max-width: 260px; background: rgba(10,10,12,0.92); color: #e6f7ff; padding: 10px 12px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.18); z-index: 50; font-size: 13px; }
+.orb-popup { position: absolute; left: 50%; transform: translateX(-50%); bottom: calc(100% + 12px); min-width: 160px; max-width: 260px; background: linear-gradient(180deg, rgba(6,6,12,0.96), rgba(14,12,25,0.96)); color: #e6f7ff; padding: 10px 12px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.18); z-index: 50; font-size: 13px }
 .orb-popup p { margin: 6px 0 0; font-weight: 400; font-size: 13px; line-height: 1.2; color: #dbeffd }
-
 .orb-popup .popup-header { display: flex; align-items: center; gap: 8px; justify-content: space-between }
 .learning-badge { font-size: 11px; padding: 4px 8px; border-radius: 999px; background: rgba(255,255,255,0.06); color: #fff; font-weight: 700 }
 .popup-extra { margin-top: 6px; opacity: 0.92; font-size: 13px }
 
-/* theme specific popup color tweaks */
-.popup-dark { background: linear-gradient(180deg, rgba(6,6,12,0.96), rgba(14,12,25,0.96)); color: #e6f7ff }
-.popup-dark .learning-badge { background: linear-gradient(90deg,#0066ff22,#00ffd622); color: #e6fff8; box-shadow: 0 6px 18px rgba(0,200,255,0.06) }
-.popup-dark .popup-extra { color: #cceeff }
+/* Orb color mappings */
+.skill-galaxy .orb-html .orb-core { background: radial-gradient(circle at 35% 30%, rgba(49,249,247,0.98), rgba(49,249,247,0.35) 28%, transparent 60%), linear-gradient(135deg,#31F9F7,#12EDE8); box-shadow: 0 8px 36px rgba(49,249,247,0.20), 0 0 120px rgba(49,249,247,0.10), inset 0 -6px 14px rgba(0,0,0,0.36); }
+.skill-galaxy .orb-css .orb-core { background: radial-gradient(circle at 35% 30%, rgba(68,138,255,0.98), rgba(68,138,255,0.35) 28%, transparent 60%), linear-gradient(135deg,#448AFF,#2962FF); box-shadow: 0 8px 36px rgba(68,138,255,0.20), 0 0 140px rgba(68,138,255,0.10), inset 0 -6px 14px rgba(0,0,0,0.36); }
+.kill-galaxy-ignore {}
+.skill-galaxy .orb-git .orb-core { background: radial-gradient(circle at 35% 30%, rgba(246,0,255,0.98), rgba(246,0,255,0.35) 28%, transparent 60%), linear-gradient(135deg,#F600FF,#C400D9); box-shadow: 0 8px 36px rgba(246,0,255,0.20), 0 0 140px rgba(246,0,255,0.10), inset 0 -6px 14px rgba(0,0,0,0.36); }
+.skill-galaxy .orb-python .orb-core { background: radial-gradient(circle at 35% 30%, rgba(31,255,147,0.98), rgba(31,255,147,0.35) 28%, transparent 60%), linear-gradient(135deg,#1FFF93,#00E67A); box-shadow: 0 8px 36px rgba(31,255,147,0.20), 0 0 120px rgba(31,255,147,0.10), inset 0 -6px 14px rgba(0,0,0,0.36); }
+.skill-galaxy .orb-docker .orb-core { background: radial-gradient(circle at 35% 30%, rgba(255,145,0,0.98), rgba(255,145,0,0.35) 28%, transparent 60%), linear-gradient(135deg,#FF9100,#FF6A00); box-shadow: 0 8px 36px rgba(255,145,0,0.20), 0 0 120px rgba(255,145,0,0.10), inset 0 -6px 14px rgba(0,0,0,0.36); }
+.skill-galaxy .orb-linux .orb-core { background: radial-gradient(circle at 35% 30%, rgba(49,249,247,0.98), rgba(49,249,247,0.35) 28%, transparent 60%), linear-gradient(135deg,#31F9F7,#12EDE8); box-shadow: 0 8px 36px rgba(49,249,247,0.20), 0 0 120px rgba(49,249,247,0.10), inset 0 -6px 14px rgba(0,0,0,0.36); }
 
-.popup-light { background: #ffffff; color: #212121; /* solid white for max contrast */ }
-/* Strong readable title and body for light popups */
-.popup-light .popup-header strong { color: #181818; font-size: 15px; font-weight: 800; text-shadow: 0 1px 2px rgba(0,0,0,0.12) }
-.popup-light p { color: #333333; text-shadow: 0 1px 1px rgba(0,0,0,0.06); }
-.popup-light .popup-extra { color: #444444; }
-/* High-contrast 'Currently learning' badge for light theme */
-.popup-light .learning-badge { background: #212121; color: #ffffff; box-shadow: 0 6px 18px rgba(33,33,33,0.08); font-weight: 700 }
-
-/* Ensure popup container uses solid background and a subtle border */
-.orb-popup.popup-light { background: #ffffff; border: 1px solid rgba(33,33,33,0.06); }
-
-/* Dark theme */
-.skill-galaxy.theme-dark { 
-  background: rgba(20,22,28,0.55);
-  border: 1px solid rgba(22,230,245,0.06);
-  /* soft neon aqua glow tuned to 0 0 18px 4px #16e6f5 (slightly softened via rgba) */
-  box-shadow: 0 0 18px 4px rgba(22,230,245,0.18), inset 0 0 0 1px rgba(22,230,245,0.04);
-}
-.skill-galaxy.theme-dark .orb { color: #fff; /* subtle neon halo on each bubble */ box-shadow: 0 0 12px 2px rgba(22,230,245,0.12); }
-.skill-galaxy.theme-dark .orb .orb-core { background: radial-gradient(circle at 30% 25%, rgba(255,245,200,0.42), rgba(255,180,120,0.08) 10%, transparent 22%), linear-gradient(135deg, rgba(102, 51, 153, 0.95), rgba(0, 255, 200, 0.85)); mix-blend-mode: screen; }
-.skill-galaxy.theme-dark .orb-html .orb-core { background: linear-gradient(135deg,#ff7a4a,#ffd58a); box-shadow: 0 8px 36px rgba(255,120,70,0.16); }
-.skill-galaxy.theme-dark .orb-css .orb-core { background: linear-gradient(135deg,#6ad0ff,#7a6bff); box-shadow: 0 8px 36px rgba(122,107,255,0.16); }
-.skill-galaxy.theme-dark .orb-git .orb-core { background: linear-gradient(135deg,#ffb86b,#ff6b9e); box-shadow: 0 8px 36px rgba(255,110,130,0.14); }
-.skill-galaxy.theme-dark .orb-linux .orb-core { background: linear-gradient(135deg,#62ffd9,#6be3ff); box-shadow: 0 8px 36px rgba(90,220,210,0.14); }
-.skill-galaxy.theme-dark .orb-docker .orb-core { background: linear-gradient(135deg,#9be1ff,#c6f7e9); box-shadow: 0 8px 36px rgba(150,230,220,0.14); }
-.skill-galaxy.theme-dark .orb-python .orb-core { background: radial-gradient(circle at 30% 30%, rgba(255,230,120,0.95), rgba(255,200,50,0.85)), linear-gradient(135deg,#ffd966,#ffb84d); box-shadow: 0 10px 48px rgba(255,200,60,0.22); }
-.skill-galaxy.theme-dark .orb { border: 1px solid rgba(255,255,255,0.06); }
-.skill-galaxy.theme-dark .orb:focus { outline: none; box-shadow: 0 6px 22px rgba(22,230,245,0.16), 0 0 10px rgba(22,230,245,0.08); }
-
-/* Neon-specific styling for dark theme orbs: saturated colors, strong halo, inner shadow, crisp white labels */
-.skill-galaxy.theme-dark .orb { color: #ffffff; }
-.skill-galaxy.theme-dark .orb .orb-label { color: #ffffff; text-shadow: 0 2px 8px rgba(0,0,0,0.65); font-weight: 900 }
-
-/* Assign distinct neon colors per orb (dark theme only) - avoid adjacent similar hues */
-/* Color mapping (ordered by skillsData): html, css, git, python, docker, linux */
-.skill-galaxy.theme-dark .orb-html .orb-core {
-  /* bright cyan */
-  background: radial-gradient(circle at 35% 30%, rgba(49,249,247,0.98), rgba(49,249,247,0.35) 28%, transparent 60%), linear-gradient(135deg,#31F9F7,#12EDE8);
-  box-shadow: 0 8px 36px rgba(49,249,247,0.20), 0 0 120px rgba(49,249,247,0.10), inset 0 -6px 14px rgba(0,0,0,0.36);
-}
-.skill-galaxy.theme-dark .orb-css .orb-core {
-  /* electric blue */
-  background: radial-gradient(circle at 35% 30%, rgba(68,138,255,0.98), rgba(68,138,255,0.35) 28%, transparent 60%), linear-gradient(135deg,#448AFF,#2962FF);
-  box-shadow: 0 8px 36px rgba(68,138,255,0.20), 0 0 140px rgba(68,138,255,0.10), inset 0 -6px 14px rgba(0,0,0,0.36);
-}
-.skill-galaxy.theme-dark .orb-git .orb-core {
-  /* hot magenta */
-  background: radial-gradient(circle at 35% 30%, rgba(246,0,255,0.98), rgba(246,0,255,0.35) 28%, transparent 60%), linear-gradient(135deg,#F600FF,#C400D9);
-  box-shadow: 0 8px 36px rgba(246,0,255,0.20), 0 0 140px rgba(246,0,255,0.10), inset 0 -6px 14px rgba(0,0,0,0.36);
-}
-.skill-galaxy.theme-dark .orb-python .orb-core {
-  /* neon green */
-  background: radial-gradient(circle at 35% 30%, rgba(31,255,147,0.98), rgba(31,255,147,0.35) 28%, transparent 60%), linear-gradient(135deg,#1FFF93,#00E67A);
-  box-shadow: 0 8px 36px rgba(31,255,147,0.20), 0 0 120px rgba(31,255,147,0.10), inset 0 -6px 14px rgba(0,0,0,0.36);
-}
-.skill-galaxy.theme-dark .orb-docker .orb-core {
-  /* vivid orange */
-  background: radial-gradient(circle at 35% 30%, rgba(255,145,0,0.98), rgba(255,145,0,0.35) 28%, transparent 60%), linear-gradient(135deg,#FF9100,#FF6A00);
-  box-shadow: 0 8px 36px rgba(255,145,0,0.20), 0 0 120px rgba(255,145,0,0.10), inset 0 -6px 14px rgba(0,0,0,0.36);
-}
-.skill-galaxy.theme-dark .orb-linux .orb-core {
-  /* wrap to bright cyan to avoid adjacent clash (reused non-adjacent) */
-  background: radial-gradient(circle at 35% 30%, rgba(49,249,247,0.98), rgba(49,249,247,0.35) 28%, transparent 60%), linear-gradient(135deg,#31F9F7,#12EDE8);
-  box-shadow: 0 8px 36px rgba(49,249,247,0.20), 0 0 120px rgba(49,249,247,0.10), inset 0 -6px 14px rgba(0,0,0,0.36);
-}
-
-/* Per-orb hover/active halo using same neon color (strong luminous outer glow) */
-.skill-galaxy.theme-dark .orb-html.is-hovered::after,
-.skill-galaxy.theme-dark .orb-html.is-active::after {
-  box-shadow: 0 0 48px 12px rgba(49,249,247,0.18), 0 0 160px 40px rgba(49,249,247,0.08); opacity: 1
-}
-.skill-galaxy.theme-dark .orb-css.is-hovered::after,
-.skill-galaxy.theme-dark .orb-css.is-active::after {
-  box-shadow: 0 0 48px 12px rgba(68,138,255,0.18), 0 0 160px 40px rgba(68,138,255,0.08); opacity: 1
-}
-.skill-galaxy.theme-dark .orb-git.is-hovered::after,
-.skill-galaxy.theme-dark .orb-git.is-active::after {
-  box-shadow: 0 0 48px 12px rgba(246,0,255,0.18), 0 0 160px 40px rgba(246,0,255,0.08); opacity: 1
-}
-.skill-galaxy.theme-dark .orb-python.is-hovered::after,
-.skill-galaxy.theme-dark .orb-python.is-active::after {
-  box-shadow: 0 0 48px 12px rgba(31,255,147,0.18), 0 0 160px 40px rgba(31,255,147,0.08); opacity: 1
-}
-.skill-galaxy.theme-dark .orb-docker.is-hovered::after,
-.skill-galaxy.theme-dark .orb-docker.is-active::after {
-  box-shadow: 0 0 48px 12px rgba(255,145,0,0.18), 0 0 160px 40px rgba(255,145,0,0.08); opacity: 1
-}
-.skill-galaxy.theme-dark .orb-linux.is-hovered::after,
-.skill-galaxy.theme-dark .orb-linux.is-active::after {
-  box-shadow: 0 0 48px 12px rgba(49,249,247,0.18), 0 0 160px 40px rgba(49,249,247,0.08); opacity: 1
-}
+/* Hover / active states */
+.skill-galaxy .orb.is-hovered, .skill-galaxy .orb.is-active { z-index: 60 }
+.skill-galaxy .orb.is-hovered::before, .skill-galaxy .orb.is-active::before { filter: blur(18px); opacity: 0.75 }
+.orb::before { content: ''; position: absolute; width: 80%; height: 28%; bottom: -10%; left: 50%; transform: translateX(-50%); border-radius: 50%; filter: blur(12px); opacity: 0.55; z-index: 0; background: rgba(0,0,0,0.5) }
+.orb::after { content: ''; position: absolute; inset: -8px; border-radius: inherit; z-index: 1; opacity: 0; transition: opacity 180ms ease, box-shadow 220ms ease; }
+.skill-galaxy .orb:hover::after { box-shadow: 0 0 18px 4px rgba(22,230,245,0.22); opacity: 1 }
 
 @media (prefers-reduced-motion: reduce) {
   .skill-galaxy .orb { animation: none !important; transition: none !important }
-  .skill-galaxy.theme-dark .orb.is-hovered::after, .skill-galaxy.theme-dark .orb.is-active::after { transition: none !important }
+  .skill-galaxy .orb.is-hovered::after, .skill-galaxy .orb.is-active::after { transition: none !important }
 }
 
-/* Multi-layer drop shadows (card + soft shadow) to give depth under each orb */
-.orb::before { content: ''; position: absolute; width: 80%; height: 28%; bottom: -10%; left: 50%; transform: translateX(-50%); border-radius: 50%; filter: blur(12px); opacity: 0.55; z-index: 0 }
-.skill-galaxy.theme-light .orb::before { background: rgba(33,33,33,0.06); }
-.skill-galaxy.theme-dark .orb::before { background: rgba(0,0,0,0.5); opacity: 0.28 }
-
-/* Hover/active lift: stronger shadow and subtle scale handled by framer-motion, but add CSS boost */
-.orb.is-hovered, .orb.is-active { z-index: 60 }
-.orb.is-hovered::before, .orb.is-active::before { filter: blur(18px); opacity: 0.75 }
-
-/* glowing ring for focus/active state */
-.orb::after { content: ''; position: absolute; inset: -8px; border-radius: inherit; z-index: 1; opacity: 0; transition: opacity 180ms ease, box-shadow 220ms ease; }
-.skill-galaxy.theme-dark .orb.is-active::after, .skill-galaxy.theme-dark .orb.is-hovered::after { box-shadow: 0 0 26px rgba(255,200,60,0.14), 0 0 80px rgba(255,180,60,0.06); opacity: 1 }
-.skill-galaxy.theme-light .orb.is-active::after, .skill-galaxy.theme-light .orb.is-hovered::after { box-shadow: 0 8px 30px rgba(200,200,220,0.08), 0 0 36px rgba(200,200,220,0.04); opacity: 1 }
-
-/* bold label on hover/active */
-.orb.is-hovered .orb-label, .orb.is-active .orb-label { font-weight: 900 }
-
-/* Light theme */
-.skill-galaxy.theme-light { background: rgba(243,233,249,0.65); border: 1px solid rgba(188,159,251,0.12); box-shadow: 0 0 20px 3px #bc9ffb, 0 0 0 3px #d2aafb inset; }
-
-.skill-galaxy.theme-dark, .skill-galaxy.theme-light {
-  /* Ensure both themes share exact sizing and layout */
-  width: 90vw;
-  max-width: 560px;
-  min-height: 140px;
-  padding: 2.2rem;
-  border-radius: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: visible;
-}
-
-/* Section spacing between main areas */
-#projects, #skills, #contact {
-  margin-top: 3.5rem;
-}
-@media (max-width: 768px) {
-  #projects, #skills, #contact { margin-top: 2.2rem }
-}
-
-/* Cap container size on very large screens so it stays visually consistent */
-@media (min-width: 1400px) {
-  .skill-galaxy { max-width: 550px }
-}
-
-/* Mobile responsiveness: keep both themes identical in sizing/layout */
-@media (max-width: 768px) {
-  .skill-galaxy.theme-dark, .skill-galaxy.theme-light {
-    max-width: 92vw;
-    padding: 1.2rem;
-    min-height: 180px;
-  }
-}
-
-@media (max-width: 420px) {
-  .skill-galaxy.theme-dark, .skill-galaxy.theme-light {
-    padding: 0.9rem;
-    min-height: 220px;
-    width: 94vw;
-  }
-  /* stack orbs on very small screens to avoid cramped single-line overflow */
-  .skill-galaxy .orbs-wrap { flex-wrap: wrap; justify-content: center; gap: 10px }
-}
-.skill-galaxy.theme-light .orb { color: #212121; }
-.skill-galaxy.theme-light .orb .orb-core { filter: blur(4px); opacity: 0.95; }
-/* Pastel orb colors for light theme */
-.skill-galaxy.theme-light .orb-html .orb-core { background: linear-gradient(135deg,#ffd6c2,#fff2e8); box-shadow: 0 10px 28px rgba(255,200,170,0.12); }
-.skill-galaxy.theme-light .orb-css .orb-core { background: linear-gradient(135deg,#d6f0ff,#e9f7ff); box-shadow: 0 10px 28px rgba(160,200,255,0.10); }
-.skill-galaxy.theme-light .orb-git .orb-core { background: linear-gradient(135deg,#ffe9f0,#fff0f6); box-shadow: 0 10px 28px rgba(255,190,210,0.10); }
-.skill-galaxy.theme-light .orb-docker .orb-core { background: linear-gradient(135deg,#dffaf0,#e8fff7); box-shadow: 0 10px 28px rgba(170,240,200,0.10); }
-.skill-galaxy.theme-light .orb-linux .orb-core { background: linear-gradient(135deg,#e6ffda,#f0ffee); box-shadow: 0 10px 28px rgba(160,230,160,0.10); }
-.skill-galaxy.theme-light .orb-python .orb-core { background: linear-gradient(135deg,#fff7cc,#fff2a8); box-shadow: 0 10px 28px rgba(240,210,80,0.10); }
-.skill-galaxy.theme-light .orb-popup { background: rgba(255,255,255,0.98); color: #212121; box-shadow: 0 12px 40px rgba(33,33,33,0.08); border: 1px solid rgba(33,33,33,0.06); }
-
-/* Ensure strong readable labels on light orbs */
-.skill-galaxy.theme-light .orb .orb-label { color: #212121; font-weight: 800; text-shadow: 0 1px 0 rgba(255,255,255,0.6); }
-
-/* learning badge adjustments for light theme: pastel accent with charcoal text */
-.popup-light .learning-badge { background: linear-gradient(90deg,#ffd6a5,#c6fff0); color: #212121; box-shadow: 0 6px 18px rgba(33,33,33,0.04) }
-
-.orb::after { content: ''; position: absolute; inset: -8px; border-radius: inherit; z-index: 1; opacity: 0; transition: opacity 200ms ease, box-shadow 220ms ease; }
-.skill-galaxy.theme-dark .orb:hover::after { box-shadow: 0 0 18px 4px rgba(22,230,245,0.22); opacity: 1; transition: opacity 180ms ease, box-shadow 220ms ease; }
-.skill-galaxy.theme-light .orb:hover::after { box-shadow: 0 12px 30px rgba(180,200,220,0.08); opacity: 1; transition: opacity 180ms ease, box-shadow 220ms ease; }
-
-/* Float animation: gentle vertical movement for a futuristic feel */
+/* Float animation */
 .skill-galaxy .orb { will-change: transform; animation: float 4.2s ease-in-out infinite; animation-delay: var(--float-delay, 0s); }
 @keyframes float { 0% { transform: translateY(-10px) } 50% { transform: translateY(10px) } 100% { transform: translateY(-10px) } }
 
-/* Per-orb staggered delays (useful when orbs are listed in order) */
+/* Per-orb staggered delays */
 .skill-galaxy .orb-html { --float-delay: 0s }
 .skill-galaxy .orb-css { --float-delay: 0.12s }
 .skill-galaxy .orb-git { --float-delay: 0.24s }
@@ -253,23 +83,15 @@
 .skill-galaxy .orb-docker { --float-delay: 0.48s }
 .skill-galaxy .orb-linux { --float-delay: 0.6s }
 
-/* Dark theme: stronger neon glows per orb */
-.skill-galaxy.theme-dark .orb-html { box-shadow: 0 0 12px 3px rgba(255,120,70,0.16) }
-.skill-galaxy.theme-dark .orb-css { box-shadow: 0 0 12px 3px rgba(110,170,255,0.18) }
-.skill-galaxy.theme-dark .orb-git { box-shadow: 0 0 12px 3px rgba(255,110,130,0.16) }
-.skill-galaxy.theme-dark .orb-python { box-shadow: 0 0 12px 3px rgba(255,200,60,0.16) }
-.skill-galaxy.theme-dark .orb-docker { box-shadow: 0 0 12px 3px rgba(150,230,220,0.16) }
-.skill-galaxy.theme-dark .orb-linux { box-shadow: 0 0 12px 3px rgba(80,240,210,0.16) }
+/* Neon glows per orb */
+.skill-galaxy .orb-html { box-shadow: 0 0 12px 3px rgba(255,120,70,0.16) }
+.skill-galaxy .orb-css { box-shadow: 0 0 12px 3px rgba(110,170,255,0.18) }
+.skill-galaxy .orb-git { box-shadow: 0 0 12px 3px rgba(255,110,130,0.16) }
+.skill-galaxy .orb-python { box-shadow: 0 0 12px 3px rgba(255,200,60,0.16) }
+.skill-galaxy .orb-docker { box-shadow: 0 0 12px 3px rgba(150,230,220,0.16) }
+.skill-galaxy .orb-linux { box-shadow: 0 0 12px 3px rgba(80,240,210,0.16) }
 
-/* Light theme: softer pastel glows */
-.skill-galaxy.theme-light .orb-html { box-shadow: 0 0 10px 3px rgba(255,200,170,0.12) }
-.skill-galaxy.theme-light .orb-css { box-shadow: 0 0 10px 3px rgba(190,220,255,0.12) }
-.skill-galaxy.theme-light .orb-git { box-shadow: 0 0 10px 3px rgba(255,190,210,0.10) }
-.skill-galaxy.theme-light .orb-python { box-shadow: 0 0 10px 3px rgba(255,230,160,0.10) }
-.skill-galaxy.theme-light .orb-docker { box-shadow: 0 0 10px 3px rgba(190,245,235,0.10) }
-.skill-galaxy.theme-light .orb-linux { box-shadow: 0 0 10px 3px rgba(200,255,220,0.10) }
-
-/* responsive tweaks */
+/* Responsive tweaks */
 @media (max-width: 768px) {
   .skill-galaxy { min-height: 220px; padding: 12px }
   .skill-galaxy .orbs-wrap { height: 120px }
@@ -277,16 +99,7 @@
   .orb-popup { min-width: 130px; max-width: 200px }
 }
 
-/* fallback grid if container is very narrow: wrap orbs into two rows */
 @media (max-width: 420px) {
-  .skill-galaxy .orbs-wrap { height: auto }
+  .skill-galaxy .orbs-wrap { height: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px }
   .orb { position: relative !important; transform: none !important; margin: 8px; display: inline-flex; }
-  .skill-galaxy .orbs-wrap { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px }
-}
-
-/* Responsive tweaks */
-@media (max-width: 768px) {
-  .skill-galaxy { min-height: 260px; padding: 12px }
-  .orb { font-size: 11px }
-  .orb-popup { min-width: 140px; max-width: 220px }
 }

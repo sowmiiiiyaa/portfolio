@@ -142,9 +142,16 @@
 }
 
 /* About header: put the heading and profile greeting on the same line on wide screens */
-.about-header-row { display: flex; align-items: center; gap: 24px; justify-content: flex-start; }
-.about-header-row .text-2xl { margin: 0; }
-.about-header-row .profile-greeting { margin: 0; }
+.about-header-row { display: flex; align-items: center; gap: 24px; justify-content: space-between; }
+.about-header-row .text-2xl { margin: 0 !important; flex: 0 0 auto; }
+.about-header-row .profile-greeting { margin: 0; display: flex; align-items: center; }
+
+/* Nudge the profile avatar down slightly to visually center with large headings */
+.profile-avatar { transform: translateY(4px) scale(1.18); }
+
+@media (max-width: 640px) {
+  .profile-avatar { transform: none; }
+}
 
 @media (max-width: 768px) {
   .about-header-row { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
